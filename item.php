@@ -5,7 +5,7 @@ require "include/template2.inc.php";
 require "include/becontent.inc.php";
 
 $header = new Template("skins/html/header.html");
-$index = new Template("skins/html/post.html");
+$index = new Template("skins/html/item.html");
 $footer = new Template("skins/html/footer.html");
 
 $main = new Template("skins/html/blank_page.html");
