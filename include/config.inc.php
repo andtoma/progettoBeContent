@@ -53,7 +53,7 @@ DEFINE("NONE", "NONE");
 			
 		"localhost" 		=> Array(
 			"host" => "127.0.0.1",
-			"database" => "tdw",
+			"database" => "progettotdw",
 			"username" => "root",
 			"password" => "root")
 
