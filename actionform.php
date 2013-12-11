@@ -1,6 +1,7 @@
 <?php
 
-require 'dbms.inc.php';
+require "include/dbms.inc.php";
+
 
 //data from step1
 $email = $_POST['email'];
@@ -23,9 +24,8 @@ $country = $_POST['country'];
 $phone = $_POST['phone'];
 $later = $_POST['later'];
 
-
 //funzione di validazione email
-function validate_email ($email) {
+function validate_email($email) {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "email address is valid.";
         return true;
@@ -35,35 +35,64 @@ function validate_email ($email) {
     }
 }
 
-if(!isset($email)) {    echo 'email not inserted';}
-if(!isset($password)) {   echo 'password not inserted';}
-if(!isset($password2)) {  echo 'password2 non inserita';}
+if (!isset($email)) {
+    echo 'email not inserted';
+}
+if (!isset($password)) {
+    echo 'password not inserted';
+}
+if (!isset($password2)) {
+    echo 'password2 non inserita';
+}
 
-if(!isset($first_name)) { echo 'first name not inserted';}
-if(!isset($last_name)) {  echo 'last name not inserted';}
-if(!isset($birthdate)) {  echo 'birthdate not inserted';}
-if(!isset($sex)) {    echo 'sex not inserted';}
+if (!isset($first_name)) {
+    echo 'first name not inserted';
+}
+if (!isset($last_name)) {
+    echo 'last name not inserted';
+}
+if (!isset($birthdate)) {
+    echo 'birthdate not inserted';
+}
+if (!isset($sex)) {
+    echo 'sex not inserted';
+}
 
-if(!isset($later)) {
-    if(!isset($address)) {    echo 'address not inserted';}
-    if(!isset($city)) {   echo 'city not inserted';}
-    if(!isset($state)) {  echo 'state not inserted';}
-    if(!isset($zip_code)) {   echo 'zip_code not inserted';}
-    if(!isset($country)) {    echo 'ecountrymail not inserted';}
-    if(!isset($phone)) {  echo 'phone not inserted';}
+if (!isset($later)) {
+    if (!isset($address)) {
+        echo 'address not inserted';
+    }
+    if (!isset($city)) {
+        echo 'city not inserted';
+    }
+    if (!isset($state)) {
+        echo 'state not inserted';
+    }
+    if (!isset($zip_code)) {
+        echo 'zip_code not inserted';
+    }
+    if (!isset($country)) {
+        echo 'ecountrymail not inserted';
+    }
+    if (!isset($phone)) {
+        echo 'phone not inserted';
+    }
 }
 
 
 
-if(!validate_email($email)) {echo 'il formato dell\'email non è corretto';}
+if (!validate_email($email)) {
+    exit();
+}
 
 
 //fa una query sul db per verificare che l'email esista già
 $check_email_query = "SELECT * FROM user WHERE email='$email'";
-$oid = mysql_query($check_email_query);
-if(!oid) {}
-else {echo 'email gia presente nel database';}
 
+if (query($check_email_query)) {
+    echo 'ERRORE: email gia presente nel database';
+    exit();
+}
 
 //inserisce i dati del db
 $insert_query = "INSERT INTO user VALUES(
@@ -81,14 +110,10 @@ $insert_query = "INSERT INTO user VALUES(
                 '$country',
                 '$phone',
                 )";
-$oid = mysql_query($insert_query);
-if(!oid) {
-        echo 'KO';
-        
+
+if (query($insert_query)) {
+    echo 'utente inserito con successo';
 } else {
-        echo 'OK';
+    echo 'si è verificato un errore';
 }
-
-
-
 ?>
