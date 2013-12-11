@@ -1,9 +1,6 @@
 <?php
 
-<<<<<<< HEAD
 require "include/template2.inc.php";
-=======
->>>>>>> d3ac521653c460c6bcf9ba01eb879f2544a0b9a5
 require "include/dbms.inc.php";
 
 
