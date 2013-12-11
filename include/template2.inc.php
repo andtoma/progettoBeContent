@@ -26,6 +26,8 @@ DEFINE("SQUARE", 1);
 DEFINE("CURL", 2);
 DEFINE('DEBUG', "DEBUG");
 
+DEFINE("TINYMCE", "js/tinymce/tinymce.min.js");
+
 Class Template {
 	var
  	$template_file,
@@ -92,8 +94,6 @@ Class Template {
 	
 	function setTagStyle($style) {
   	
-  	
-  	
   		switch ($style) {
   		case CURL:
   			$this->tags['open'] = "{";
@@ -116,90 +116,36 @@ Class Template {
   	}
 
 ////////////////////////////////////////////////////////////////*KAISERSOSE*/////////////////////////////////////////////////////////////////////////////////////////    
-    /**
-	 * Checks if the placeholders within template file are used inside and outside foreach statements or in different foreaches
-	 * using the same name.
-	 * Trigger error is generated if it occurs.
-	 * @return null;
-	 */
-	function checkPlaceholders($buffer)
-		{		
-		 $temp_buffer = $buffer;
-		 // $temp_buffer contiene tutto il codice HTML della pagina.
-		 // $root conterrà il codice della pagina, a cui però viene tolto il foreach
-	     $root = preg_replace("~<\[foreach\]>.*<\[\/foreach\]>~Us","",$temp_buffer,-1);	
-	    
-	     //echo "TEMp_BUFFER 01: ".$temp_buffer."<br/>";	    
-	    	    
-		 do
-		 	{
-		 	 // $result1 vale 1 se trova un foreach nella pagina HTML, 0 altrimenti
-	    	 $result1 = preg_match("~<\[foreach\]>(.*)<\[\/foreach\]>~Us", $temp_buffer, $token);
-	    	
-	    	 // $token[0] contiene il codice del foreach (compresi i tags del foreach)
-	    	 // $token[1] contiene il codice del foreach (esclusi i tags del foreach)
-	    	 /*echo "TOKEN 0: ".$token[0]."<br/>";
-	    	 echo "TOKEN 1: ".$token[1]."<br/>";
-	    	 echo "TOKEN 2: ".$token[2]."<br/>";
-	   	 	 echo "TOKEN 3: ".$token[3]."<br/>";
-	    	 echo "TOKEN 4: ".$token[4]."<br/>";*/
-	    	
-	    	 //echo "RESULT 1: ".$result1."<br/>";
-			
-	    	 // se ha trovato un foreach
-	    	 if($result1)
-	    	 	{
-				 $temp_buffer = preg_replace("~<\[foreach\]>.*<\[\/foreach\]>~Us","",$temp_buffer,1);
-
-				 // $temp_buffer ora contiene tutto il codice HTML della pagina, a cui però è stato tolto il foreach
-				 //echo "TEMp_BUFFER 02: ".$temp_buffer."<br/>";
-				
-				 // $token2 è un array bidimensionale che contiene nella prima riga i placeholders della pagina (o meglio del foreach), compresi i tags
-				 // e nella seconda riga gli stessi placeholders, ma senza tags (solo i nomi)
-				 $result2 = preg_match_all("~<\[(?!foreach|\/foreach)(.+)(::(.*))?\]>~Us", $token[1], $token2,PREG_PATTERN_ORDER);
-				 
-				 /*echo "\$TOKEN2: ".$token2[0][0]."<br/>";
-				 echo "\$TOKEN2: ".$token2[0][1]."<br/>";
-				 echo "\$TOKEN2: ".$token2[1][0]."<br/>";
-				 echo "\$TOKEN2: ".$token2[1][1]."<br/>";
-				 echo "RESULT 2: ".$result2."<br/>";*/
-				
-				 // se ci sono placeholders 
-				 if($result2) 
-				 	{
-				 	 // per ogni placeholder (senza tags, quindi $name conterrà il nome del placeholder)
-					 foreach($token2[1] as $name)
-					 	{					 	 
-					 	 // controlla se nella pagina HTML esiste un altro foreach non annidato, ma fratello di quello più esterno,
-					 	 // che abbia all'interno un placeholder con lo stesso nome di quelli già usati nell'altro foreach
-						 $result3 = preg_match("~<\[foreach\]>(.*){$this->escaped_tags['open']}$name(::(.*))?{$this->escaped_tags['close']}(.*)<\[\/foreach\]>~Us", $temp_buffer, $token3);
+    
+	function checkPlaceholders($buffer){
+		
+		$temp_buffer = $buffer;
+	    $root = preg_replace("~<\[foreach\]>.*<\[\/foreach\]>~Us","",$temp_buffer,-1);	
+	      
+		do{
+	    	$result1 = preg_match("~<\[foreach\]>(.*)<\[\/foreach\]>~Us",$temp_buffer,$token);
+			if ($result1) {
+				$temp_buffer = preg_replace("~<\[foreach\]>.*<\[\/foreach\]>~Us","",$temp_buffer,1);
+					
+				$result2 = preg_match_all("~<\[(?!foreach|\/foreach)(.+)(::(.*))?\]>~Us",$token[1],$token2,PREG_PATTERN_ORDER);
+				if ($result2) {
+					foreach($token2[1] as $name){
 						
-						 //echo "\$TOKEN3: ".$token3[0]."<br/>";
-						 //echo "RESULT 3: ".$result3."<br/>";
+						$result3 = preg_match("~<\[foreach\]>(.*){$this->escaped_tags['open']}$name(::(.*))?{$this->escaped_tags['close']}(.*)<\[\/foreach\]>~Us",$temp_buffer,$token3);												if ($result3) {
+								trigger_error("cannot define variables with the same name in different foreach construct: (<[$name]>)", E_USER_ERROR);	
+						}
 						
-						 // se trova placeholders con lo stesso nome
-						 if($result3)
-						 	{
-							 //trigger_error("cannot define variables with the same name in different foreach construct: (<[$name]>)", E_USER_ERROR);
-							}
-						
-						 
-						 $result4 = preg_match("~{$this->escaped_tags['open']}$name(::(.*))?{$this->escaped_tags['close']}~Us", $root, $token4);
-						 						 
-						 //echo "\$ROOT: ".$root."<br/>";
-						 
-						 if($result4)
-						 	{
-							 //trigger_error("cannot define variables with the same name in foreach construct and out of them: (<[$name]>)", E_USER_ERROR);
-							}
+						$result4 = preg_match("~{$this->escaped_tags['open']}$name(::(.*))?{$this->escaped_tags['close']}~Us",$root,$token4);
+						if ($result4){
+							trigger_error("cannot define variables with the same name in foreach construct and out of them: (<[$name]>)", E_USER_ERROR);
 						}
 					}
 				}
-			} while($result1); // per ogni tag "foreach" incontrato
-		}
+			}
+		} while ($result1);
+	}
 
-		
-	function checkForeachConstructs($buffer){
+	function checkForeachConstructs($buffer){ 
 	      
 		  $temp_buffer = $buffer;
 		  
@@ -231,8 +177,7 @@ Class Template {
 		  
 		do {
 			$result = preg_match("~{$this->escaped_tags['open']}(.+)(::(.*)){$this->escaped_tags['close']}~U",$temp_buffer,$token);
-	      	
-			if ($result and (count($token)>1)) {
+	      	if ($result and (count($token)>1)) {
 		    	
 	      		if ($token[3]=="") {
 					trigger_error("undefined selector of tagLibrary for <i><[$token[1]]></i> variable",E_USER_ERROR);
@@ -251,7 +196,7 @@ Class Template {
 					$result3 = preg_match("~(\"+|\s+)library\s*=\s*\"?\S*\"?~Us",$token[2]);
 					if (!$result3) {
 						trigger_error("undefined tagLibrary for <i><[$token[1]]></i> variable",E_USER_WARNING);	
-					}
+					}     
 				}	
 		  	}
 		  
@@ -373,7 +318,8 @@ Class Template {
 				
 				$result = preg_match("~([^:]+)~",$placeholder[1],$token2);
 				
-				if($result){					
+				if($result){
+					
 					
 					$placeholderName = $token2[1];
 					$parsedContent = $this->transformContent($placeholderName,NULL,$buffer);
@@ -397,7 +343,7 @@ Class Template {
 	}
 	
 	function transformContent($name,$data,$buffer){ //Interpretazione, e codifica di placeholder complessi
-		
+			
 		static $library_obj,
 		       $library,
 			   $selectors;
@@ -413,6 +359,7 @@ Class Template {
 		$value = NULL;
 		
 		$result = preg_match($complex_pattern_param,$buffer,$token);
+		
 		
 		
 		do {
@@ -479,6 +426,8 @@ Class Template {
 					}
 								
 					$value[$token[1]] = $library_obj->apply($name,$data,$parameter,$selector);
+					$value[$name] = $data;
+					
 				} else {
 					
 					if (!file_exists("include/tags/$library.inc.php")) {
@@ -515,14 +464,22 @@ Class Template {
 						}
 					
 						$value[$token[1]] = $library_obj->apply($name,$data,$parameter,$selector);
+						$value[$name] = $data;
+						
+						
 					}
+					
+					
 				}
+				
+				
 				
 				$token[1] = $this->string_to_pattern($token[1]);
 				$buffer = preg_replace("~<\[$token[1]\]>~Us","",$buffer,-1);
 				$result = preg_match($complex_pattern_param,$buffer,$token);  
 				 
 			} else {// Non ci sono placeholder $name con selettore e parametri
+				
 				
 				
 				
@@ -549,6 +506,7 @@ Class Template {
 						}			
 						
 						$value[$token[1]] = $library_obj->apply($name,$data,$parameter,$selector);
+						$value[$name] = $data;
 					} else {
 						if (!file_exists("include/tags/$library.inc.php")) {				
 							trigger_error("Library <b>$library</b> does not exists!",E_USER_ERROR);
@@ -562,12 +520,16 @@ Class Template {
 						}
 						
 						$value[$token[1]] = $library_obj->apply($name,$data,$parameter,$selector);
+						$value[$name] = $data;
 					}
 					
 					$buffer = preg_replace("~<\[$token[1]\]>~Us","",$buffer,-1);
 					$result = preg_match($complex_pattern,$buffer,$token);
+					
+					
 
 				} else {//Non ci sono placeholder $name complessi
+					
 					
 					
 					$result = preg_match($simple_pattern,$buffer,$token);
@@ -575,6 +537,8 @@ Class Template {
 						$value[$name] = $data;
 						$buffer = preg_replace("~<\[$name\]>~Us","",$buffer,-1);
 						$result = preg_match("~<\[($name)\]>~Us",$buffer,$token);
+						
+						
 					}	
 				}		
 			}
@@ -635,7 +599,7 @@ Class Template {
 			$this->setContent("user.surname", $_SESSION['user']['surname']);
 			$this->setContent("user.lastlogin", $_SESSION['user']['lastlogin']);
 		
-			$this->setContent("email", $_SESSION['user']['email']);
+			$this->setContent("user.email", $_SESSION['user']['email']);
 		}
 		
 		
@@ -646,6 +610,7 @@ Class Template {
 					$this->buffer = $this->cache->getCacheFileContent();	
 				} else {
 					$this->checkPlaceholders($this->buffer);
+					
 					$this->checkForeachConstructs($this->buffer);
 					$this->checkTagLibraries($this->buffer);
 					$this->buffer = $this->foreach->parseForeach($this->buffer); 
@@ -827,6 +792,7 @@ Class Template {
 		if (!$this->parsed) {
 			$this->parse();	
 		}
+		
 		$this->buffer = preg_replace("~<\[(?!foreach\d+_\d+|\/foreach\d+_\d+).+\]>~Us","",$this->buffer,-1);
 		$this->buffer = preg_replace("~<\[foreach\d+_\d+\]>~Us","",$this->buffer,-1);
 		$this->buffer = preg_replace("~<\[\/foreach\d+_\d+\]>~Us","",$this->buffer,-1);
@@ -1088,7 +1054,7 @@ Class ForeachCode {
 			$this->foreachCodeArray[$foreachName] = $foreachCleanedCode;
 		}// Fine pulizia
 		else{// Se non ci sono foreach annidati non serve pulire il codice
-			$foreachCleanedCode = $foreachCode; // Mi serve per cercare solo i placeholder a questo livello nel prossimo if
+			$foreachCleanedCode = $foreachCode; // Mi serve per cercare solo i placeholdea questo livello nel prossimo if
 			$this->foreachCodeArray[$foreachName] = $foreachCode;
 		}
 		
@@ -1445,6 +1411,7 @@ Class Skin extends Template {
 	var 
 		$name,
 		$templates,
+		$frame,
 		$placeholders,
 		$private,
 		
@@ -1469,11 +1436,29 @@ Class Skin extends Template {
 		$GLOBALS["current_skin"] = $skin;
 		$this->name = $skin;
 		
+		$this->resolve();
+	
+	}
+	
+	
+	function resolve() {
+		
+		
+		
+		
 		if (class_exists("Auth")) {
-			Template::Template("skins/{$skin}/dtml/frame-private.html");
+			if (isset($this->frame)) {
+				Template::Template("skins/{$this->name}/dtml/{$this->frame}.html");
+			} else {
+				Template::Template("skins/{$this->name}/dtml/frame-private.html");
+			}
 			$this->private = true;
 		} else {
-			Template::Template("skins/{$skin}/dtml/frame-public.html");
+			if (isset($this->frame)) {
+				Template::Template("skins/{$this->name}/dtml/{$this->frame}.html");
+			} else {
+				Template::Template("skins/{$this->name}/dtml/frame-public.html");
+			}
 			$this->private = false;
 		}
 		
@@ -1487,7 +1472,7 @@ Class Skin extends Template {
 		
 		if ($this->regenerateCache()) {
 	
-			$this->setContent("skin", $skin);
+			$this->setContent("skin", $this->name);
 			$this->setContent("base", $GLOBALS['config']['base']);
 			$this->setContent("server", $_SERVER['SERVER_NAME']);
 			#$this->setContent("script", basename($_SERVER['SCRIPT_NAME']));
@@ -1502,7 +1487,15 @@ Class Skin extends Template {
 			exit;
 			
 		}
+		
+		
+	}
 	
+	function setFrame($frame) {
+		
+		$this->frame = $frame;
+		$this->resolve();
+		
 	}
 	
 	function regenerateCache() {
@@ -1561,7 +1554,7 @@ Class Skin extends Template {
 		if ($this->private) {
 			
 		
-			$this->addentContent("javascript", "<script language=\"javascript\" type=\"text/javascript\" src=\"js/tiny_mce/tiny_mce.js\"></script>\n");
+			$this->addentContent("javascript", "<script language=\"javascript\" type=\"text/javascript\" src=\"".TINYMCE."\"></script>\n");
 			$this->addentContent("javascript", "<script language=\"javascript\" type=\"text/javascript\" src=\"js/becontent.js\"></script>\n");
 			
 			$this->addentContent("head", "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen, print\" href=\"css/beContent.css\" />");
@@ -1571,15 +1564,16 @@ Class Skin extends Template {
 		Template::close();
 		
 		
+		
 		if (!$this->private) {
 			$buffer = $this->buffer;
-			$fp = fopen($this->cache_name, "w");
+			$fp = fopen($this->cache_name,"w");
 			fwrite($fp, $buffer);
 			fclose($fp);
 		}
 	}
+	
 }
-
 
 Class Skinlet extends Template {
 	

@@ -3,6 +3,7 @@
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
 
+
 $header = new Template("skins/sb-admin/html/header.html");
 $index = new Template("skins/sb-admin/html/index.html");
 $footer = new Template("skins/sb-admin/html/footer.html");
