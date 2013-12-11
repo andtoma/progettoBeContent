@@ -2816,7 +2816,7 @@ button.disabled:hover {
 }
 #twtr-widget-1 .twtr-tweet-wrap .twtr-tweet-text p {
 	padding: 0 0 0 31px !important;
-	background: url({{ 'ico-twitter-2.png' | asset_url }}) 0 5px no-repeat;
+	background: url('ico-twitter-2.png') 0 5px no-repeat;
 	font-family: Arial, sans-serif !important;
 	font-size: 12px !important;
 	line-height: 20px !important;
