@@ -1,6 +1,8 @@
 <?php
 
-require 'dbms.inc.php';
+require "include/template2.inc.php";
+require "include/dbms.inc.php";
+
 
 //data from step1
 $email = $_POST['email'];
