@@ -22,11 +22,11 @@ $().ready(function() {
 
 	$('.mandatory').each(function() {
 
-		$(this).closest('div').prev().append(' (*):');
+		$(this).find('label').first().prepend('<span id="mandatory">* </span>');
 
 	});
 
-	$("button[type='submit']").click(function(event) {
+	$("button").click(function(event) {
 
 		$('.validate').each(function() {
 			$(this).css({
