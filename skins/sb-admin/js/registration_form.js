@@ -52,7 +52,7 @@ $().ready(function(){
 					
 					// plain text test function
 					function IsName(name){
-						var regex = /^([a-zA-Z])+$/;
+						var regex = /([a-zA-Z]*\s)*/;
 						if(!IsEmpty(name)){
 							return regex.test(name);
 						}
