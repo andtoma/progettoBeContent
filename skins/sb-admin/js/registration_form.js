@@ -244,7 +244,7 @@ $().ready(function(){
 					
 					
 					// form filling by geoComplete and street_number custom binding
-					$("#geocomplete").geocomplete({
+					$("#geocomplete_small, #geocomplete_big").geocomplete({
 						details: "form",
 						detailsAttribute: "data-geo"
 						}).bind("geocode:result", function(event, result){
@@ -293,9 +293,9 @@ $().ready(function(){
 							.css({
 								'margin-top':'-40px'
 							});
-							$('.guest-login #geocomplete').css('display','none');
+							$('.guest-login #geocomplete_big').css('display','none');
 							$('.main-login #geocontainer').css('display','block');
-							$('.main-login #geocomplete').css({
+							$('.main-login #geocomplete_small').css({
 								'margin-left':'150px',
 								'margin-bottom':'20px',
 								'margin-top':'-25px'
@@ -322,7 +322,7 @@ $().ready(function(){
 								'margin-right':'0px',
 								'width':'auto'
 							});
-							$('.main-login #geocomplete').css({
+							$('.main-login #geocomplete_small').css({
 								'width':'256px',
 								'margin-left':'0px',
 								'margin-right':'0px',
@@ -361,7 +361,7 @@ $().ready(function(){
 								'margin-right': '60px'
 								});
 							$('.main-login #geocontainer').css('display','none');
-							$('.guest-login #geocomplete').css('display','block');	
+							$('.guest-login #geocomplete_big').css('display','block');	
 							$('.main-login .sign-in').css({
 								'margin-right':'70px'								
 							});
@@ -385,7 +385,7 @@ $().ready(function(){
 							$('.main-login .sign-in').css({
 								'margin-right':'70px'
 							});
-							$('.main-login #geocomplete').css({
+							$('.main-login #geocomplete_small').css({
 								'margin-left':'150px',
 								'margin-bottom':'20px',
 								'margin-top':'-25px',
