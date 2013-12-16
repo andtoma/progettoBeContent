@@ -1,0 +1,181 @@
+<form action='#'>
+		<!-- BEGIN .main-content-wrapper -->
+			<section class="main-content-wrapper clearfix">
+
+				<!-- BEGIN .single-full-width -->
+				<section class="single-full-width clearfix">
+
+					<!-- BEGIN .main-login -->
+					<div class="main-login">
+						<div class="size_container">
+							<div class="mandatory">
+								<label>E-mail:</label>
+								<input name="email"type="text" autocomplete="off"/>
+							</div>
+							<div  class="mandatory">	
+								<label>Password:</label>
+								<input name="password" type="password"/>
+							</div>
+							<div  class="mandatory">	
+								<label>Confirm Password:</label>
+								<input name="repeat_password" type="password"/>
+							</div>
+							<div>
+								<label> </label>
+								<input type="checkbox" name="newsletter">
+								<strong>Subscribe me to Newsletter!</strong>
+							</div>
+							<div class="sign-in">
+								<label> </label>
+								<!-- REDIRECTION BUTTON A NEXT -->
+									<button>
+										Next Step
+									</button>
+							</div>
+						</div>
+						<!-- END .main-login -->
+					</div>
+
+					<!-- BEGIN .guest-login -->
+					<div class="guest-login">
+						<ul>
+							<li>
+							<h4>Login Information</h4>
+							<p>
+								Information about what to insert.<br>All fields marked with <strong>*</strong> are mandatory.
+							</p>
+							</li>
+						</ul>
+						<!-- END .guest-login -->
+					</div>
+					<!-- END .single-full-width -->
+				</section>
+				
+				
+				<!-- BEGIN .single-full-width -->
+				<section class="single-full-width clearfix">
+
+					<!-- BEGIN .main-login -->
+					<div class="main-login">
+						<div class="size_container">
+							<div class="mandatory">
+								<label>Name:</label>
+								<input name="name" type="text" />
+							</div>
+							<div  class="mandatory">	
+								<label>Surname:</label>
+								<input name="surname" type="text"/>
+							</div>
+							<div>	
+								<label>Birth Date:</label>
+								<input name="birth_date" type="text" id="datepicker">
+							</div>
+							<div>	
+								<label>Phone:</label>
+								<input name="phone" type="text">
+							</div>
+							<div>	
+								<label>Gender:</label>
+								<input id="male_radio" type="radio" name="sex" value="male">  <strong>Male</strong>
+								<input id="female_radio" type="radio" name="sex" value="female">  <strong>Female</strong>
+							</div>
+							<div class="sign-in">
+								<label> </label>
+								<!-- REDIRECTION BUTTON A NEXT -->
+									<button>
+										Next Step
+									</button>
+							</div>
+						</div>	
+						<!-- END .main-login -->
+					</div>
+
+					<!-- BEGIN .guest-login -->
+					<div class="guest-login">
+						<ul>
+							<li>
+							<h4>Anagraphical Information</h4>
+							<p>
+							Information about what to insert.<br>All fields marked with <strong>*</strong> are mandatory.
+							</p>
+							</li>
+						</ul>
+						<!-- END .guest-login -->
+					</div>
+					<!-- END .single-full-width -->
+				</section>
+
+				
+				
+				<section class="single-full-width clearfix" >
+
+					<!-- BEGIN .main-login -->
+					<div class="main-login">
+					<div class="size_container">
+							<div id="geocontainer">
+								<h5>Feeling Lazy?<br>Just type all here and we'll do the rest!</h5>	
+								<input geocoder_address="true" id="geocomplete_big" placeholder="" type="text" size="60px" autocomplete="off"/>
+								</div>
+							<div  class="mandatory">	
+								<label>Country:</label>
+								<input name="country" type="text" data-geo="country">
+							</div>
+							<div  class="mandatory">	
+								<label>State:</label>
+								<input name="state" type="text" data-geo="administrative_area_level_1">
+							</div>
+							<div  class="mandatory">	
+								<label>City:</label>
+								<input name="city" type="text" data-geo="locality">
+							</div>
+							<div class="mandatory">	
+								<label>Zip-Code:</label>
+								<input name="zip_code" type="text" data-geo="postal_code">
+							</div>
+							<div class="mandatory">
+								<label>Address:</label>
+								<input name="address" type="text" data-geo="route">
+							</div>						
+							<div class="item last">
+								<label></label>
+								<input name="later" type="checkbox">
+								 <strong>Do it later !</strong>
+							</div>
+							<div class="sign-in">
+								<label> </label>
+								<button>
+									Next Step
+								</button>
+							</div>
+					</div>
+						<!-- END .main-login -->
+					</div>
+					
+					<!-- END .main-login -->
+										
+					<!-- BEGIN .guest-login -->
+					<div class="guest-login">
+						<ul>
+							
+							<li>
+								<h4>Billing Information</h4>
+								<p>Information about what to insert.<br>All fields marked with <strong>*</strong> are mandatory.</p>
+								
+							</li>
+							<li>
+								<h4>Feeling Lazy?</h4>
+								<p>Type in all of your data separated by comma in the underlying space, follow our suggestions and press Enter, we'll fill the form for you !</p>
+								<div>
+									<input geocoder_address="true" id="geocomplete_small" placeholder="" type="text" size="60px" autocomplete="off"/>
+								</div>
+								<p>Anyway you can also do it later...</p>
+							</li>
+						</ul>
+						<!-- END .guest-login -->
+					</div>
+					<!-- END .single-full-width -->
+				</section>
+
+				<!-- END .main-content-wrapper -->
+			</section>
+</form>
