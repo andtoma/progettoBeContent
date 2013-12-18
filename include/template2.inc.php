@@ -284,7 +284,7 @@ Class Template {
 		for($i=0;$i<count($contentKeys);$i++){
 			$placeholderName = $contentKeys[$i];
 			$placeholderValue = $contentValue[$i];
-			if($foreachCode = $this->foreach->getForeachCode($this->foreach->getForeachName($placeholderName))){// Se è un contenuto iterato
+			if($foreachCode = $this->foreach->getForeachCode($this->foreach->getForeachName($placeholderName))){// Se ï¿½ un contenuto iterato
 				$parsedContent = $this->transformContent($contentKeys[$i],$contentValue[$i],$foreachCode);
 				if (is_array($parsedContent)) {
 					foreach($parsedContent as $currentParsedContentName=>$currentParsedContentValue){
@@ -292,7 +292,7 @@ Class Template {
 						$finalContent[1][] = $currentParsedContentValue;
 					}
 				}
-			} else {// Se non è un contenuto iterato
+			} else {// Se non ï¿½ un contenuto iterato
 				$parsedContent = $this->transformContent($contentKeys[$i],$contentValue[$i],$this->buffer);
 				if (is_array($parsedContent)) {
 				foreach($parsedContent as $currentParsedContentName=>$currentParsedContentValue){
@@ -416,7 +416,7 @@ Class Template {
 					
 					#if (version_compare(phpversion(),"5.0", "<")) {
 					#if (aux::phpMinV('5')) {
-						$key = array_search(strtolower($selector),$selectors);
+						$key = array_search($selector,$selectors);
 					#} else {
 					#	$key = array_search($selector,$selectors);
 					#}
@@ -441,13 +441,16 @@ Class Template {
 					
 						$selectors = $library_obj->getSelectors();
 					
+                                                
 						#echo $selector;
-						
+                                                    
+
 						#if (version_compare(phpversion(),"5.0", "<")) {
 						
 						#if (aux::phpMinV('5')) {
 						#if ($GLOBALS['aux']->phpMinV('5')) {
-							$key = array_search(strtolower($selector),$selectors);
+							#$key = array_search(strtolower($selector),$selectors);
+                                                        $key = array_search($selector,$selectors);
 						#} else {
 						#	$key = array_search($selector,$selectors);
 						#}
@@ -456,7 +459,6 @@ Class Template {
 						Just added strtolower, not sure is right but works.
 						
 					*/
-					
 					
 					
 						if (!$key) {
@@ -1121,7 +1123,7 @@ Class ForeachCode {
 							$currentContentName=reset($content[0]);
 							$currentContentValue=reset($content[1]);	
 						}
-						else{//Non è un contenuto per questo foreach
+						else{//Non ï¿½ un contenuto per questo foreach
 							if($this->isRelativeForeachPlaceholder($currentContentName,$foreachName)){
 								//E' un placeholder di un foreach figlio o discendente
 								if($this->isDescendantForeachPlaceholder($currentContentName,$foreachName)){
@@ -1150,7 +1152,7 @@ Class ForeachCode {
 							}
 						}		
 					}	
-					else{//Non è un contenuto da iterare, vado avanti
+					else{//Non ï¿½ un contenuto da iterare, vado avanti
 						array_shift($content[0]);
 						array_shift($content[1]);
 						if($content[0]){
@@ -1173,7 +1175,7 @@ Class ForeachCode {
 							$currentContentName=reset($content[0]);
 							$currentContentValue=reset($content[1]);	
 						}
-						else{//Non è un contenuto per questo foreach
+						else{//Non ï¿½ un contenuto per questo foreach
 							if($this->isRelativeForeachPlaceholder($currentContentName,$foreachName)){
 								if($this->isBrotherForeachPlaceholder($currentContentName,$foreachName)){
 									return $foreachCode;		
@@ -1192,7 +1194,7 @@ Class ForeachCode {
 							}	
 						}
 					}
-					else{//Non è un contenuto da iterare, vado avanti
+					else{//Non ï¿½ un contenuto da iterare, vado avanti
 						array_shift($content[0]);
 						array_shift($content[1]);
 						if($content[0]){
@@ -1272,8 +1274,8 @@ Class ForeachCode {
 	function getChildFromDescendantPlaceholder($placeholderName,$foreachName){//Ritorna il nome del foreach figlio da cui discende l'elemento se esiste
 		$check = FALSE;
 		$foreachChilds = $this->getForeachChilds($foreachName);
-		if($foreachChilds){// il foreach corrente NON è una foglia
-			foreach($foreachChilds as $child){ //Se il prossimo foreach è un mio discendente
+		if($foreachChilds){// il foreach corrente NON ï¿½ una foglia
+			foreach($foreachChilds as $child){ //Se il prossimo foreach ï¿½ un mio discendente
 				foreach($this->getForeachPlaceholders($child) as $currentPlaceholder){
 					if($placeholderName==$currentPlaceholder) return $child;
 				}
@@ -1282,7 +1284,7 @@ Class ForeachCode {
 			}	
 			return NULL;	
 		}
-		else{//il foreach corrente è una foglia
+		else{//il foreach corrente ï¿½ una foglia
 			return NULL;
 		}	
 	}
@@ -1335,8 +1337,8 @@ Class ForeachCode {
 	function isDescendantForeachPlaceholder($placeholderName,$foreachName){//Controlla se esiste un discendente che contiene questo placeholder
 		$check = FALSE;
 		$foreachChilds = $this->getForeachChilds($foreachName);
-		if($foreachChilds){// il foreach corrente NON è una foglia
-			foreach($foreachChilds as $child){ //Se il prossimo foreach è un mio discendente
+		if($foreachChilds){// il foreach corrente NON ï¿½ una foglia
+			foreach($foreachChilds as $child){ //Se il prossimo foreach ï¿½ un mio discendente
 				foreach($this->getForeachPlaceholders($child) as $currentPlaceholder){
 					if($placeholderName==$currentPlaceholder) return TRUE;
 				}
@@ -1345,13 +1347,13 @@ Class ForeachCode {
 			}	
 			return FALSE;	
 		}
-		else{//il foreach corrente è una foglia
+		else{//il foreach corrente ï¿½ una foglia
 			return FALSE;
 		}	
 	}
 	function isBrotherForeachPlaceholder($placeholderName,$foreachName){
 		$checkForeachName = $this->getForeachName($placeholderName);
-		//se il prossimo foreach ha lo stesso genitore allora è al mio stesso livello
+		//se il prossimo foreach ha lo stesso genitore allora ï¿½ al mio stesso livello
 		foreach($this->foreachHierarchyArray as $currentForeachName=>$currentForeachChilds){
 			foreach($currentForeachChilds as $child){
 				if($child==$foreachName){
@@ -1367,10 +1369,10 @@ Class ForeachCode {
 	}
 	function setPlaceholderValue($placeholderName,$placeholderValue,$foreachName,$foreachCode){
 		$result = preg_match("~<\[$placeholderName\]>~Us",$foreachCode);
-		if($result){//Se c'è il placeholder lo istanzio
+		if($result){//Se c'ï¿½ il placeholder lo istanzio
 			$foreachCode = preg_replace("~<\[$placeholderName\]>~Us",$placeholderValue,$foreachCode,-1);
 		}
-		else{// Se non c'è controllo se si trova nel codice del foreach pulito, nel caso in cui lo appendo 
+		else{// Se non c'ï¿½ controllo se si trova nel codice del foreach pulito, nel caso in cui lo appendo 
 			$foreachCode=preg_replace("~<\[(foreach\d+_\d+)\]>.+<\[\/\\1\]>~Us","",$foreachCode,-1);//Elimino i vecchi foreach annidati, sono in una nuova iterazione	
 			$result = preg_match("~<\[$placeholderName\]>~Us",$this->getForeachCode($foreachName));
 			if($result){

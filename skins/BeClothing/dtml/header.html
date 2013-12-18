@@ -1,156 +1,165 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-- Title here -->
-		<title>BeClothing | <[section]> </title>
-		<!-- Description, Keywords and Author -->
-		<meta name="description" content="Your description">
-		<meta name="keywords" content="Your,Keywords">
-		<meta name="author" content="ResponsiveWebInc">
+    <head>
+        <!-- Title here -->
+        <title>BeClothing | <[section]> </title>
+        <!-- Description, Keywords and Author -->
+        <meta name="description" content="Your description">
+        <meta name="keywords" content="Your,Keywords">
+        <meta name="author" content="ResponsiveWebInc">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600italic,600' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600italic,600' rel='stylesheet' type='text/css'>
 
-		<!-- Styles -->
-		<!-- Bootstrap CSS -->
-		<link href="skins/BeClothing/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Animate css -->
-		<link href="skins/BeClothing/css/animate.min.css" rel="stylesheet">
-		<!-- Dropdown menu -->
-		<link href="skins/BeClothing/css/ddlevelsmenu-base.css" rel="stylesheet">
-		<link href="skins/BeClothing/css/ddlevelsmenu-topbar.css" rel="stylesheet">
-		<!-- Countdown -->
-		<link href="skins/BeClothing/css/jquery.countdown.css" rel="stylesheet">
-		<!-- Font awesome CSS -->
-		<link href="skins/BeClothing/css/font-awesome.min.css" rel="stylesheet">
-		<!-- Custom CSS -->
-		<link href="skins/BeClothing/css/style.css" rel="stylesheet">
-		<!-- Bootstrap Form Helpers CSS -->
-		<link href="skins/BeClothing/css/bootstrap-formhelpers.css" rel="stylesheet">
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="#">
+        <!-- Styles -->
+        <!-- Bootstrap CSS -->
+        <link href="skins/BeClothing/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Animate css -->
+        <link href="skins/BeClothing/css/animate.min.css" rel="stylesheet">
+        <!-- Dropdown menu -->
+        <link href="skins/BeClothing/css/ddlevelsmenu-base.css" rel="stylesheet">
+        <link href="skins/BeClothing/css/ddlevelsmenu-topbar.css" rel="stylesheet">
+        <!-- Countdown -->
+        <link href="skins/BeClothing/css/jquery.countdown.css" rel="stylesheet">
+        <!-- Font awesome CSS -->
+        <link href="skins/BeClothing/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="skins/BeClothing/css/style.css" rel="stylesheet">
+        <!-- Bootstrap Form Helpers CSS -->
+        <link href="skins/BeClothing/css/bootstrap-formhelpers.css" rel="stylesheet">
+        <!-- Datepicker CSS -->
+        <link href="skins/BeClothing/css/datepicker.css" rel="stylesheet">
 
-	</head>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="#">
 
-	<body>
+    </head>
 
-		<!-- Shopping cart Modal -->
-		<div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-							&times;
-						</button>
-						<h4 class="modal-title">Shopping Cart</h4>
-					</div>
-					<div class="modal-body">
+    <body>
 
-						<!-- Items table -->
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Quantity</th>
-									<th>Price</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><a href="single-item.php">HTC One</a></td>
-									<td>2</td>
-									<td>$ 250</td>
-								</tr>
-								<tr>
-									<td><a href="single-item.php">Apple iPhone</a></td>
-									<td>1</td>
-									<td>$ 502</td>
-								</tr>
-								<tr>
-									<td><a href="single-item.php">Galaxy Note</a></td>
-									<td>4</td>
-									<td>$ 1303</td>
-								</tr>
-								<tr>
-									<th></th>
-									<th>Total</th>
-									<th>$ 2405</th>
-								</tr>
-							</tbody>
-						</table>
+        <!-- Shopping cart Modal -->
+        <div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">Shopping Cart</h4>
+                    </div>
+                    <div class="modal-body">
 
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">
-							Continue Shopping
-						</button>
-						<a href="checkout.php" class="btn-info"><button type="button" class="btn btn-info">
-							Checkout
-						</button></a>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+                        <!-- Items table -->
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="single-item.php">HTC One</a></td>
+                                    <td>2</td>
+                                    <td>$ 250</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="single-item.php">Apple iPhone</a></td>
+                                    <td>1</td>
+                                    <td>$ 502</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="single-item.php">Galaxy Note</a></td>
+                                    <td>4</td>
+                                    <td>$ 1303</td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>Total</th>
+                                    <th>$ 2405</th>
+                                </tr>
+                            </tbody>
+                        </table>
 
-		<!-- Logo & Navigation starts -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Continue Shopping
+                        </button>
+                        <a href="checkout.php" class="btn-info"><button type="button" class="btn btn-info">
+                                Checkout
+                            </button></a>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
-		<div class="header">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-2 col-sm-2">
-						<!-- Logo -->
-						<div class="logo">
-							<h1><a href="index.php">BeClothing</a></h1>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-5">
-						<!-- Navigation menu -->
-						<div class="navi">
-							<div id="ddtopmenubar" class="mattblackmenu">
-								<ul>
-									<li>
-										<a href="index.php">Home</a>
-									</li>
-									<li>
-										<a href="items.php" rel="ddsubmenu1">Man</a>
-										<ul id="ddsubmenu1" class="ddsubmenustyle">
-											<li>
-												<a href="items.php">Trousers</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<a href="items.php">Woman</a>
-									</li>
-									<li>
-										<a href="blog.php">Blog</a>
-									</li>
-									<li>
-										<a href="account.php">My Account</a>
-									</li>
-									<li>
-										<a href="contactus.php">Contact Us</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+        <!-- Logo & Navigation starts -->
 
-						<!-- Dropdown NavBar -->
-						<div class="navis"></div>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <h1><a href="index.php">BeClothing</a></h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-5">
+                        <!-- Navigation menu -->
 
-					</div>
+                        <[HeaderMenu::HeaderMenu library="functions"]>
 
-					<div class="col-md-4 col-sm-5">
-						<div class="kart-links">
-							<a href="login.php">Login</a>
-							<a href="register.php">Signup</a>
-							<a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> 3 Items - $ 300</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                        <!--  DOVE C'ERA IL PLACEHOLDER
+                        <div class="navi">
+                            <div id="ddtopmenubar" class="mattblackmenu">
+                                <ul>
+                                    <li>
+                                        <a href="index.php">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="items.php" rel="ddsubmenu1">Man</a>
+                                        <ul id="ddsubmenu1" class="ddsubmenustyle">
+                                            <li>
+                                                <a href="items.php">Trousers</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="items.php">Woman</a>
+                                    </li>
+                                    <li>
+                                        <a href="blog.php">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="account.php">My Account</a>
+                                    </li>
+                                    <li>
+                                        <a href="contactus.php">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        -->
+                        
+                        
+                        <!-- Dropdown NavBar -->
+                        <div class="navis"></div>
 
-		<!-- Logo & Navigation ends -->
+                    </div>
+
+                    <div class="col-md-4 col-sm-5">
+                        <div class="kart-links">
+                            <a href="login.php">Login</a>
+                            <a href="register.php">Signup</a>
+                            <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> 3 Items - $ 300</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logo & Navigation ends -->

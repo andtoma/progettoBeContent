@@ -172,4 +172,5 @@ $(function(){
 
 $(document).ready(function() {
     $('.sidey .nav').navgoco({accordion: true});
+    $('.datepicker').datepicker();
 });
