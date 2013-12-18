@@ -1,0 +1,165 @@
+      <!-- Page title -->
+      <div class="page-title">
+         <div class="container">
+            <h2><i class="icon-desktop color"></i> Checkout <small>Subtext for header</small></h2>
+            <hr />
+         </div>
+      </div>
+      <!-- Page title -->
+      
+      <!-- Page content -->
+      
+      <div class="checkout">
+         <div class="container">
+            <h4>Shipping & Billing Details</h4>
+            <br />
+            <form class="form-horizontal" role="form" method="POST">
+              <div class="form-group">
+                <label for="name" class="col-md-2 control-label">Name</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" name="name" placeholder="Name">
+                </div>
+              </div>            
+              <div class="form-group">
+                <label for="email" class="col-md-2 control-label">Email</label>
+                <div class="col-md-4">
+                  <input type="email" class="form-control" name="email" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone" class="col-md-2 control-label">Phone Number</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" name="phone" placeholder="Phone">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="country" class="col-md-2 control-label">Country</label>
+                <div class="col-md-4">
+                	<div data-name="country" class="bfh-selectbox bfh-countries" data-country="US" data-flags="true">
+					</div>
+                </div>
+              </div>              
+              <div class="form-group">
+                  <label for="address" class="col-md-2 control-label">Address</label>
+                  <div class="col-md-4">
+                     <textarea class="form-control" rows="3" value="address" placeholder="Address"></textarea>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="zipcode" class="col-md-2 control-label">Zip Code</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" id="zipcode" placeholder="Zip Code">
+                </div>
+              </div>
+              
+              <hr />
+              <h4>Payment Details</h4>
+              
+              <div class="form-group">
+                <label for="paymentmethod" class="col-md-2 control-label">Payment Method</label>
+                <div class="col-md-4">
+                  <select name="paymentmethod" class="payment_method form-control">
+                    <option>Cash On Delivery</option>
+                    <option>Credit Card</option>
+                  </select>
+                </div>
+              </div>
+              <hr/>
+              
+              <!-- Card Holder's Name -->
+              <div class="creditCardSlider">
+              <h4>Credit Card Details</h4>
+              <div class="form-group">
+                <label for="cardholder" class="col-md-2 control-label">Card Holder's Name</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" name="cardholder" placeholder="Card Holder's Name">
+                </div>
+              </div>
+              
+              <!-- Card Number -->
+              <div class="form-group">
+                <label for="cardnumber" class="col-md-2 control-label">Card Number</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" name="cardnumber" placeholder="Card Number">
+                </div>
+              </div>
+              
+              <!-- Expiration Code -->
+              <div class="form-group">
+                <label for="expirationdate" class="col-md-2 control-label">Expiration Date</label>
+                <div class="col-md-5">
+                <div class="form-inline">
+                	<div style="margin-right: 1px;"class="col-md-7 form-group">
+                		<select name="expirationmonth"class="form-control">
+                    		<option>January</option>
+                    		<option>February</option>
+                    		<option>March</option>
+                    		<option>April</option>
+                    		<option>May</option>
+                    		<option>June</option>
+                    		<option>July</option>
+                    		<option>August</option>
+                    		<option>September</option>
+                    		<option>October</option>
+                    		<option>November</option>
+                    		<option>December</option>
+                  		</select>
+                	</div>
+                	<div class="col-md-4 form-group">
+                		<select name="expirationyear"class="form-control">
+                    		<option>2013</option>
+                    		<option>2014</option>
+                    		<option>2015</option>
+                    		<option>2016</option>
+                    		<option>2017</option>
+                    		<option>2018</option>
+                    		<option>2019</option>
+                    		<option>2020</option>
+                    		<option>2021</option>
+                    		<option>2022</option>
+                    		<option>2023</option>
+                  		</select>
+                	</div>
+                </div>	
+                </div>
+              </div>
+              
+              <!-- Card Holder's Name -->
+              <div class="form-group">
+                <label for="ccv" class="col-md-2 control-label">CCV</label>
+                <div class="col-md-2">
+                  <input type="text" class="form-control" name="ccv" placeholder="CCV">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                  <div class="checkbox">
+                    <label>
+                      <input name="defaultpayment" type="checkbox"> Set as Default Payment Information
+                    </label>
+                  </div>
+                </div>
+              </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                  <div class="checkbox">
+                    <label>
+                      <input name="terms"type="checkbox"> Accept Terms & Conditions
+                    </label>
+                  </div>
+                </div>
+              </div>
+ 
+              <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                  <button type="submit" class="btn btn-danger">Confirm Order</button>
+                  <button type="reset" class="btn btn-default">Reset</button>
+                </div>
+              </div>
+            </form>
+            
+         </div>
+      </div>
