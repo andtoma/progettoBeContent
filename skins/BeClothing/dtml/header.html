@@ -61,6 +61,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <[ShoppingCart::ShoppingCart library="functions"]>
+                                <!--
                                 <tr>
                                     <td><a href="single-item.php">HTC One</a></td>
                                     <td>2</td>
@@ -76,10 +78,11 @@
                                     <td>4</td>
                                     <td>$ 1303</td>
                                 </tr>
+                                -->
                                 <tr>
                                     <th></th>
                                     <th>Total</th>
-                                    <th>$ 2405</th>
+                                    <th>&#36;<[TotalPrice::TotalPrice library="functions"]></th>
                                 </tr>
                             </tbody>
                         </table>
@@ -144,18 +147,22 @@
                             </div>
                         </div>
                         -->
-                        
-                        
+
+
                         <!-- Dropdown NavBar -->
                         <div class="navis"></div>
 
                     </div>
 
+
                     <div class="col-md-4 col-sm-5">
                         <div class="kart-links">
+                            <[LoginBox::LoginBox library="functions"]>
+                            <!--
                             <a href="login.php">Login</a>
                             <a href="register.php">Signup</a>
                             <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> 3 Items - $ 300</a>
+                            -->
                         </div>
                     </div>
                 </div>

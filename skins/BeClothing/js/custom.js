@@ -173,4 +173,7 @@ $(function(){
 $(document).ready(function() {
     $('.sidey .nav').navgoco({accordion: true});
     $('.datepicker').datepicker();
+    $('button.close').click(function(){
+        $('div.alert').hide('slow');
+    });
 });
