@@ -88,7 +88,7 @@ Class functions extends TagLibrary {
         foreach ($data as $key => $value) {
 
             $link = 'single-item.php?id=' . $value['item'];
-            $short_desc = substr($value['description'], 0, 80) . '...';
+            $short_desc = substr($value['description'], 0, 60) . '...';
 
             $content .= '<li>
                              <a href="' . $link . '"><img src="' . $value['path'] . '" alt="" class="img-responsive"/></a>
@@ -96,7 +96,7 @@ Class functions extends TagLibrary {
                                  <h5><a href="' . $link . '">' . $value['name'] . '</a></h5>
                                  <p>' . $short_desc . '</p>
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-search"></i>View Details</a>
-                                 <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for ' . $value['price'] . '</a>
+                                 <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for $ ' . $value['price'] . '</a>
                              </div>
                          </li>';
         }
@@ -110,7 +110,7 @@ Class functions extends TagLibrary {
         foreach ($data as $key => $value) {
 
             $link = 'single-item.php?id=' . $value['item'];
-            $short_desc = substr($value['description'], 0, 80) . '...';
+            $short_desc = substr($value['description'], 0, 60) . '...';
 
             $content .= '<li>
                              <a href="' . $link . '"><img src="' . $value['path'] . '" alt="" class="img-responsive"/></a>
@@ -118,13 +118,21 @@ Class functions extends TagLibrary {
                                  <h5><a href="' . $link . '">' . $value['name'] . '</a></h5>
                                  <p>' . $short_desc . '</p>
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-search"></i>View Details</a>
-                                 <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for ' . $value['price'] . '</a>
+                                 <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for $ ' . $value['price'] . '</a>
                              </div>
                          </li>';
         }
+        return $content;
+    }
 
+    function SiteInfo($name, $data, $pars) {
+        $content = "";
+        foreach ($data as $key => $value) {
+            $content .= $value['info_text'];
+        }
         return $content;
     }
 
 }
+
 ?>
