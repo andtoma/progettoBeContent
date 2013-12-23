@@ -65,37 +65,7 @@ $(".navis select").change(function() {
 
 /* Carousel */
 
-$('#carousel_alfa_container').carouFredSel({
-	responsive: true,
-	width: '100%',
-   direction: 'right',
-	scroll: {
-      items: 4,
-      delay: 2000,
-      duration: 500,
-      pauseOnHover: "true"
-   },
-   prev : {
-      button	: "#car_prev_alfa",
-      key		: "left"
-   },
-   next : {
-      button	: "#car_next_alfa",
-      key		: "right"
-   },
-	items: {	
-		visible: {
-         min: 1,
-			max: 4
-		}
-	}
-});
-
-/* New Arrival carousel (CarouFredSel) */
-
-/* Carousel */
-
-$('#carousel_container').carouFredSel({
+$('.carousel_container').carouFredSel({
 	responsive: true,
 	width: '100%',
    direction: 'right',
@@ -111,6 +81,36 @@ $('#carousel_container').carouFredSel({
    },
    next : {
       button	: "#car_next",
+      key		: "right"
+   },
+	items: {	
+		visible: {
+         min: 1,
+			max: 4
+		}
+	}
+});
+
+/* New Arrival carousel (CarouFredSel) */
+
+/* Carousel */
+
+$('.carousel_container').carouFredSel({
+	responsive: true,
+	width: '100%',
+   direction: 'right',
+	scroll: {
+      items: 4,
+      delay: 2000,
+      duration: 500,
+      pauseOnHover: "true"
+   },
+   prev : {
+      button	: "#car_prev_alfa",
+      key		: "left"
+   },
+   next : {
+      button	: "#car_next_alfa",
       key		: "right"
    },
 	items: {	
