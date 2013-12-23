@@ -1,21 +1,22 @@
 <?php
 
+session_start();
+
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
+require "include/auth.inc.php";
+require "include/query_collection.php";
+require "include/mainhtml.php";
+$main = load_main_html("Login");
 
+$container = new Skinlet("login");
 
-$header = new Template("skins/BeClothing/dtml/header.html");
-$container = new Template("skins/BeClothing/dtml/login.html");
-$footer = new Template("skins/BeClothing/dtml/footer.html");
+if (!isset($_SESSION['user'])) {
+    login($main);
+} else {
+    header("Location: index.php");
+}
 
-$header->setContent("section", Login);
-
-$main = new Template("skins/BeClothing/dtml/blank_page.html");
-$main -> setContent("header", $header->get());
-$main -> setContent("container", $container->get());
-$main -> setContent("footer", $footer->get());
 
 $main->close();
-
-
 ?>

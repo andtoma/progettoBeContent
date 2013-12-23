@@ -14,7 +14,7 @@
                                  <!-- Contact form -->
                                     <h5>Contact Us</h5>
                                     
-                                    <form role="form">
+                                    <form role="form" action='mailto:<[SiteEmail::SiteInfo library="functions"]>' method="post" enctype="text/plain">
                                       <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control" id="name" placeholder="Enter Name">
@@ -47,17 +47,17 @@
                                               <!-- Company name -->
                                               <h6>BeClothing Inc.</h6>
                                               <!-- Address -->
-                                              Via Ospedale S. Salvatore, 6<br>
-                                               67100 Coppito AQ<br>
+                                              <[SiteAddress::SiteInfo library="functions"]><br>
+                                              <br>
                                               <!-- Phone number -->
-                                              +39 0862 433122
+                                              <[SitePhone::SiteInfo library="functions"]>
                                            </address>
                                             
                                            <address>
                                               <!-- Name -->
                                               <h6>Executive Sales Manager</h6>
                                               <!-- Email -->
-                                              <a href="mailto:#">IAmTheBoss@gmail.com</a>
+                                              <a href='mailto:<[SiteEmail::SiteInfo library="functions"]>'><[SiteEmail::SiteInfo library="functions"]></a>
                                            </address>
                                            
                                        </div>

@@ -1,21 +1,29 @@
 <?php
 
+session_start();
+
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
+require "include/query_collection.php";
+require "include/mainhtml.php";
+$main = load_main_html("Contact Us");
 
+$container = new Skinlet("contactus");
 
-$header = new Template("skins/BeClothing/dtml/header.html");
-$container = new Template("skins/BeClothing/dtml/contactus.html");
-$footer = new Template("skins/BeClothing/dtml/footer.html");
+/*
+ * PLACEHOLDER -> CONTAINER
+ */
 
-$header->setContent("section", ContactUs);
+# SITE ADDRESS
+$res_siteaddress = getResult($query_siteaddress);
+$container->setContent("SiteAddress", $res_siteaddress);
+# SITE PHONE
+$res_sitephone = getResult($query_sitephone);
+$container->setContent("SitePhone", $res_sitephone);
+# SITE EMAIL
+$res_siteemail = getResult($query_siteemail);
+$container->setContent("SiteEmail", $res_siteemail);
 
-$main = new Template("skins/BeClothing/dtml/blank_page.html");
-$main -> setContent("header", $header->get());
-$main -> setContent("container", $container->get());
-$main -> setContent("footer", $footer->get());
-
+$main->setContent("container", $container->get());
 $main->close();
-
-
 ?>
