@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title here -->
+        <title>BeClothing | <[section]> </title>
+        <!-- Description, Keywords and Author -->
+        <meta name="description" content="Your description">
+        <meta name="keywords" content="Your,Keywords">
+        <meta name="author" content="ResponsiveWebInc">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600italic,600' rel='stylesheet' type='text/css'>
+
+        <!-- Styles -->
+        <!-- Bootstrap CSS -->
+        <link href="skins/BeClothing/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Animate css -->
+        <link href="skins/BeClothing/css/animate.min.css" rel="stylesheet">
+        <!-- Dropdown menu -->
+        <link href="skins/BeClothing/css/ddlevelsmenu-base.css" rel="stylesheet">
+        <link href="skins/BeClothing/css/ddlevelsmenu-topbar.css" rel="stylesheet">
+        <!-- Countdown -->
+        <link href="skins/BeClothing/css/jquery.countdown.css" rel="stylesheet">
+        <!-- Font awesome CSS -->
+        <link href="skins/BeClothing/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="skins/BeClothing/css/style.css" rel="stylesheet">
+        <!-- Bootstrap Form Helpers CSS -->
+        <link href="skins/BeClothing/css/bootstrap-formhelpers.css" rel="stylesheet">
+        <!-- Datepicker CSS -->
+        <link href="skins/BeClothing/css/datepicker.css" rel="stylesheet">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="#">
+
+    </head>
+
+    <body>
+
+        <!-- Shopping cart Modal -->
+        <div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">Shopping Cart</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- Items table -->
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <[ShoppingCart::ShoppingCart library="functions"]>
+                                <!--
+                                <tr>
+                                    <td><a href="single-item.php">HTC One</a></td>
+                                    <td>2</td>
+                                    <td>$ 250</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="single-item.php">Apple iPhone</a></td>
+                                    <td>1</td>
+                                    <td>$ 502</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="single-item.php">Galaxy Note</a></td>
+                                    <td>4</td>
+                                    <td>$ 1303</td>
+                                </tr>
+                                -->
+                                <tr>
+                                    <th></th>
+                                    <th>Total</th>
+                                    <th>&#36;<[TotalPrice::TotalPrice library="functions"]></th>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Continue Shopping
+                        </button>
+                        <a href="checkout.php" class="btn-info"><button type="button" class="btn btn-info">
+                                Checkout
+                            </button></a>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Logo & Navigation starts -->
+
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <h1><a href="index.php">BeClothing</a></h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-5">
+                        <!-- Navigation menu -->
+
+                        <[HeaderMenu::HeaderMenu library="functions"]>
+
+                        <!--  DOVE C'ERA IL PLACEHOLDER
+                        <div class="navi">
+                            <div id="ddtopmenubar" class="mattblackmenu">
+                                <ul>
+                                    <li>
+                                        <a href="index.php">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="items.php" rel="ddsubmenu1">Man</a>
+                                        <ul id="ddsubmenu1" class="ddsubmenustyle">
+                                            <li>
+                                                <a href="items.php">Trousers</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="items.php">Woman</a>
+                                    </li>
+                                    <li>
+                                        <a href="blog.php">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="account.php">My Account</a>
+                                    </li>
+                                    <li>
+                                        <a href="contactus.php">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        -->
+
+
+                        <!-- Dropdown NavBar -->
+                        <div class="navis"></div>
+
+                    </div>
+
+
+                    <div class="col-md-4 col-sm-5">
+                        <div class="kart-links">
+                            <[LoginBox::LoginBox library="functions"]>
+                            <!--
+                            <a href="login.php">Login</a>
+                            <a href="register.php">Signup</a>
+                            <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> 3 Items - $ 300</a>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logo & Navigation ends -->
+
+
+
+
+        <[container]>
+
+
+
+
+        <!-- FOOTER.HTML STARTS HERE -->
+
+        <!-- Footer starts -->
+        <footer>
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <div class="fwidget">
+                            <h4>Categories</h4>
+                            <hr />
+
+                            <[FooterMenu::FooterMenu library="functions"]>
+                            <!-- DOVE C'ERA IL PLACEHOLDER
+                            <ul>
+                                <li>
+                                    <a href="index.php">Home</a>
+                                </li>
+                                <li>
+                                    <a href="items.php">Women</a>
+                                </li>
+                                <li>
+                                    <a href="items.php">Men</a>
+                                </li>
+                                <li>
+                                    <a href="blog.php">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="contactus.php">Contact Us</a>
+                                </li>
+                            </ul>
+                            -->
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="fwidget">
+                            <h4>Latest Blog Posts</h4>
+                            <hr />
+                            <ul>
+                                <li>
+                                    <a href="#">Clothing guide to face the cold in L'Aquila</a>
+                                </li>
+                                <li>
+                                    <a href="#">Post 2</a>
+                                </li>
+                                <li>
+                                    <a href="#">Post 3</a>
+                                </li>
+                                <li>
+                                    <a href="#">Post 4</a>
+                                </li>
+                                <li>
+                                    <a href="#">Post 5</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm3">
+                        <div class="fwidget">
+
+                            <h4>Subscribe to Newsletter</h4>
+                            <hr/>
+                            <p>
+                                Insert your email address to receive new arrivals and promotions info.
+                            </p>
+                            <div class="form-group">
+                                <input style="margin-top:10px;"type="email" class="form-control" id="newsletter_subscribe" placeholder="Enter email">
+                            </div>
+                            <button type="submit" class="btn btn-danger">
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-3">
+                        <div class="fwidget">
+
+                            <h4>Get In Touch</h4>
+                            <hr />
+                            <div class="address">
+                                <p>
+                                    <i class="icon-home color contact-icon"></i><[SiteAddress::SiteInfo library="functions"]>
+                                </p>
+                                <p>
+                                    <i class="icon-phone color contact-icon"></i><[SitePhone::SiteInfo library="functions"]>
+                                </p>
+                                <p>
+                                    <i class="icon-envelope color contact-icon"></i><a href='mailto:<[SiteEmail::SiteInfo library="functions"]>'><[SiteEmail::SiteInfo library="functions"]></a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="copy text-center">
+                    Progetto Tecnologie Del Web - <a href="http://responsivewebinc.com/bootstrap-themes">Git Repository</a>
+                    <div class="social">
+                        <a href="#" class="github"><i class="icon-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer ends -->
+
+        <!-- Scroll to top -->
+        <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
+
+        <!-- Javascript files -->
+        <!-- jQuery -->
+        <script src="skins/BeClothing/js/jquery.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="skins/BeClothing/js/bootstrap.min.js"></script>
+        <!-- Dropdown menu -->
+        <script src="skins/BeClothing/js/ddlevelsmenu.js"></script>
+        <!-- CaroFredSel -->
+        <script src="skins/BeClothing/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+        <!-- Countdown -->
+        <script src="skins/BeClothing/js/jquery.countdown.min.js"></script>
+        <!-- jQuery Navco -->
+        <script src="skins/BeClothing/js/jquery.navgoco.min.js"></script>
+        <!-- Filter for support page -->
+        <script src="skins/BeClothing/js/filter.js"></script>
+        <!-- Respond JS for IE8 -->
+        <script src="skins/BeClothing/js/respond.min.js"></script>
+        <!-- HTML5 Support for IE -->
+        <script src="skins/BeClothing/js/html5shiv.js"></script>
+        <!-- Custom JS -->
+        <script src="skins/BeClothing/js/custom.js"></script>
+        <!-- Bootstrap Form Helpers JS -->
+        <script src="skins/BeClothing/js/bootstrap-formhelpers.js"></script>
+        <!-- Datepicker JS -->
+        <script src="skins/BeClothing/js/bootstrap-datepicker.js"></script>
+
+    </body>
+</html>

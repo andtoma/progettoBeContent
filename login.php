@@ -5,20 +5,16 @@ session_start();
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
 require "include/auth.inc.php";
-# DA METTERE IN OGNI FILE PHP CHE CONTIENE HEADER E FOOTER
+require "include/query_collection.php";
 require "include/mainhtml.php";
-$main = new Template("skins/BeClothing/dtml/blank_page.html");
+$main = load_main_html("Login");
 
-# DA METTERE IN OGNI FILE PHP CHE CONTIENE HEADER E FOOTER
-load_main_html($main, "Login");
-
-
-/*
- * PLACEHOLDER -> CONTAINER
- */
+$container = new Skinlet("login");
 
 if (!isset($_SESSION['user'])) {
     login($main);
+} else {
+    header("Location: index.php");
 }
 
 

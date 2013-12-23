@@ -201,6 +201,37 @@ Class functions extends TagLibrary {
         }
         return $tot_price;
     }
+
+    function UserInfo($name, $data, $pars) {
+        # QUERY: USER INFO
+        $query_userinfo = 'SELECT * FROM users WHERE users.id_user='.$_SESSION['user']['id_user'];
+        $res_userinfo= getResult($query_userinfo);
+        
+        foreach($res_userinfo as $key => $value) {
+            $identity = $value['name'].' '.$value['surname'];
+            $address = $value['country'].' '.$value['state'].'<br>'.$value['zip_code'].' '.$value['city'].'<br>'.$value['address'];
+            $phone = $value['phone'];
+            $email = $value['email'];
+        }
+        switch($name) {
+            case 'UserIdentity':
+                return $identity;
+                break;
+            case 'UserAddress':
+                return $address;
+                break;
+            case 'UserPhone':
+                return $phone;
+                break;
+            case 'UserEmail':
+                return $email;
+                break;
+            default:
+                return;
+                break;
+        }
+    }
+
 }
 
 ?>

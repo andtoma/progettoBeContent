@@ -1,54 +1,36 @@
 <?php
-
 session_start();
 
-/* * ************************************************************************************************
-  this procedure is used to check login data, if they are correct users will be placed in session
- * ************************************************************************************************ */
-
 function login($main) {
+    require "include/query_collection.php";
 
     if (!isset($_POST["email"]) && !isset($_POST["password"])) {
-
-        $container = new Template("skins/BeClothing/dtml/login.html");
+        $container = new Skinlet("login");
         $main->setContent("container", $container->get());
         return;
     } else {
-        /* he's coming here pressing SIGN IN */
-
-        $query_login = "SELECT * 
-                        FROM users 
-                        WHERE email = '{$_POST['email']}'AND password = MD5('{$_POST['password']}')";
-
+        /* L'UTENTE HA INSERITO I DATI DI ACCESSO */
         $res_login = getResult($query_login);
-
         if (!$res_login) {
-
+            /* ERRORE NELLA QUERY, USERNAME O PASSWORD ERRATI */
             $alert = '<div class="alert alert-danger alert-dismissable">
                         <button type="button" class="close">&times;</button>
                         <strong>Warning!</strong> Invalid Email or Password.
                       </div>';
-            $container = new Template("skins/BeClothing/dtml/login.html");
+            $container = new Skinlet("login");
             $container->setContent("alert", $alert);
             $main->setContent("container", $container->get());
             return;
         } else {
-
-            $query_login_data = "SELECT id_user, name, username 
-                                 FROM users 
-                                 WHERE email = '{$_POST['email']}' AND password = MD5('{$_POST['password']}')";
-
+            /* LOGIN OK, INSERISCI L'UTENTE IN SESSIONE */
             $res_login_data = getResult($query_login_data);
-
-            foreach($res_login_data as $key => $value) {
+            foreach ($res_login_data as $key => $value) {
                 $_SESSION['user']['id_user'] = $value['id_user'];
                 $_SESSION['user']['name'] = $value['name'];
                 $_SESSION['user']['username'] = $value['username'];
             }
-            
-            $container = new Template("skins/BeClothing/dtml/login.html");
+            $container = new Skinlet("login");
             $main->setContent("container", $container->get());
-            
             header("Location: index.php");
             return;
         }

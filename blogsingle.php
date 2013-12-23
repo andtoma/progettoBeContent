@@ -1,21 +1,15 @@
 <?php
 
+session_start();
+
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
+require "include/query_collection.php";
+require "include/mainhtml.php";
+$main = load_main_html("Blog Post");
 
+$container = new Skinlet("blogsingle");
 
-$header = new Template("skins/BeClothing/dtml/header.html");
-$container = new Template("skins/BeClothing/dtml/blogsingle.html");
-$footer = new Template("skins/BeClothing/dtml/footer.html");
-
-$header->setContent("section", BlogPost);
-
-$main = new Template("skins/BeClothing/dtml/blank_page.html");
-$main -> setContent("header", $header->get());
 $main -> setContent("container", $container->get());
-$main -> setContent("footer", $footer->get());
-
 $main->close();
-
-
 ?>

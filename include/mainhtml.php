@@ -1,49 +1,40 @@
 <?php
+session_start();
 
-function load_main_html($main, $section) {
+function load_main_html($section) {
 
-    $header = new Template("skins/BeClothing/dtml/header.html");
-    $footer = new Template("skins/BeClothing/dtml/footer.html");
-
+    require "include/query_collection.php";
+    
+    $main = new Skin("BeClothing");
+    
     /*
      * PLACEHOLDER -> HEADER
      */
 
-    $header->setContent("section", $section);
-    $header->setContent("ShoppingCart");
-    $header->setContent("TotalPrice");
-    
-    # QUERY: MENU
-    $query_menu = "SELECT * FROM menu";
+    $main->setContent("section", $section);
+    $main->setContent("ShoppingCart");
+    $main->setContent("TotalPrice");
+    # MENU
     $res_menu = getResult($query_menu);
-    $header->setContent("HeaderMenu", $res_menu);
-    
+    $main->setContent("HeaderMenu", $res_menu);
+
     /*
      * PLACEHOLDER -> FOOTER
      */
 
-    $footer->setContent("FooterMenu", $res_menu);
-
-    # QUERY: SITE ADDRESS
-    $query_siteaddress = "SELECT info_text FROM site_infos WHERE info_type='address'";
+    # MENU
+    $main->setContent("FooterMenu", $res_menu);
+    # SITE ADDRESS
     $res_siteaddress = getResult($query_siteaddress);
-    $footer->setContent("SiteAddress", $res_siteaddress);
-
-    # QUERY: SITE PHONE
-    $query_sitephone = "SELECT info_text FROM site_infos WHERE info_type='phone'";
+    $main->setContent("SiteAddress", $res_siteaddress);
+    # SITE PHONE
     $res_sitephone = getResult($query_sitephone);
-    $footer->setContent("SitePhone", $res_sitephone);
-
-    # QUERY: SITE EMAIL
-    $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
+    $main->setContent("SitePhone", $res_sitephone);
+    # SITE EMAIL
     $res_siteemail = getResult($query_siteemail);
-    $footer->setContent("SiteEmail", $res_siteemail);
+    $main->setContent("SiteEmail", $res_siteemail);
 
-
-
-    $main->setContent("header", $header->get());
-    $main->setContent("footer", $footer->get());
-
-    return;
+    return $main;
 }
+
 ?>
