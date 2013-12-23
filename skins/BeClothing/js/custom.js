@@ -8,7 +8,9 @@ $().ready(function(){
 		} else {
 			$('.creditCardSlider').hide();
 		}
-		
+	});
+	$('button[type=reset]').on('click', function(){
+		$('.creditCardSlider').hide();
 	});
 });
 

@@ -1209,6 +1209,14 @@ strong{
    line-height:20px;
 }
 
+.item-details .pull-left {
+	margin-left: 25px;
+}
+
+.item-details .pull-right {
+	margin-right: 25px;
+}
+
 .shop-items .item-price{
 	margin: 7px 5px;
 	display: inline-block;
@@ -1587,6 +1595,9 @@ strong{
    font-size:16px;
 }
 
+.comment-list {
+	list-style-type: disc;
+}
 /* Countdown */
 
 .countdown{
@@ -1810,7 +1821,36 @@ strong{
    border-bottom:1px solid #ccc;
 }
 
+/* Left Side Thumbs Single Item*/
 
+.left-side-container{
+	min-width: 74px;
+}
+
+.left-side-container .left-side-item {
+	min-width: 54px; 
+	min-height: 54px;
+}
+
+.left-side-container .left-side-item .left-side-thumb {
+	min-width: 54px; 
+	min-height: 54px;	
+} 
+
+.left-side-container .left-side-item .left-side-thumb img {
+	min-width: 54px; 
+	min-height: 54px;	
+}
+
+/* Single Item Color Selection*/
+.single-item .form-group {
+	width: 200px;
+}
+
+/* Expiration Date Picker */
+.expiration-picker {
+	 margin-right: 1px;
+}
 
 /* Register & Login */
 
