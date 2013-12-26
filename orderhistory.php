@@ -12,8 +12,12 @@ if (!isset($_SESSION['user'])) {
     header("Location: login.php");
 } else {
     $container = new Skinlet("orderhistory");
+
+    # PURCHASE HISTORY
+    $res_purchase = getResult($query_purchase);
+    $container->setContent("PurchaseHistory", $res_purchase);
 }
 
-$main -> setContent("container", $container->get());
+$main->setContent("container", $container->get());
 $main->close();
 ?>

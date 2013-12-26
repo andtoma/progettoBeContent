@@ -1,4 +1,5 @@
 <?php
+
 /*
  * QUERY HEADER-FOOTER
  */
@@ -6,11 +7,11 @@ $query_menu = "SELECT * FROM menu";
 $query_siteaddress = "SELECT info_text FROM site_infos WHERE info_type='address'";
 $query_sitephone = "SELECT info_text FROM site_infos WHERE info_type='phone'";
 $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
-$query_slideshow = "SELECT * FROM site_images INNER JOIN site_infos ON site_images.site_info=site_infos.id_info";
 /*
  * QUERY HOMEPAGE
  */
-$query_itemsmp = "SELECT purchase.item, path, name,description, price, COUNT(*) 
+$query_slideshow = "SELECT * FROM slideshow";
+$query_itemsmp = "SELECT purchase.item, path, name, description, price, COUNT(*) 
 FROM purchase 
 INNER JOIN items ON purchase.item=items.id_item 
 INNER JOIN items_images ON items.id_item=items_images.item 
@@ -43,5 +44,17 @@ WHERE email = '{$_POST['email']}' AND password = MD5('{$_POST['password']}')";
 $query_siteaddress = "SELECT info_text FROM site_infos WHERE info_type='address'";
 $query_sitephone = "SELECT info_text FROM site_infos WHERE info_type='phone'";
 $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
+/*
+ * QUERY ACCOUNT
+ */
+$query_userinfo = "SELECT * FROM users WHERE users.id_user=" . $_SESSION['user']['id_user'];
+$query_purchase = "SELECT datetime, id_item, name, quantity, price, status 
+FROM purchase
+INNER JOIN items ON purchase.item=items.id_item
+WHERE purchase.user=" . $_SESSION['user']['id_user'];
+$query_wishlist = "SELECT id_item, name, price 
+FROM wishlist
+INNER JOIN items ON wishlist.item=items.id_item
+WHERE wishlist.user=" . $_SESSION['user']['id_user'];
 
 ?>

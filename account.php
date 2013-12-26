@@ -13,13 +13,18 @@ if (!isset($_SESSION['user'])) {
 } else {
     $container = new Skinlet("account");
 
-    # USER-PURCHASE INFO
-    $res_up_info = getResult($query_up_info);
+    # USER INFO
+    $res_userinfo = getResult($query_userinfo);
+    $container->setContent("Name", $res_userinfo);
+    $container->setContent("Surname", $res_userinfo);
+    $container->setContent("Address", $res_userinfo);
+    $container->setContent("Phone", $res_userinfo);
+    $container->setContent("Email", $res_userinfo);
+    
+    # RECENT PURCHASE
+    $res_purchase = getResult($query_purchase);
+    $container->setContent("RecentPurchase", $res_purchase);
 
-    $container->setContent("UserIdentity");
-    $container->setContent("UserAddress");
-    $container->setContent("UserPhone");
-    $container->setContent("UserEmail");
 }
 
 

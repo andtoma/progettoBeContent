@@ -13,10 +13,10 @@ function load_main_html($section) {
 
     $main->setContent("section", $section);
     $main->setContent("ShoppingCart");
-    $main->setContent("TotalPrice");
     # MENU
     $res_menu = getResult($query_menu);
     $main->setContent("HeaderMenu", $res_menu);
+    $main->setContent("LoginBox");
 
     /*
      * PLACEHOLDER -> FOOTER

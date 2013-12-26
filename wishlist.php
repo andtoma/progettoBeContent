@@ -12,6 +12,10 @@ if (!isset($_SESSION['user'])) {
     header("Location: login.php");
 } else {
     $container = new Skinlet("wishlist");
+    
+    # WISHLIST
+    $res_wishlist = getResult($query_wishlist);
+    $container->setContent("WishList", $res_wishlist);
 }
 
 $main -> setContent("container", $container->get());
