@@ -10,13 +10,13 @@ Class functions extends TagLibrary {
 
     function HeaderMenu($name, $data, $pars) {
         ### QUERY PER PRENDERE LE ID DEI MENU CON SOTTOMENU
-        $query_1 = "SELECT DISTINCT submenu.menu FROM menu INNER JOIN submenu ON menu.id_field=submenu.menu";
+        $query_1 = "SELECT DISTINCT parent_id FROM menu WHERE parent_id!=0";
         $res_1 = getResult($query_1);
         $content = '<div class="navi"><div id="ddtopmenubar" class="mattblackmenu"><ul>';
         foreach ($data as $key => $value) {
             $hassub = 0;
             foreach ($res_1 as $k1 => $v1) {
-                if ($value['id_field'] == $v1['menu']) {
+                if ($value['id'] == $v1['parent_id']) {
                     $hassub = 1;
                     break;
                 }
@@ -26,14 +26,14 @@ Class functions extends TagLibrary {
                  * CASO IN CUI IL MENU HA DEI SOTTOMENU
                  */
                 $content.= '<li>
-                                <a href="' . $value['link'] . '" rel="ddsubmenu1">' . $value['field_name'] . '</a>
+                                <a href="' . $value['link'] . '" rel="ddsubmenu1">' . $value['name'] . '</a>
                             <ul id="ddsubmenu1" class="ddsubmenustyle">';
                 ### QUERY PER PRENDERE I CAMPI DEL SOTTOMENU ASSOCIATO AL MENU CORRENTE
-                $query_2 = "SELECT * FROM submenu WHERE menu=" . $value['id_field'];
+                $query_2 = "SELECT * FROM menu WHERE parent_id=" . $value['id'];
                 $res_2 = getResult($query_2);
                 foreach ($res_2 as $k2 => $v2) {
                     $content .= '<li>
-                                    <a href="' . $v2['link'] . '?cat=' . $v2['id_submenu'] . '">' . $v2['field_name'] . '</a>
+                                    <a href="' . $v2['link'] . '">' . $v2['name'] . '</a>
                                  </li>';
                 }
                 $content .= '</ul></li>';
@@ -41,7 +41,7 @@ Class functions extends TagLibrary {
                 /*
                  * CASO IN CUI IL MENU NON HA SOTTOMENU
                  */
-                $content .= '<li><a href="' . $value['link'] . '">' . $value['field_name'] . '</a></li>';
+                $content .= '<li><a href="' . $value['link'] . '">' . $value['name'] . '</a></li>';
             }
         }
         $content .= '</ul></div></div>';
@@ -52,7 +52,7 @@ Class functions extends TagLibrary {
         $content = '<ul>';
         foreach ($data as $key => $value) {
             $content.='<li>
-                       <a href="' . $value['link'] . '">' . $value['field_name'] . '</a>
+                       <a href="' . $value['link'] . '">' . $value['name'] . '</a>
                        </li>';
         }
         $content .= '</ul>';
@@ -84,6 +84,7 @@ Class functions extends TagLibrary {
 
     function ItemsMP($name, $data, $pars) {
         $content = '';
+        $max = 6;
         foreach ($data as $key => $value) {
 
             $link = 'single-item.php?id=' . $value['item'];
@@ -98,19 +99,22 @@ Class functions extends TagLibrary {
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
                              </div>
                          </li>';
+            
+            if (!( --$max))
+                break;
         }
 
         return $content;
     }
 
     function ItemsNA($name, $data, $pars) {
-
         $content = '';
+        $max = 6;
         foreach ($data as $key => $value) {
-
+            
             $link = 'single-item.php?id=' . $value['item'];
             $short_desc = substr($value['description'], 0, 60) . '...';
-
+            
             $content .= '<li>
                              <a href="' . $link . '"><img src="' . $value['path'] . '" alt="" class="img-responsive"/></a>
                              <div class="carousel_caption">
@@ -120,6 +124,9 @@ Class functions extends TagLibrary {
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
                              </div>
                          </li>';
+            
+            if (!( --$max))
+                break;
         }
         return $content;
     }
@@ -143,11 +150,10 @@ Class functions extends TagLibrary {
             # SE L'UTENTE è IN SESSIONE CARICA IL CARRELLO E IL LOGOUT
             $num_items = 0;
             $tot_price = 0;
-
             
             # QUERY: SHOPPINGCART
             $query_shoppingcart = "SELECT name, quantity, price 
-                                   FROM items INNER JOIN cart ON items.id_item=cart.item 
+                                   FROM items INNER JOIN cart ON items.id=cart.item 
                                    WHERE cart.user=" . $_SESSION['user']['id_user'];
             $res_shoppingcart = getResult($query_shoppingcart);
             foreach ($res_shoppingcart as $key => $value) {
@@ -168,12 +174,12 @@ Class functions extends TagLibrary {
         } else {
             # QUERY: SHOPPINGCART
             $query_shoppingcart = "SELECT name, quantity, price 
-                                   FROM items INNER JOIN cart ON items.id_item=cart.item 
+                                   FROM items INNER JOIN cart ON items.id=cart.item 
                                    WHERE cart.user=" . $_SESSION['user']['id_user'];
             $res_shoppingcart = getResult($query_shoppingcart);
             foreach ($res_shoppingcart as $key => $value) {
                 $content.= '<tr>
-                                <td><a href="single-item.php?id=' . $value['id_item'] . '">' . $value['name'] . '</a></td>
+                                <td><a href="single-item.php?id=' . $value['id'] . '">' . $value['name'] . '</a></td>
                                 <td>'.$value['quantity'].'</td>
                                 <td>&#36;' . ($value['price']*$value['quantity']) . '</td>
                             </tr>';
@@ -207,7 +213,7 @@ Class functions extends TagLibrary {
      */
 
     function UserInfo($name, $data, $pars) {
-        $id = $data[0]['id_user'];
+        $id = $data[0]['id'];
         $name1 = $data[0]['name'];
         $surname = $data[0]['surname'];
         $birth_date = $data[0]['birth_date'];
@@ -272,7 +278,7 @@ Class functions extends TagLibrary {
         foreach ($data as $key => $value) {
             $content .= '<tr>
                             <td>' . $value['datetime'] . '</td>
-                            <td>' . $value['id_item'] . '</td>
+                            <td>' . $value['id'] . '</td>
                             <td>' . $value['name'] . '</td>
                             <td>' . $value['quantity'] . '</td>
                             <td>&#36;' . $value['price'] . '</td>
@@ -290,7 +296,7 @@ Class functions extends TagLibrary {
         foreach ($data as $key => $value) {
             $content .= '<tr>
                             <td>' . ($index++) . '</td>
-                            <td><a href="single-item.php?id=' . $value['id_item'] . '">' . $value['name'] . '</a></td>
+                            <td><a href="single-item.php?id=' . $value['id'] . '">' . $value['name'] . '</a></td>
                             <td>&#36;' . $value['price'] . '</td>
                         </tr>';
         }
@@ -302,7 +308,7 @@ Class functions extends TagLibrary {
         foreach ($data as $key => $value) {
             $content .= '<tr>
                             <td>' . $value['datetime'] . '</td>
-                            <td>' . $value['id_item'] . '</td>
+                            <td>' . $value['id'] . '</td>
                             <td>' . $value['name'] . '</td>
                             <td>' . $value['quantity'] . '</td>
                             <td>&#36;' . $value['price'] . '</td>

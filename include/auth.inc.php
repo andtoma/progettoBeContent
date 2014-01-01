@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 function login($main) {
@@ -24,11 +25,9 @@ function login($main) {
         } else {
             /* LOGIN OK, INSERISCI L'UTENTE IN SESSIONE */
             $res_login_data = getResult($query_login_data);
-            foreach ($res_login_data as $key => $value) {
-                $_SESSION['user']['id_user'] = $value['id_user'];
-                $_SESSION['user']['name'] = $value['name'];
-                $_SESSION['user']['username'] = $value['username'];
-            }
+            $_SESSION['user']['id_user'] = $res_login_data[0]['id'];
+            $_SESSION['user']['name'] = $res_login_data[0]['name'];
+            $_SESSION['user']['username'] = $res_login_data[0]['username'];
             $container = new Skinlet("login");
             $main->setContent("container", $container->get());
             header("Location: index.php");

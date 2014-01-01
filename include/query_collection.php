@@ -3,7 +3,7 @@
 /*
  * QUERY HEADER-FOOTER
  */
-$query_menu = "SELECT * FROM menu";
+$query_menu = "SELECT * FROM menu WHERE parent_id=0 ORDER BY position";
 $query_siteaddress = "SELECT info_text FROM site_infos WHERE info_type='address'";
 $query_sitephone = "SELECT info_text FROM site_infos WHERE info_type='phone'";
 $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
@@ -11,23 +11,23 @@ $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
  * QUERY HOMEPAGE
  */
 $query_slideshow = "SELECT * FROM slideshow";
-$query_itemsmp = "SELECT purchase.item, path, name, description, price, COUNT(*) 
+$query_itemsmp = "SELECT purchase.item, path, name, description, price, quantity, COUNT(*) 
 FROM purchase 
-INNER JOIN items ON purchase.item=items.id_item 
-INNER JOIN items_images ON items.id_item=items_images.item 
+INNER JOIN items ON purchase.item=items.id 
+INNER JOIN items_images ON items.id=items_images.item 
 GROUP BY purchase.item 
 ORDER BY COUNT(*) DESC";
-$query_itemsna = "SELECT id_item AS item , path, name, description, price 
+$query_itemsna = "SELECT items.id AS item , path, name, description, price 
 FROM items 
-INNER JOIN items_images ON items.id_item=items_images.item 
-ORDER BY id_item DESC";
+INNER JOIN items_images ON items.id=items_images.item 
+ORDER BY items.id DESC";
 /*
  * QUERY CARRELLO
  */
-$query_up_info = "SELECT users.name, users.surname, users.country, users.state, users.city, users.zip_code, users.address, users.phone, purchase.id_order, items.name, items.price
-FROM users 
-INNER JOIN purchase ON users.id_user=purchase.user 
-INNER JOIN items ON items.id_item=purchase.item
+$query_up_info = "SELECT U.name, U.surname, U.country, U.state, U.city, U.zip_code, U.address, U.phone, P.id, I.name, I.price 
+FROM users U
+INNER JOIN purchase P ON users.id_user=purchase.user 
+INNER JOIN items I ON items.id=purchase.item
 WHERE users.id_user=" . $_SESSION['user']['id_user'];
 /*
  * QUERY LOGIN
@@ -35,7 +35,7 @@ WHERE users.id_user=" . $_SESSION['user']['id_user'];
 $query_login = "SELECT * 
 FROM users 
 WHERE email = '{$_POST['email']}'AND password = MD5('{$_POST['password']}')";
-$query_login_data = "SELECT id_user, name, username 
+$query_login_data = "SELECT id, name, username 
 FROM users 
 WHERE email = '{$_POST['email']}' AND password = MD5('{$_POST['password']}')";
 /*
@@ -47,14 +47,14 @@ $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
 /*
  * QUERY ACCOUNT
  */
-$query_userinfo = "SELECT * FROM users WHERE users.id_user=" . $_SESSION['user']['id_user'];
-$query_purchase = "SELECT datetime, id_item, name, quantity, price, status 
-FROM purchase
-INNER JOIN items ON purchase.item=items.id_item
+$query_userinfo = "SELECT * FROM users WHERE users.id=" . $_SESSION['user']['id_user'];
+$query_purchase = "SELECT datetime, items.id, name, quantity, price, status 
+FROM purchase 
+INNER JOIN items ON purchase.item=items.id 
 WHERE purchase.user=" . $_SESSION['user']['id_user'];
-$query_wishlist = "SELECT id_item, name, price 
-FROM wishlist
-INNER JOIN items ON wishlist.item=items.id_item
+$query_wishlist = "SELECT id, name, price 
+FROM wishlist 
+INNER JOIN items ON wishlist.item=items.id 
 WHERE wishlist.user=" . $_SESSION['user']['id_user'];
 
 ?>
