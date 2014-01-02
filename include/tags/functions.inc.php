@@ -154,7 +154,7 @@ Class functions extends TagLibrary {
             # QUERY: SHOPPINGCART
             $query_shoppingcart = "SELECT name, quantity, price 
                                    FROM items INNER JOIN cart ON items.id=cart.item 
-                                   WHERE cart.user=" . $_SESSION['user']['id_user'];
+                                   WHERE cart.user=".$_SESSION['user']['id_user'];
             $res_shoppingcart = getResult($query_shoppingcart);
             foreach ($res_shoppingcart as $key => $value) {
                 $num_items += $value['quantity'];
@@ -175,7 +175,7 @@ Class functions extends TagLibrary {
             # QUERY: SHOPPINGCART
             $query_shoppingcart = "SELECT name, quantity, price 
                                    FROM items INNER JOIN cart ON items.id=cart.item 
-                                   WHERE cart.user=" . $_SESSION['user']['id_user'];
+                                   WHERE cart.user=".$_SESSION['user']['id_user'];
             $res_shoppingcart = getResult($query_shoppingcart);
             foreach ($res_shoppingcart as $key => $value) {
                 $content.= '<tr>

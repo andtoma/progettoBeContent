@@ -47,14 +47,14 @@ $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
 /*
  * QUERY ACCOUNT
  */
-$query_userinfo = "SELECT * FROM users WHERE users.id=" . $_SESSION['user']['id_user'];
+$query_userinfo = "SELECT * FROM users WHERE users.id=".$_SESSION['user']['id_user'];
 $query_purchase = "SELECT datetime, items.id, name, quantity, price, status 
 FROM purchase 
 INNER JOIN items ON purchase.item=items.id 
-WHERE purchase.user=" . $_SESSION['user']['id_user'];
+WHERE purchase.user=".$_SESSION['user']['id_user'];
 $query_wishlist = "SELECT id, name, price 
 FROM wishlist 
 INNER JOIN items ON wishlist.item=items.id 
-WHERE wishlist.user=" . $_SESSION['user']['id_user'];
+WHERE wishlist.user=".$_SESSION['user']['id_user'];
 
 ?>

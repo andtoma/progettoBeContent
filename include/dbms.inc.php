@@ -70,7 +70,6 @@ $mydb = new Connection("localhost", "root", "root", "progettotdw");
 $mydb->connect();
 
 function getResult($query) {
-
     $oid = mysql_query($query) or die(mysql_error());
 
     do {
