@@ -99,7 +99,7 @@ Class functions extends TagLibrary {
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
                              </div>
                          </li>';
-            
+
             if (!( --$max))
                 break;
         }
@@ -111,10 +111,10 @@ Class functions extends TagLibrary {
         $content = '';
         $max = 6;
         foreach ($data as $key => $value) {
-            
+
             $link = 'single-item.php?id=' . $value['item'];
             $short_desc = substr($value['description'], 0, 60) . '...';
-            
+
             $content .= '<li>
                              <a href="' . $link . '"><img src="' . $value['path'] . '" alt="" class="img-responsive"/></a>
                              <div class="carousel_caption">
@@ -124,7 +124,7 @@ Class functions extends TagLibrary {
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
                              </div>
                          </li>';
-            
+
             if (!( --$max))
                 break;
         }
@@ -150,7 +150,7 @@ Class functions extends TagLibrary {
             # SE L'UTENTE è IN SESSIONE CARICA IL CARRELLO E IL LOGOUT
             $num_items = 0;
             $tot_price = 0;
-            
+
             # QUERY: SHOPPINGCART
             $query_shoppingcart = "SELECT name, quantity, price 
                                    FROM items INNER JOIN cart ON items.id=cart.item 
@@ -158,7 +158,7 @@ Class functions extends TagLibrary {
             $res_shoppingcart = getResult($query_shoppingcart);
             foreach ($res_shoppingcart as $key => $value) {
                 $num_items += $value['quantity'];
-                $tot_price += ($value['price']*$value['quantity']);
+                $tot_price += ($value['price'] * $value['quantity']);
             }
             $content .= '<a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> ' . $num_items . ' Items - &#36;' . $tot_price . '</a>
                          <a href="logout.php">Logout</a>';
@@ -180,36 +180,36 @@ Class functions extends TagLibrary {
             foreach ($res_shoppingcart as $key => $value) {
                 $content.= '<tr>
                                 <td><a href="single-item.php?id=' . $value['id'] . '">' . $value['name'] . '</a></td>
-                                <td>'.$value['quantity'].'</td>
-                                <td>&#36;' . ($value['price']*$value['quantity']) . '</td>
+                                <td>' . $value['quantity'] . '</td>
+                                <td>&#36;' . ($value['price'] * $value['quantity']) . '</td>
                             </tr>';
-                $tot_price += ($value['price']*$value['quantity']);
+                $tot_price += ($value['price'] * $value['quantity']);
             }
             $content .= '<tr>
                             <th></th>
                             <th>Total</th>
-                            <th>&#36;'.$tot_price.'</th>
+                            <th>&#36;' . $tot_price . '</th>
                          </tr>';
         }
         return $content;
     }
-    
-    /*
-    function TotalPrice($name, $data, $pars) {
-        $tot_price = 0;
-        if (isset($_SESSION['user'])) {
-            # QUERY: TOTAL PRICE
-            $query_totalprice = 'SELECT SUM(price) AS tot_price 
-                                 FROM cart INNER JOIN items ON cart.item=items.id_item 
-                                 WHERE cart.user=' . $_SESSION['user']['id_user'];
-            $res_totalprice = getResult($query_totalprice);
 
-            foreach ($res_totalprice as $key => $value) {
-                $tot_price += $value['tot_price'];
-            }
-        }
-        return $tot_price;
-    }
+    /*
+      function TotalPrice($name, $data, $pars) {
+      $tot_price = 0;
+      if (isset($_SESSION['user'])) {
+      # QUERY: TOTAL PRICE
+      $query_totalprice = 'SELECT SUM(price) AS tot_price
+      FROM cart INNER JOIN items ON cart.item=items.id_item
+      WHERE cart.user=' . $_SESSION['user']['id_user'];
+      $res_totalprice = getResult($query_totalprice);
+
+      foreach ($res_totalprice as $key => $value) {
+      $tot_price += $value['tot_price'];
+      }
+      }
+      return $tot_price;
+      }
      */
 
     function UserInfo($name, $data, $pars) {
@@ -314,6 +314,59 @@ Class functions extends TagLibrary {
                             <td>&#36;' . $value['price'] . '</td>
                             <td>' . $value['status'] . '</td>
                         </tr>';
+        }
+        return $content;
+    }
+
+    function ItemsList($name, $data, $pars) {
+
+        $content = '';
+
+        foreach ($data as $key => $value) {
+            #check disponibilità
+            $query_availability = "SELECT DISTINCT item FROM availability WHERE item=" . $value['id'];
+            $res_availability = getResult($query_availability);
+            #check prodotto hot
+            $query_discount = "SELECT discount FROM items WHERE id=" . $value['id'];
+            $res_discount = getResult($query_discount);
+
+            $link = "single-item.php&id=" . $value['id'];
+            $short_desc = substr($value['description'], 0, 60) . '...';
+            
+            $content .= '<div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="item">';
+
+            # HOT or OUT OF STOCK icon
+            if (!$res_availability) {
+                $content .= '<div class="item-icon">
+                             <span class="out-of-stock">OUT OF STOCK</span>
+                             </div>';
+            } elseif ($res_discount[0]['discount']) {
+                $content .= '<div class="item-icon">
+                                 <span class="hot">HOT</span>
+                                 </div>';
+            }
+            # Item image
+            $query_image = "SELECT path FROM items_images WHERE item=" . $value['id'];
+            $res_image = getResult($query_image);
+            $content .= '<div class = "item-image">
+                         <a href = "' . $link . '"><img src = "' . $res_image[0]['path'] . '" alt = "" class = "img-responsive"/></a>
+                         </div>
+                         <div class = "item-details">
+                         <h5><a href = "' . $link . '">' . $value['name'] . '</a></h5>
+                         <div class = "clearfix"></div>
+                         <p>' . $short_desc . '</p>
+                         <hr />
+                         <div class = "pull-left">
+                         <a href = "' . $link . '" class = "btn btn-info btn-sm"><i class = "icon-search"></i>View Details</a>
+                         </div>
+                         <div class = "pull-right">
+                         <a href = "' . $link . '" class = "btn btn-danger btn-sm"><i class = "icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
+                         </div>
+                         <div class = "clearfix"></div>
+                         </div>
+                         </div>
+                         </div>';
         }
         return $content;
     }
