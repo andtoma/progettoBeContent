@@ -103,7 +103,6 @@ Class functions extends TagLibrary {
             if (!( --$max))
                 break;
         }
-
         return $content;
     }
 
@@ -160,7 +159,8 @@ Class functions extends TagLibrary {
                 $num_items += $value['quantity'];
                 $tot_price += ($value['price'] * $value['quantity']);
             }
-            $content .= '<a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> ' . $num_items . ' Items - &#36;' . $tot_price . '</a>
+            $content .= '<a href="account.php">Account</a>
+                         <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> ' . $num_items . ' Items - &#36;' . $tot_price . '</a>
                          <a href="logout.php">Logout</a>';
         }
         return $content;
@@ -332,7 +332,7 @@ Class functions extends TagLibrary {
 
             $link = "single-item.php&id=" . $value['id'];
             $short_desc = substr($value['description'], 0, 60) . '...';
-            
+
             $content .= '<div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="item">';
 
