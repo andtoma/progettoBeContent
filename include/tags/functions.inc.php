@@ -64,7 +64,8 @@ Class functions extends TagLibrary {
         $active = 1;
         foreach ($data as $key => $value) {
             $content .= '<div class="item ';
-            if ($active) {
+
+            if ($active == 1) {
                 $content .= 'active ';
                 $active = 0;
             }
@@ -77,20 +78,6 @@ Class functions extends TagLibrary {
                         </p>
                         </div>
                         </div>';
-        }
-        return $content;
-    }
-
-    function Carousel($name, $data, $pars) {
-        $content = '';
-        $active = 1;
-        for ($i = 0; $i < count($data); $i++) {
-            if ($active) {
-                $content .= '<li data-target="#carousel-example-generic" data-slide-to="' . $i . '" class="active"></li>';
-                $active = 0;
-            } else {
-                $content .= '<li data-target="#carousel-example-generic" data-slide-to="' . $i . '"></li>';
-            }
         }
         return $content;
     }
@@ -109,7 +96,7 @@ Class functions extends TagLibrary {
                                  <h5><a href="' . $link . '">' . $value['name'] . '</a></h5>
                                  <p>' . $short_desc . '</p>
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-search"></i>View Details</a>
-                                 <a data-toggle="modal" data-id=' . $value['item'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] . '</a>
+                                 <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
                              </div>
                          </li>';
 
@@ -133,7 +120,7 @@ Class functions extends TagLibrary {
                                  <h5><a href="' . $link . '">' . $value['name'] . '</a></h5>
                                  <p>' . $short_desc . '</p>
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-search"></i>View Details</a>
-                                 <a data-toggle="modal" data-id=' . $value['item'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] . '</a>
+                                 <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
                              </div>
                          </li>';
 
@@ -166,7 +153,7 @@ Class functions extends TagLibrary {
             # QUERY: SHOPPINGCART
             $query_shoppingcart = "SELECT name, quantity, price 
                                    FROM items INNER JOIN cart ON items.id=cart.item 
-                                   WHERE cart.user=" . $_SESSION['user']['id_user'];
+                                   WHERE cart.user=".$_SESSION['user']['id_user'];
             $res_shoppingcart = getResult($query_shoppingcart);
             foreach ($res_shoppingcart as $key => $value) {
                 $num_items += $value['quantity'];
@@ -188,7 +175,7 @@ Class functions extends TagLibrary {
             # QUERY: SHOPPINGCART
             $query_shoppingcart = "SELECT name, quantity, price 
                                    FROM items INNER JOIN cart ON items.id=cart.item 
-                                   WHERE cart.user=" . $_SESSION['user']['id_user'];
+                                   WHERE cart.user=".$_SESSION['user']['id_user'];
             $res_shoppingcart = getResult($query_shoppingcart);
             foreach ($res_shoppingcart as $key => $value) {
                 $content.= '<tr>
@@ -343,7 +330,7 @@ Class functions extends TagLibrary {
             $query_discount = "SELECT discount FROM items WHERE id=" . $value['id'];
             $res_discount = getResult($query_discount);
 
-            $link = "single-item.php?id=" . $value['id'];
+            $link = "single-item.php&id=" . $value['id'];
             $short_desc = substr($value['description'], 0, 60) . '...';
 
             $content .= '<div class="col-xs-12 col-sm-6 col-md-4">
@@ -360,7 +347,7 @@ Class functions extends TagLibrary {
                                  </div>';
             }
             # Item image
-            $query_image = "SELECT path FROM items_images WHERE item={$value['id']}";
+            $query_image = "SELECT path FROM items_images WHERE item=" . $value['id'];
             $res_image = getResult($query_image);
             $content .= '<div class = "item-image">
                          <a href = "' . $link . '"><img src = "' . $res_image[0]['path'] . '" alt = "" class = "img-responsive"/></a>
@@ -374,94 +361,12 @@ Class functions extends TagLibrary {
                          <a href = "' . $link . '" class = "btn btn-info btn-sm"><i class = "icon-search"></i>View Details</a>
                          </div>
                          <div class = "pull-right">
-                         <a data-toggle="modal" data-id=' . $value['id'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] . '</a>
+                         <a href = "' . $link . '" class = "btn btn-danger btn-sm"><i class = "icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
                          </div>
                          <div class = "clearfix"></div>
                          </div>
                          </div>
                          </div>';
-        }
-        return $content;
-    }
-
-    function ItemDetails($name, $data, $pars) {
-        $content = "";
-        switch ($pars['value']) {
-            case 'sex':
-                if ($data[0]['sex'] == 'M') {
-                    $content .= "icon-male";
-                } else {
-                    $content .="icon-female";
-                }
-                break;
-            case 'name':
-                $content .= $data[0]['name'];
-                break;
-            case 'image':
-                $res_images = getResult("SELECT * FROM items_images WHERE items_images.item={$data[0]['id']}");
-                $content .= $res_images[0]['path'];
-                break;
-            case 'color':
-                $first = 1;
-                $res_images = getResult("SELECT * FROM items_images WHERE items_images.item={$data[0]['id']}");
-                foreach ($res_images as $key => $value) {
-                    if ($first) {
-                        $content .= "<option selected>{$value['colour']}</option>";
-                        $first = 0;
-                    } else {
-                        $content .= "<option>{$value['colour']}</option>";
-                    }
-                }
-                break;
-            case 'size':
-                $res_sizes = getResult("SELECT * FROM availability WHERE item={$data[0]['id']}");
-                foreach ($res_sizes as $key => $value) {
-                    $content .= "<option>{$value['size']}</option>";
-                }
-                break;
-            case 'thumbs':
-                $res_images = getResult("SELECT * FROM items_images WHERE items_images.item={$data[0]['id']}");
-                if ($res_images > 0)
-                    for ($i = 1; $i < min(4, count($res_images)); $i++) {
-                        $content.= '<div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                    <div class="left-side-thumb item-thumb" style="padding:10px ">
-                                    <a href=""><img src="' . $res_images[$i]['path'] . '" alt="" class="img-responsive"/></a>
-                                    <div style="height:5px;background-color:' . $res_images[$i]['colour'] . '"></div>
-                                    </div>
-                                    </div>';
-                    }
-                break;
-            case 'price':
-                $content .= $data[0]['price'];
-                break;
-            case 'brand':
-                $res_brand = getResult("SELECT brand_name FROM brands WHERE id={$data[0]['brand']}");
-                $content .= $res_brand[0]['brand_name'];
-                break;
-            case 'availability':
-                $res_quantity = getResult("SELECT * FROM availability WHERE item={$data[0]['id']}");
-                if (!$res_quantity) {
-                    $content .= "Out of Stok";
-                } else {
-                    $content .= "In Stock";
-                }
-                break;
-            case 'description';
-                $content .= $data[0]['description'];
-                break;
-            case 'crumb';
-                $content .= '<li><a href="index.php">Home</a><span class="divider"></span></li>';
-                if ($data[0]['sex'] == 'M') {
-                    $content .= '<li><a href="items.php?sex=M">Man</a><span class="divider"></span></li>';
-                } else {
-                    $content .= '<li><a href="items.php?sex=F">Woman</a><span class="divider"></span></li>';
-                }
-                $res_category = getResult("SELECT cat_name FROM categories WHERE id={$data[0][category]}");
-                $content .= '<li><a href="items.php?sex=' . $data[0]['sex'] . '&cat=' . $data[0][category] . '">' . $res_category[0]['cat_name'] . '</a><span class="divider"></span></li>';
-                $content .= '<li><a href="single-item.php?id=' . $data[0]['id'] . '">' . $data[0]['name'] . '</a><span class="divider"></span></li>';
-                break;
-            default:
-                break;
         }
         return $content;
     }
