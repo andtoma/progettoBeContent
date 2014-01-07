@@ -1,3 +1,34 @@
+/* Single Blog Post Comments*/
+
+$().ready(function() {
+	$('.posts div.comments').hide();
+	$('.posts div.respond').hide();
+	if ($('.posts div.comments ul.comment-list').hasClass('visible')) {
+		$('.posts div.comments').toggle('slow');
+		/* ajax user logged test */
+		$.post('isLoggedUser.php', function(result) {
+			if (result == 1) {
+				/* logged user can type comments */
+				$('.posts div.respond').toggle('slow');
+			}
+		});
+	}
+	$('.meta .pull-right').on('click', function() {
+		var comments = parseInt(($(this).text()).replace(' Comments', ''));
+		if (comments !== 0) {
+			$('.posts div.comments').toggle('slow');
+		}
+		/* ajax user logged test */
+		$.post('isLoggedUser.php', function(result) {
+			if (result == 1) {
+				/* logged user can type comments */
+				$('.posts div.respond').toggle('slow');
+			}
+		});
+	});
+
+});
+
 /* Register Input Validation */
 $().ready(function() {
 	/* Email Address Regular Expression Validation */
@@ -126,12 +157,12 @@ $().ready(function() {
 
 		}
 	});
-	
+
 	/* Birth Date Regular Expression Validation */
 	var birthDate = new RegExp(/^(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)[0-9][0-9]$/);
 	$('.birthDateValidation').on('blur', function() {
-		var val="";
-		switch($('.month').filter('.active').text()){
+		var val = "";
+		switch($('.month').filter('.active').text()) {
 			case 'Jan':
 				val += "01";
 				break;
@@ -170,7 +201,7 @@ $().ready(function() {
 				break;
 		}
 		val += "/";
-		switch($('.day').filter('.active').text()){
+		switch($('.day').filter('.active').text()) {
 			case '1':
 				val += "0";
 				val += $('.day').filter('.active').text()
@@ -228,37 +259,35 @@ $().ready(function() {
 			});
 			$(this).addClass('validated');
 		}
-		});
-	
-	
+	});
+
 	/* Submit Final Validation */
-	$('.formValidation').on('submit',function(){
+	$('.formValidation').on('submit', function() {
 		var validation = 1;
 		/* Check if all input fields have been correctly filled */
-		$(this).find("input:not(input[type=radio], input[type=checkbox])").each(function(){
-			if(!$(this).hasClass('validated')){
+		$(this).find("input:not(input[type=radio], input[type=checkbox])").each(function() {
+			if (!$(this).hasClass('validated')) {
 				validation = 0;
 			}
 		});
 		/* Check Sex Radiobox */
-		if($('.sexValidation input:radio:checked').length == 0){
+		if ($('.sexValidation input:radio:checked').length == 0) {
 			/* No Sex Chosen */
 			validation = 0;
 		}
 		/* Check Terms&Conditions Checkbox */
-		if(!$('.termsValidation').is(':checked')){
+		if (!$('.termsValidation').is(':checked')) {
 			/* No Terms Accepted */
 			validation = 0;
 		}
-		
-		if(validation == 0){
+
+		if (validation == 0) {
 			validation = 1;
-			return false;	
+			return false;
 		}
-		
+
 	});
-	
-	
+
 });
 
 /*Credit Card Information Sliding Down & Up on Change Event*/

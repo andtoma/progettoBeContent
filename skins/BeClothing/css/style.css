@@ -69,6 +69,11 @@ strong{
    border-color:#16cbe6 !important;
 }
 
+
+/* Selected Pagination Index */
+.active_index {
+	background-color: #EEEEEE;
+}
 /* Basic CSS ends */
 
 .container{
@@ -1518,7 +1523,6 @@ strong{
 }
 
 /* Comments */
-
 .respond{
 	padding-top: 10px;
 }
@@ -1575,6 +1579,12 @@ strong{
 
 .comments .reply{
    margin-left:75px;
+}
+
+
+/*Cwell Comments*/
+.comments .cwell{
+	padding: 15px;
 }
 
 .respond{
@@ -1992,6 +2002,8 @@ footer .copy{
    font-size:13px;
    margin:15px 0px;
 }
+
+
 /* Responsive CSS */
 
 /* Mobile phones */
