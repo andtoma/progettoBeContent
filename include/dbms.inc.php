@@ -96,14 +96,4 @@ function insData($query) {
     return;
 }
 
-function getSingleResult($query, $column) {
-    $oid = mysql_query($query) or die(mysql_error());
-    if (mysql_num_rows($oid) <> 1) {
-        echo "error";
-    } else {
-        $data = mysql_fetch_assoc($oid);
-        return $data[$column];
-    }
-}
-
 ?>
