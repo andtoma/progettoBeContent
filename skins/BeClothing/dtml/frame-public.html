@@ -100,9 +100,6 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
-
-        <[quickshop]>
-
         <!-- Logo & Navigation starts -->
 
         <div class="header">
@@ -217,30 +214,10 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
-                        <div class="fwidget">
-                            <h4>Latest Blog Posts</h4>
-                            <hr />
-                            <ul>
-                                <li>
-                                    <a href="#">Clothing guide to face the cold in L'Aquila</a>
-                                </li>
-                                <li>
-                                    <a href="#">Post 2</a>
-                                </li>
-                                <li>
-                                    <a href="#">Post 3</a>
-                                </li>
-                                <li>
-                                    <a href="#">Post 4</a>
-                                </li>
-                                <li>
-                                    <a href="#">Post 5</a>
-                                </li>
-                            </ul>
-                        </div>
+                    	<[Recent_Post_Footer::RecentPostsList library=functions]>
                     </div>
 
-                    <div class="col-md-3 col-sm-3">
+                    <div class="col-md-3 col-sm3">
                         <div class="fwidget">
 
                             <h4>Subscribe to Newsletter</h4>
@@ -249,7 +226,7 @@
                                 Insert your email address to receive new arrivals and promotions info.
                             </p>
                             <div class="form-group">
-                                <input style="margin-top:10px;" type="email" class="form-control" id="newsletter_subscribe" placeholder="Enter email">
+                                <input style="margin-top:10px;"type="email" class="form-control" id="newsletter_subscribe" placeholder="Enter email">
                             </div>
                             <button type="submit" class="btn btn-danger">
                                 Subscribe
@@ -319,6 +296,6 @@
         <script src="skins/BeClothing/js/bootstrap-formhelpers.js"></script>
         <!-- Datepicker JS -->
         <script src="skins/BeClothing/js/bootstrap-datepicker.js"></script>
-        <script src="skins/BeClothing/js/modal_quickshop.js"></script>
+
     </body>
 </html>
