@@ -9,6 +9,7 @@ require "include/mainhtml.php";
 $main = load_main_html("Homepage");
 
 $container = new Skinlet("homepage");
+$quickshop = new Skinlet("quickshop");
 
 /*
  * PLACEHOLDER -> CONTAINER
@@ -24,6 +25,7 @@ $container->setContent("ItemsMP", $res_itemsmp);
 $res_itemsna = getResult($query_itemsna);
 $container->setContent("ItemsNA", $res_itemsna);
 
+$main->setContent("quickshop", $quickshop->get());
 $main->setContent("container", $container->get());
 $main->close();
 ?>
