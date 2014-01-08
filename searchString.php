@@ -80,9 +80,7 @@ if (!$query) {
 				   	<i class="icon-user"></i>' . $value['username'] . '				   	
 				   	<i class="icon-comment"></i> <a href="blogsingle.php?id=' . $value['id'] . '&mode=1">'.$comments_number.' Comments </a></span>
                    </div>
-				   <div class="bthumb">
-						<a href="#"><img src="'.$value['picture'].'" alt="" class="img-responsive"/></a>
-				   </div>
+				   
 				   <p>' . substr($value['text'],0, 200) . '...' . '</p>
 				   <a href="blogsingle.php?id=' . $value['id'] . '" class="btn btn-info">Read More...</a>
 				   </div>';
