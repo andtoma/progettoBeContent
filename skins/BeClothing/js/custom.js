@@ -1,3 +1,84 @@
+/* Search Blog Post ( Extensible for other) */
+$().ready(function() {
+	$('button.blog_search_button').on('click', function() {
+		var search_text = $(this).closest('div').find('input').first().val();
+		if (search_text == '') {
+			$('div.blog div.col-md-9').html('<h1 style="text-align: center;">Empty Search String<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Without any search criteria, it\'s like hunting a needle in an haystack!</h2><div class="link-list"><h5></h5><a href="#"></a><a href="#"></a><a href="#"></a></div>');
+		} else {
+			$.ajax({
+				url : 'searchString.php',
+				data : {
+					what : search_text,
+					where : 'blog_posts'
+				},
+				type : 'post'
+			}).done(function(response) {
+				if (response === "error") {
+					$('div.blog div.col-md-9').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try again typing what you\'re searching for in another way!</h2></div><div class="link-list"><h5></h5><a href="#"></a><a href="#"></a><a href="#"></a></div>');
+				} else {
+					new_response = response.replace(/&lt;/g, "<");
+					new_response = new_response.replace(/&gt;/g, ">");
+					new_response = new_response.replace(/&quot;/g, "\"");
+					new_response = new_response.replace(/&amp;/g, "&");
+					$('div.blog div.col-md-9').html(new_response);
+					
+				}
+			});
+		}
+
+	});
+
+});
+
+/* Update/Delete Comment */
+$().ready(function() {
+	/* Edit Comment */
+
+	$('li.cwell.comment form.editComment').hide();
+	$('button.update_comment.btn').on('click', function() {
+		$(this).closest('li.cwell.comment').find('form.editComment').first().toggle();
+		$(this).closest('li.cwell.comment').find('p').first().toggle();
+	});
+	$('li.cwell.comment form.editComment button').on('click', function() {
+		var test = $(this).closest('li.cwell.comment');
+		$.ajax({
+			url : 'updateComment.php',
+			type : 'post',
+			data : {
+				id : $(this).val(),
+				text : $(this).closest('form.editComment').find('textarea').first().val()
+			}
+		}).done(function(data) {
+			if (data == 'ko') {
+				alert('Sorry something gone wrong...Try later!')
+			} else {
+				test.find('p').text(test.find('form.editComment textarea').val());
+				test.find('form.editComment').first().toggle();
+				test.find('p').first().toggle();
+			}
+		});
+	});
+
+	/* Remove Comment */
+	$('button.remove_comment.btn').on('click', function() {
+		var test = $(this).closest('li.cwell.comment');
+		$.ajax({
+			url : 'removeComment.php',
+			type : 'post',
+			data : {
+				id : "" + $(this).val() + ""
+			}
+		}).done(function(data) {
+			if (data == 'ko') {
+				alert('Sorry something gone wrong...Try later!')
+			} else {
+				test.remove();
+			}
+		});
+	});
+
+});
+
 /* Single Blog Post Comments*/
 
 $().ready(function() {

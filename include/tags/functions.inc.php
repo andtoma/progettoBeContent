@@ -2,6 +2,31 @@
 
 session_start();
 
+function match_verifier($data1, $data2) {
+	foreach ($data1 as $key => $value) {
+		if (in_array($value, $data2)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function check_permission($service) {
+	/* groups with the service */
+	$q1 = ("select grp from services_groups where service=(select id from services where name='{$service}')");
+
+	$data1 = getResult($q1);
+
+	/*user group*/
+	$q2 = ("select grp from users_groups where user ='{$_SESSION['user']['id_user']}'");
+
+	$data2 = getResult($q2);
+
+	/*looking for common elements in the 2 arrays */
+	return match_verifier($data1, $data2);
+
+}
+
 Class functions extends TagLibrary {
 
 	function IoDevoEssereLaPrimaFunzione() {
@@ -373,40 +398,72 @@ Class functions extends TagLibrary {
 
 	/* Blog Post List */
 	function BlogPosts($name, $data, $pars) {
+		switch($name){
+			case "Post_List":
 		if (!isset($data['page'])) {
 			$data['page'] = 1;
 		}
 		$blog_page_start = (intval($data['page']) - 1) * 6;
 		$blog_page_end = $blog_page_start + 5;
-		$data = getResult("select id, username, title, text, datetime, picture from posts order by datetime limit " . $blog_page_start . "," . $blog_page_end . "");
+		$query = getResult("select id, username, title, text, datetime, picture from posts order by id desc limit " . $blog_page_start . "," . $blog_page_end . "");
 		$post_list = '<div class="posts">';
-		foreach ($data as $key => $value) {
+		foreach ($query as $key => $value) {
 			$comments_number = getSingleResult('select count(*) from comments where post=' . $value['id'] . '', 'count(*)');
 			$post_list .= '<div class="cwell entry">
-				   <h2><a href="blogsingle.php?id=' . $value['id'] . '">' . $value['title'] . ' </a></h2>
+				   <h2>
+				   <a href="blogsingle.php?id=' . $value['id'] . '">' . $value['title'] . ' </a>';
+			if (check_permission("edit_post") && check_permission("delete_post")) {
+				$post_list .= '<div style="float:right;">
+				   <form action="updateDeletePost.php" method="post">
+				   		<button name="edit" value="' . $value['id'] . '" class="btn btn-xs btn-warning"><i class="icon-pencil" ></i></button>
+				   		<button name="remove" value="' . $value['id'] . '" class="btn btn-xs btn-danger"><i class="icon-remove" ></i></button>
+				   </form>
+				   </div>';
+			} else {
+
+				if (check_permission("edit_post")) {
+					$post_list .= '<div style="float:right;">
+				   <form action="updateDeletePost.php" method="post">
+				   		<button name="edit" value="' . $value['id'] . '" class="btn btn-xs btn-warning"><i class="icon-pencil" ></i></button>
+				   </form>
+				   </div>';
+
+				} else {
+
+					if (check_permission("delete_post")) {
+						$post_list .= '<div style="float:right;">
+				   <form action="updateDeletePost.php" method="post">
+				   		<button name="remove" value="' . $value['id'] . '" class="btn btn-xs btn-danger"><i class="icon-remove" ></i></button>
+				   </form>
+				   </div>';
+					}
+				}
+			}
+
+			$post_list .= '</h2>
 				   <div class="meta">
 				   	<i class="icon-calendar"></i>' . $value['datetime'] . '
 				   	<i class="icon-user"></i>' . $value['username'] . '				   	
 				   	<i class="icon-comment"></i> <a href="blogsingle.php?id=' . $value['id'] . '&mode=1">' . $comments_number . ' Comments </a></span>
                    </div>
-				   <div class="bthumb">
-						<a href="#"><img src="' . $value['picture'] . '" alt="" class="img-responsive"/></a>
-				   </div>
-				   <p>' . softTrim($value['text'], 200, '...') . '</p>
+				   <p>' . substr($value['text'],0, 200) . '...' . '</p>
 				   <a href="blogsingle.php?id=' . $value['id'] . '" class="btn btn-info">Read More...</a>
 				   </div>';
 		}
+		
 		$post_list .= '</div>
 					   <div class="pagination-centered">
 							<ul class="pagination">
-							<li>
-								<a href="#">&laquo;</a>
-							</li>';
-		$pages_number = ceil(getSingleResult('select count(*) from posts', 'count(*)') / 5);
+							';
+		if(getSingleResult('select count(*) from posts', 'count(*)') % 5){
+			$pages_number = ceil(getSingleResult('select count(*) from posts', 'count(*)') / 5);
+		} else {
+			$pages_number = getSingleResult('select count(*) from posts', 'count(*)') / 5;	
+		}							
+		
 		$pagination_index = 0;
 		while ($pages_number) {
 			$pagination_index += 1;
-			echo $data['page'];
 			if ($pagination_index == $data['page']) {
 				$post_list .= '<li class="active_index">';
 			} else {
@@ -416,18 +473,31 @@ Class functions extends TagLibrary {
 						   </li>';
 			$pages_number -= 1;
 		}
-		$post_list .= '<li>
-						<a href="#">&raquo;</a>
-		              </li>
+		$post_list .= '
 					 </ul>
 					</div>
 					<div class="clearfix"></div>';
 		return $post_list;
+		
+		case "NewPostHeader":
+			if(check_permission('create_post')){
+				return '<div class="container">
+				<form style="margin-top: -20px;" action="postManager.php" method="post">
+					<button name="action" value="new" class="btn btn-sm btn-success">
+						<i class="icon-plus" ></i> Create New Post
+					</button>
+				</form>
+			</div>';
+			} else {
+				return "";
+			}
+	}
+
 	}
 
 	/* Recent Posts Lists */
 	function RecentPostsList($name, $data, $pars) {
-		$query = getResult("select * from posts order by datetime limit 0, 5");			
+		$query = getResult("select * from posts order by datetime limit 0, 5");
 		switch($name) {
 			/* Recent Posts on Footer */
 			case "Recent_Post_Footer" :
@@ -441,7 +511,7 @@ Class functions extends TagLibrary {
 				}
 				$recent_post .= '</ul>
 							</div>';
-                return $recent_post;    
+				return $recent_post;
 				break;
 			default :
 				$recent_post = '<div class="sidebar">
@@ -458,6 +528,22 @@ Class functions extends TagLibrary {
 		}
 
 	}
+	
+	/* Search Sidebar */
+	function SearchSidebar($name, $data, $pars){
+		$search = '<div class="sidebar cwell">
+					<div class="widget">
+						<h4>Search</h4>
+						<div class="row">
+								<div class="col-sm-12">
+									<input class="form-control searchText" placeholder="Search Blog Post..." type="text" >
+									<button style="margin-top: 5px;float: right;" class="btn btn-md btn-info blog_search_button">Search <i class="icon-zoom-in"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>';
+		return $search;					
+	}
 
 	/* Single Blog Post */
 	function SingleBlogPost($name, $data, $pars) {
@@ -467,21 +553,49 @@ Class functions extends TagLibrary {
 				$post_data = getResult('select * from posts where id=' . $data['id'] . '');
 				$comments_number = getSingleResult('select count(*) from comments where post=' . $data['id'] . '', 'count(*)');
 				foreach ($post_data as $key => $value) {
-					$result .= '
-					<div class="cwell entry">
-						<h2><a href="#">' . $value['title'] . '</a></h2>
+					$result .= '<div class="cwell entry">
+								<h2>
+								<a href="#">' . $value['title'] . '</a>';
+
+					if (check_permission("edit_post") && check_permission("delete_post")) {
+						$result .= '<div style="float:right;">
+				  		 <form action="updateDeletePost.php" method="post">
+				   			<button name="edit" value="' . $value['id'] . '" class="btn btn-xs btn-warning"><i class="icon-pencil" ></i></button>
+				   			<button name="remove" value="' . $value['id'] . '" class="btn btn-xs btn-danger"><i class="icon-remove" ></i></button>
+				   		 </form>
+				   		</div>';
+					} else {
+
+						if (check_permission("edit_post")) {
+							$result .= '<div style="float:right;">
+				  		 <form action="updateDeletePost.php" method="post">
+				   			<button name="edit" value="' . $value['id'] . '" class="btn btn-xs btn-warning"><i class="icon-pencil" ></i></button>
+				   		 </form>
+				   		</div>';
+						} else {
+
+							if (check_permission("delete_post")) {
+								$result .= '<div style="float:right;">
+				  		 <form action="updateDeletePost.php" method="post">
+				   			<button name="remove" value="' . $value['id'] . '" class="btn btn-xs btn-danger"><i class="icon-remove" ></i></button>
+				   		 </form>
+				   		</div>';
+							}
+						}
+					}
+
+					$result .= '</h2>
 						<div class="meta">
 							<i class="icon-calendar"></i>' . $value['datetime'] . ' 
 							<i class="icon-user"></i>' . $value['username'] . ' 
 							<span class="pull-right"><i class="icon-comment"></i> <a href="#">' . $comments_number . ' Comments</a></span>
 						</div>
-						<div class="bthumb">
-							<a href="#"><img src="' . $value['picture'] . '" alt="" class="img-responsive" /></a>
-						</div>
+						
 						<p>' . $value['text'] . '</p>';
 				}
 				return $result;
 				break;
+
 			case "Post_Comments" :
 				$post_comments = getResult('select * from comments where post=' . $data['id'] . '');
 				$result = '
@@ -498,66 +612,95 @@ Class functions extends TagLibrary {
 					$result .= '
 							<li class="cwell comment">
 								<div class="comment-author">
-									<a href="#">' . $value['username'] . '</a>
-								</div>
+									<a href="#">' . $value['username'] . '</a>';
+
+					/**/
+					if (check_permission("edit_post") && check_permission("delete_post")) {
+						$result .= '<div style="float:right;">
+				   						<button name="' . $value['id'] . '" class="update_comment btn btn-xs btn-warning"><i class="icon-pencil" ></i></button>
+				   						<button value="'.$data['id'].'" name="' . $value['id'] . '" class="remove_comment btn btn-xs btn-danger"><i class="icon-remove" ></i></button>
+				   					</div>';
+					} else {
+
+						if (check_permission("edit_post")) {
+							$result .= '<div style="float:right;">
+				   						<button name="' . $value['id'] . '" class="update_comment btn btn-xs btn-warning"><i class="icon-pencil" ></i></button>
+				   					</div>';
+						} else {
+
+							if (check_permission("delete_post")) {
+								$result .= '<div style="float:right;">
+				   						<button value="'.$value['id'].'" name="' . $value['id'] . '" class="remove_comment btn btn-xs btn-danger"><i class="icon-remove" ></i></button>
+				   					</div>';
+							}
+						}
+					}
+
+					$result .= '</div>
 								<div class="cmeta">
 									Commented on ' . $value['datetime'] . '
 								</div>
 								<p>' . $value['text'] . '</p>
-								<div class="clearfix"></div>
+								<form action="#" role="form" method="get" class="editComment">
+									<div class="form-group">
+										<textarea name="text" class="form-control" rows="3" required>' . $value['text'] . '</textarea>
+									</div>
+									<button type="button" name="id" value="' . $value['id'] . '" style="float: right;" class="btn btn-success">Confirm</button>
+									<div class="clearfix"></div>
+								</form>
 							</li>';
 				}
 				$result .= '
 						</ul>
-					</div>
-					<div class="respond">
+					</div>';
+					
+				if(check_permission("create_comment")){	
+				$result .=	'<div class="respond">
 						<div class="title">
 							<h5>Leave a Comment</h5>
 						</div>
-						<form role="form">
+						<form action="addComment.php" role="form" method="post">
 							<div class="form-group">
-								<input class="form-control" placeholder="Type here your Title..."></input>
+								<textarea name="text" class="form-control" rows="3" placeholder="Type here your comment...	" required></textarea>
 							</div>
-							<div class="form-group">
-								<textarea class="form-control" rows="3" placeholder="Type here your comment...	"></textarea>
-							</div>
-							<button type="submit" class="btn btn-info">
+							<button name="post" value="' . $data['id'] . '" type="submit" class="btn btn-info">
 								Submit
 							</button>
 							<button type="reset" class="btn btn-default">
 								Reset
 							</button>
-						</form>
+						</form>						
 					</div>';
+					}
 				return $result;
 				break;
 			case 'Post_Navigation' :
-				$previous_index = $data['id'] - 1;
-				$next_index = $data['id'] + 1;
-				/* Posts Number */
-				$posts_number = getSingleResult('select count(*) from posts', 'count(*)');
+			/*select id from posts where id > $_POST['id'] order by id desc limit 1*/
+				$previous_index = getSingleResult("select * from posts where id < ".$data['id']." order by id desc limit 1","id");
+				$next_index = getSingleResult("select * from posts where id > ".$data['id']." order by id asc limit 1","id");
 				$result .= '<div class="navigation button">';
 				/* Left Arrow if not first */
-				if ($data['id'] > 1) {
+				if ($previous_index != 'error') {
 					$result .= '<div class="pull-left">
-							 <a href="blogsingle.php?id=' . $previous_index . '" class="btn btn-info">&laquo; Previous Post</a>
+							 <a href="blogsingle.php?id='.$previous_index.'" class="btn btn-info">&laquo; Previous Post</a>
 						    </div>';
 				}
-				/* Right Arrow if not last */
-				if ($data['id'] < $posts_number) {
+				if ($next_index != 'error') {
 					$result .= '<div class="pull-right">
-							 <a href="blogsingle.php?id=' . $next_index . '" class="btn btn-info">Next Post &raquo;</a>
+							 <a href="blogsingle.php?id='.$next_index .'" class="btn btn-info">Next Post &raquo;</a>
 						    </div>';
-				}
+						    }
 				$result .= '
 							<div class="clearfix"></div>
 							</div>
 							<div class="clearfix"> </div>
 							<br>';
 				return $result;
+			case '':	
 		}
 
 	}
+
 
 }
 ?>
