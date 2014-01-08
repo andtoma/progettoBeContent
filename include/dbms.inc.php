@@ -96,6 +96,7 @@ function insData($query) {
     return;
 }
 
+<<<<<<< HEAD
 function getSingleResult($query, $column) {
     $oid = mysql_query($query) or die(mysql_error());
 	
@@ -109,4 +110,6 @@ function getSingleResult($query, $column) {
     }
 }
 
+=======
+>>>>>>> a21dc4008cd838ccb196ac49bbd5f9869c99852a
 ?>
