@@ -13,18 +13,13 @@ if (!isset($_SESSION['user'])) {
 } else {
 
 	$container = new Skinlet("account");
-	
+
 	switch($_GET['id']) {
 		case 2 :
-			$cart = new Skinlet("cart");
-			$res_cart = getResult($query_cart);
-			$cart -> setContent("Cart", $res_cart);
-			$container -> setContent("content", $cart -> get());
 			break;
 		case 3 :
 			$wishlist = new Skinlet("wishlist");
 			# WISHLIST
-			
 			$res_wishlist = getResult($query_wishlist);
 			$wishlist -> setContent("WishList", $res_wishlist);
 			$container -> setContent("content", $wishlist -> get());
@@ -40,30 +35,39 @@ if (!isset($_SESSION['user'])) {
 			# USER INFO
 			$profile = new Skinlet("editprofile");
 			$res_userinfo = getResult($query_userinfo);
-			$profile -> setContent("val", $res_userinfo);
+			$profile -> setContent("Username", $res_userinfo);
+			$profile -> setContent("Name", $res_userinfo);
+			$profile -> setContent("Surname", $res_userinfo);
+			$profile -> setContent("Email", $res_userinfo);
+			$profile -> setContent("Birth_Date", $res_userinfo);
+			if ($res_userinfo[0]['sex'] == 'M')
+				$profile -> setContent("Male", "checked");
+			else
+				$profile -> setContent("Female", "checked");
+			$profile -> setContent("Country", $res_userinfo);
+			$profile -> setContent("State", $res_userinfo);
+			$profile -> setContent("City", $res_userinfo);
+			$profile -> setContent("Zip_Code", $res_userinfo);
+			$profile -> setContent("Address", $res_userinfo);
+			$profile -> setContent("Phone", $res_userinfo);
 			$container -> setContent("content", $profile -> get());
-			break;
-		
-		case 6 :
-			$password = new Skinlet("password_form");
-			$container -> setContent("content", $password -> get());
-			break;
-		case 7 :
-			# USER INFO
-			$profile = new Skinlet("editaddress");
-			$res_userinfo = getResult($query_userinfo);
-			$profile -> setContent("val", $res_userinfo);
-			$container -> setContent("content", $profile -> get());
+
 			break;
 		case 1 :
 		default :
 			$account_resume = new Skinlet("account_resume");
 			# USER INFO
 			$res_userinfo = getResult($query_userinfo);
-			$account_resume -> setContent("val", $res_userinfo);
+			$account_resume -> setContent("Name", $res_userinfo);
+			$account_resume -> setContent("Surname", $res_userinfo);
+			$account_resume -> setContent("Address", $res_userinfo);
+			$account_resume -> setContent("Phone", $res_userinfo);
+			$account_resume -> setContent("Email", $res_userinfo);
+
 			# RECENT PURCHASE
-			$res_processing = getResult($query_processing);
-			$account_resume -> setContent("ProcessingPurchase", $res_processing);
+			$res_purchase = getResult($query_purchase);
+			$account_resume -> setContent("RecentPurchase", $res_purchase);
+
 			$container -> setContent("content", $account_resume -> get());
 			break;
 	}

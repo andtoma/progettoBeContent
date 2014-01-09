@@ -12,13 +12,6 @@ function load_main_html($section) {
      */
 
     $main->setContent("section", $section);
-	
-	$modal=new Skinlet("modal");
-	$main->setContent("modal",$modal->get());
-	
-	$quickshop = new Skinlet("quickshop");
-	$main -> setContent("quickshop", $quickshop -> get());
-	
     $main->setContent("ShoppingCart");
     # MENU
     $res_menu = getResult($query_menu);

@@ -17,34 +17,18 @@ INNER JOIN items ON purchase.item=items.id
 INNER JOIN items_images ON items.id=items_images.item 
 GROUP BY purchase.item 
 ORDER BY COUNT(*) DESC";
-$query_itemsna = "SELECT items.id AS item , path, name, description, price 
+$query_itemsna = "SELECT DISTINCT items.id AS item , path, name, description, price 
 FROM items 
 INNER JOIN items_images ON items.id=items_images.item 
 ORDER BY items.id DESC";
 /*
  * QUERY CARRELLO
  */
- 
-$query_cart="select 
-	I.id,
-    I.name,
-    C.colour,
-    C.size,
-    I.price,
-    C.quantity,
-    (C.quantity * I.price) as partial
-from
-    cart C
-        join
-    items I on  C.item = I.id
-where
-   C.user={$_SESSION['user']['id']}"; 
-     
 $query_up_info = "SELECT U.name, U.surname, U.country, U.state, U.city, U.zip_code, U.address, U.phone, P.id, I.name, I.price 
 FROM users U
-INNER JOIN purchase P ON users.id=purchase.user 
+INNER JOIN purchase P ON users.id_user=purchase.user 
 INNER JOIN items I ON items.id=purchase.item
-WHERE users.id=" . $_SESSION['user']['id'];
+WHERE users.id_user={$_SESSION['user']['id_user']}";
 /*
  * QUERY LOGIN
  */
@@ -63,20 +47,23 @@ $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
 /*
  * QUERY ACCOUNT
  */
-$query_userinfo = "SELECT * FROM users WHERE users.id=".$_SESSION['user']['id'];
-
-$query_processing="SELECT DATE_FORMAT(datetime, ' %e %b %Y, %h:%i %p') as datetime, purchase.id as id, name,colour,size, quantity, price, status 
+$query_userinfo = "SELECT * FROM users WHERE users.id={$_SESSION['user']['id_user']}";
+$query_purchase = "SELECT datetime, items.id, name, quantity, price, status 
 FROM purchase 
 INNER JOIN items ON purchase.item=items.id 
-WHERE purchase.user=".$_SESSION['user']['id']." and purchase.status='processing' order by purchase.id desc";
-
-$query_purchase = "SELECT DATE_FORMAT(datetime, ' %e %b %Y, %h:%i %p') as datetime, purchase.id as id, name,colour,size, quantity, price, status 
-FROM purchase 
-INNER JOIN items ON purchase.item=items.id 
-WHERE purchase.user=".$_SESSION['user']['id']."  order by purchase.id desc";
+WHERE purchase.user={$_SESSION['user']['id_user']}";
 $query_wishlist = "SELECT id, name, price 
 FROM wishlist 
 INNER JOIN items ON wishlist.item=items.id 
-WHERE wishlist.user=".$_SESSION['user']['id'];
+WHERE wishlist.user={$_SESSION['user']['id_user']}";
+/*
+ * QUERY ITEMS
+ */
+$query_category = "SELECT cat_name FROM categories WHERE id={$_GET['cat']}";
+$query_item = "SELECT * 
+FROM items I 
+INNER JOIN items_images G ON I.id=G.item 
+INNER JOIN availability A ON I.id=A.item 
+WHERE I.id={$_GET['id']}";
 
 ?>

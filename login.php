@@ -7,7 +7,6 @@ require "include/dbms.inc.php";
 require "include/auth.inc.php";
 require "include/query_collection.php";
 require "include/mainhtml.php";
-
 $main = load_main_html("Login");
 
 $container = new Skinlet("login");
