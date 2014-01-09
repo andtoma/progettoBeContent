@@ -1,0 +1,29 @@
+<!-- Page title -->
+<div class="page-title">
+	<div class="container">
+		<h2><i class="icon-desktop color"></i> Blog <small>Subtext for header</small></h2>
+
+		<hr />
+	</div>
+</div>
+<!-- Page title -->
+
+<!-- Page content -->
+
+<div class="blog">
+	<div class="container">
+		<div class="row">
+			<[NewPostHeader::BlogPosts library=functions]>
+			<div class="col-md-9">
+				<[Post_List::BlogPosts library=functions]>
+			</div>
+			<div class="col-md-3">
+				<[BlogSearch::SearchSidebar library=functions]>
+				</div>
+			<div class="col-md-3">
+				<[Recent_Post::RecentPostsList library=functions]>
+			</div>
+
+		</div>
+	</div>
+</div>

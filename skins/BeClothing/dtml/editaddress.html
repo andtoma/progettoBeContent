@@ -1,0 +1,57 @@
+
+
+
+
+<div class="col-md-9">
+	<h3><i class="icon-user color"></i> &nbsp;Edit or Set your Default Address</h3>
+	<!-- Your details -->
+	<div class="cwell">
+		</br>
+		<form class="form-horizontal"  id="edit_address_form" method="post" role="form" action="" autocomplete="off">
+		
+
+			<div class="form-group">
+				<label for="inputCountry" class="col-md-2 control-label">Country</label>
+				<div class="col-md-5">
+					<div data-name="inputCountry" class="bfh-selectbox bfh-countries"  data-country='<[val::UserInfo field="country" value='country' library=functions]>' required data-flags="true"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputState" class="col-md-2 control-label">State</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputState" name="state" placeholder="State" value='<[val::UserInfo field="state" library=functions]>' required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputCity" class="col-md-2 control-label">City</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputCity" name="city" placeholder="City" value='<[val::UserInfo field="city" library=functions]>' required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputZip" class="col-md-2 control-label">Zip Code</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputZip" placeholder="Zip Code" name="zip_code" value='<[val::UserInfo field="zip_code" library=functions]>' required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputAddress" class="col-md-2 control-label">Address</label>
+				<div class="col-md-5">
+					<textarea class="form-control" rows="3" id="inputAddress" name="address" required placeholder="Address"><[val::UserInfo field="address" library=functions]></textarea>
+				</div>
+			</div>
+
+			<hr />
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<button type="submit" name="act" value="3" class="btn btn-info">
+						Save Changes
+					</button>
+					<button type="reset" class="btn btn-default">
+						Reset
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

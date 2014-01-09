@@ -1,0 +1,75 @@
+
+
+
+
+<div class="col-md-9">
+	<h3><i class="icon-user color"></i> &nbsp;Edit your personal informations</h3>
+	<!-- Your details -->
+	<div class="cwell">
+		</br>
+		<form class="form-horizontal"  id="edit_userinfo_form" method="post" role="form" action="" autocomplete="off">
+		
+			<div class="form-group">
+				<label for="inputUsername" class="col-md-2 control-label">Username</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputUsername" placeholder="Username" disabled value='<[val::UserInfo field="username" library=functions]>' required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputName" class="col-md-2 control-label">Name</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputName" name="name" placeholder="Name" value='<[val::UserInfo field="name" library=functions]>' required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputSurname" class="col-md-2 control-label">Surname</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputSurname"name="surname" placeholder="Surname" value='<[val::UserInfo field="surname" library=functions]>' required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail1" class="col-md-2 control-label">Email</label>
+				<div class="col-md-5">
+					<input type="email" class="form-control" id="inputEmail1" name="email" placeholder="Email" value='<[val::UserInfo field="email" library=functions]>' required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputDate" class="col-md-2 control-label">Birth Date</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control datepicker" id="inputDate" name="birth_date" placeholder="Pick data" value='<[val::UserInfo field="birth_date" library=functions]>' required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputSex" class="col-md-2 control-label">Sex</label>
+				<div class="radio-inline">
+					<label class="col-xs-2">
+						<input type="radio" name="sex" value="M" <[val::UserInfo field="sex" value="M" library=functions]>>
+						Male </label>
+				</div>
+				<div class="radio-inline">
+					<label class="col-xs-2">
+						<input type="radio" name="sex" value="F" <[val::UserInfo field="sex" value="F" library=functions]>>
+						Female </label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPhone" class="col-md-2 control-label">Phone Number</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputPhone" name="phone" placeholder="Phone" value="<[val::UserInfo field="phone" library=functions]>">
+				</div>
+			</div>
+
+			<hr />
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<button type="submit" name="act" value="3" class="btn btn-info">
+						Save Changes
+					</button>
+					<button type="reset" class="btn btn-default">
+						Reset
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
