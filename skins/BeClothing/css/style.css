@@ -1172,7 +1172,7 @@ strong {
 .shop-items .item {
 	position: relative;
 	max-height: 410px;
-	max-width: 300px;
+	width: 250px;
 	margin: 10px auto;
 	padding: 20px 10px 10px 10px;
 	background: #fff;

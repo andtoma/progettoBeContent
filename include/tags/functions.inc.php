@@ -393,7 +393,7 @@ Class functions extends TagLibrary {
                          <hr />
                          <div class="pagination-centered">
                          	<a href = "' . $link . '" class = "btn btn-info btn-sm"><i class = "icon-search"></i>View Details</a>
-                         	<a href = "' . $link . '" class = "btn btn-danger btn-sm"><i class = "icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
+                       	    <a data-toggle="modal" data-id=' . $value['id'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . floor($value['price'] - $value['price'] * $value['discount'] / 100) . '</a>
                          </div>
                          <div class = "clearfix"> </div>
                          
@@ -772,7 +772,7 @@ Class functions extends TagLibrary {
 					for ($i = 1; $i < min(4, count($res_images)); $i++) {
 						$content .= '<div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                     <div class="left-side-thumb item-thumb" style="padding:10px ">
-                                    <button value=' . $res_images[$i]['id'] . ' class="item_image_button"><img  src="' . $res_images[$i]['path'] . '" alt="" class="img-responsive item_page_image"/></button>
+                                    <button value=' . $res_images[$i]['id'] . ' class="item_image_button"><img style="max-width:117px; max-heigth:148px;" src="' . $res_images[$i]['path'] . '" alt="" class="img-responsive item_page_image"/></button>
                                     <div class="selected_image_colour"  style="height:5px;background-color:' . $res_images[$i]['colour'] . '"></div>
                                     </div>
                                     </div>';
