@@ -2,7 +2,6 @@ $(document).ready(function() {
 
 	$('#newsletter_form').on('submit', function(e) {
 		e.preventDefault();
-
 		$.ajax({
 			url : "newsletter-subscribe.php",
 			type : "post",

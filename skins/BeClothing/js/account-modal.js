@@ -2,6 +2,7 @@ $(document).ready(function() {
 	/*when the user update the cart the update will success just in case there is enough items desired in the store
 	 *  for achieve this I've made ajax sync with async : false
 	 * */
+	
 	$('.validate_quantity').on('click', function() {
 		var result;
 		

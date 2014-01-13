@@ -13,7 +13,8 @@ if (isset($_POST['order-button'])) {
 	/*I put every item in the cart  in into purchase*/
 	foreach ($items_cart as $key => $value) {
 
-		$item_price = getSingleResult("select * from items where id='{$value['item']}'", "price");
+		$item_price = getSingleResult("select  FLOOR( price - price * discount/100) as price
+									 from items where id='{$value['item']}'", "price");
 		$datetime = date('Y-m-d H:i:s');
 		/*insert into purchase*/
 		$new_purchase = mysql_query("insert into purchase (user,item,size,colour,quantity,item_price,country,state,city,zip_code,address,datetime)

@@ -11,13 +11,13 @@ $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
  * QUERY HOMEPAGE
  */
 $query_slideshow = "SELECT * FROM slideshow";
-$query_itemsmp = "SELECT purchase.item, path, name, description, price, quantity, COUNT(*) 
+$query_itemsmp = "SELECT purchase.item, path, name, description, FLOOR( price - price * discount/100) as price, quantity, COUNT(*) 
 FROM purchase 
 INNER JOIN items ON purchase.item=items.id 
 INNER JOIN items_images ON items.id=items_images.item 
 GROUP BY purchase.item 
 ORDER BY COUNT(*) DESC";
-$query_itemsna = "SELECT DISTINCT items.id AS item , path, name, description, price 
+$query_itemsna = "SELECT DISTINCT items.id AS item , path, name, description, FLOOR( price - price * discount/100) as price 
 FROM items 
 INNER JOIN items_images ON items.id=items_images.item 
 ORDER BY items.id DESC";
@@ -30,9 +30,9 @@ $query_cart="select
     I.name,
     C.colour,
     C.size,
-    I.price,
+   	FLOOR( I.price - I.price * I.discount/100) as price,
     C.quantity,
-    (C.quantity * I.price) as partial
+    (C.quantity * FLOOR( I.price - I.price * I.discount/100)) as partial
 from
     cart C
         join
@@ -65,16 +65,16 @@ $query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
  */
 $query_userinfo = "SELECT * FROM users WHERE users.id=".$_SESSION['user']['id'];
 
-$query_processing="SELECT DATE_FORMAT(datetime, ' %e %b %Y, %h:%i %p') as datetime, purchase.id as id, name,colour,size, quantity, price, status 
+$query_processing="SELECT DATE_FORMAT(datetime, ' %e %b %Y, %h:%i %p') as datetime, purchase.id as id, name,colour,size, quantity,purchase.item_price as price , status 
 FROM purchase 
 INNER JOIN items ON purchase.item=items.id 
 WHERE purchase.user=".$_SESSION['user']['id']." and purchase.status='processing' order by purchase.id desc";
 
-$query_purchase = "SELECT DATE_FORMAT(datetime, ' %e %b %Y, %h:%i %p') as datetime, purchase.id as id, name,colour,size, quantity, price, status 
+$query_purchase = "SELECT DATE_FORMAT(datetime, ' %e %b %Y, %h:%i %p') as datetime, purchase.id as id, name,colour,size, quantity, purchase.item_price as price, status 
 FROM purchase 
 INNER JOIN items ON purchase.item=items.id 
 WHERE purchase.user=".$_SESSION['user']['id']."  order by purchase.id desc";
-$query_wishlist = "SELECT id, name, price 
+$query_wishlist = "SELECT id, name, FLOOR( price - price * discount/100) as price 
 FROM wishlist 
 INNER JOIN items ON wishlist.item=items.id 
 WHERE wishlist.user=".$_SESSION['user']['id'];

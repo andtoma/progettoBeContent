@@ -16,6 +16,7 @@ if (!isset($_SESSION['user'])) {
 	
 	switch($_GET['id']) {
 		case 2 :
+			# CART
 			$cart = new Skinlet("cart");
 			$res_cart = getResult($query_cart);
 			$cart -> setContent("Cart", $res_cart);
@@ -23,8 +24,7 @@ if (!isset($_SESSION['user'])) {
 			break;
 		case 3 :
 			$wishlist = new Skinlet("wishlist");
-			# WISHLIST
-			
+			# WISHLIST		
 			$res_wishlist = getResult($query_wishlist);
 			$wishlist -> setContent("WishList", $res_wishlist);
 			$container -> setContent("content", $wishlist -> get());
@@ -45,6 +45,7 @@ if (!isset($_SESSION['user'])) {
 			break;
 		
 		case 6 :
+			# EDIT PASSWORD
 			$password = new Skinlet("password_form");
 			$container -> setContent("content", $password -> get());
 			break;
@@ -61,7 +62,7 @@ if (!isset($_SESSION['user'])) {
 			# USER INFO
 			$res_userinfo = getResult($query_userinfo);
 			$account_resume -> setContent("val", $res_userinfo);
-			# RECENT PURCHASE
+			# PROCESSING PURCHASES	
 			$res_processing = getResult($query_processing);
 			$account_resume -> setContent("ProcessingPurchase", $res_processing);
 			$container -> setContent("content", $account_resume -> get());

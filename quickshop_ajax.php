@@ -10,7 +10,7 @@ switch($_POST['type']) {
 
 	case "colour" :
 		/*I take the colour available for the selected item, if the product is out of stock I return NULL*/
-		$data = getResult("select colour  from availability where item ='{$_POST['id']}'");
+		$data = getResult("select distinct colour  from availability where item ='{$_POST['id']}'");
 		if (!$data ) {
 			//$colours = "<option value='' disabled selected>Sorry, this item is out of stock</option>";
 			echo "NULL";

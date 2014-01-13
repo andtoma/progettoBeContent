@@ -3,6 +3,7 @@
 session_start();
 
 require_once "include/permissions.inc.php";
+require_once "include/dbms.inc.php";
 
 Class functions extends TagLibrary {
 
@@ -112,8 +113,7 @@ Class functions extends TagLibrary {
                                  <h5><a href="' . $link . '">' . $value['name'] . '</a></h5>
                                  <p>' . $short_desc . '</p>
                                  <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-search"></i>View Details</a>
-                                 <a data-toggle="modal" data-id=' . $value['item'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] .
-                              '</a>
+                                 <a data-toggle="modal" data-id=' . $value['item'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] . '</a>
                              </div>
                          </li>';
 
@@ -168,7 +168,7 @@ Class functions extends TagLibrary {
 			$tot_price = 0;
 
 			# QUERY: SHOPPINGCART
-			$query_shoppingcart = "SELECT name, quantity, price 
+			$query_shoppingcart = "SELECT name, quantity,FLOOR( price - price * discount/100) as price 
                                    FROM items INNER JOIN cart ON items.id=cart.item 
                                    WHERE cart.user=" . $_SESSION['user']['id'];
 			$res_shoppingcart = getResult($query_shoppingcart);
@@ -190,7 +190,7 @@ Class functions extends TagLibrary {
 			$content .= '<tr></tr>';
 		} else {
 			# QUERY: SHOPPINGCART
-			$query_shoppingcart = "SELECT name, quantity,colour,size, price 
+			$query_shoppingcart = "SELECT name, quantity,colour,size, FLOOR( price - price * discount/100) as price
                                    FROM items INNER JOIN cart ON items.id=cart.item 
                                    WHERE cart.user=" . $_SESSION['user']['id'];
 			$res_shoppingcart = getResult($query_shoppingcart);
@@ -252,8 +252,9 @@ Class functions extends TagLibrary {
                             <td>' . $value['name'] . '</td>
                             <td>' . $value['colour'] . '</td>
                             <td>' . $value['size'] . '</td>
-                            <td>' . $value['quantity'] . '</td>
                             <td>&#36;' . $value['price'] . '</td>
+                            <td style="text-align: center;">' . $value['quantity'] . '</td>
+                            <td>&#36;' . $value['price'] * $value['quantity'] . '</td>
                            <td><form action="delete_order.php"  method="post">
                            <button name="delete" value=' . $value["id"] . ' class="btn btn-danger" type="submit">
 							<i class="icon-remove" ></i>
@@ -355,32 +356,34 @@ Class functions extends TagLibrary {
 
 		foreach ($data as $key => $value) {
 			#check disponibilità
-			$query_availability = "SELECT DISTINCT item FROM availability WHERE item=" . $value['id'];
-			$res_availability = getResult($query_availability);
-			#check prodotto hot
-			$query_discount = "SELECT discount FROM items WHERE id=" . $value['id'];
-			$res_discount = getResult($query_discount);
+	$query_availability = "SELECT DISTINCT item FROM availability WHERE item=" . $value['id'];
+	$res_availability = getResult($query_availability);
+	#check prodotto hot
+	$query_discount = "SELECT discount FROM items WHERE id=" . $value['id'];
+	$res_discount = getResult($query_discount);
 
-			$link = "single-item.php?id=" . $value['id'];
-			$short_desc = substr($value['description'], 0, 60) . '...';
+	$link = "single-item.php?id=" . $value['id'];
+	$short_desc = substr($value['description'], 0, 60) . '...';
 
-			$content .= '<div class="col-xs-12 col-sm-6 col-md-4">
+	$content .= '<div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="item">';
 
-			# HOT or OUT OF STOCK icon
-			if (!$res_availability) {
-				$content .= '<div class="item-icon">
+	# HOT or OUT OF STOCK icon
+	if (!$res_availability) {
+		$content .= '<div class="item-icon">
                              <span class="out-of-stock">OUT OF STOCK</span>
                              </div>';
-			} elseif ($res_discount[0]['discount']) {
-				$content .= '<div class="item-icon">
+	} else {
+		if ($res_discount[0]['discount']) {
+			$content .= '<div class="item-icon">
                                  <span class="hot">HOT</span>
                                  </div>';
-			}
-			# Item image
-			$query_image = "SELECT path FROM items_images WHERE item={$value['id']}";
-			$res_image = getResult($query_image);
-			$content .= '<div class = "item-image">
+		}
+	}
+	# Item image
+	$query_image = "SELECT path FROM items_images WHERE item=" . $value['id'];
+	$res_image = getResult($query_image);
+	$content .= '<div class = "item-image" style="margin-top: -20px;margin-bottom: -20px;">
                          <a href = "' . $link . '"><img src = "' . $res_image[0]['path'] . '" alt = "" class = "img-responsive"/></a>
                          </div>
                          <div class = "item-details">
@@ -388,16 +391,17 @@ Class functions extends TagLibrary {
                          <div class = "clearfix"></div>
                          <p>' . $short_desc . '</p>
                          <hr />
-                         <div class = "pull-left">
-                         <a href = "' . $link . '" class = "btn btn-info btn-sm"><i class = "icon-search"></i>View Details</a>
+                         <div class="pagination-centered">
+                         	<a href = "' . $link . '" class = "btn btn-info btn-sm"><i class = "icon-search"></i>View Details</a>
+                         	<a href = "' . $link . '" class = "btn btn-danger btn-sm"><i class = "icon-shopping-cart"></i> Buy for &#36;' . $value['price'] . '</a>
                          </div>
-                         <div class = "pull-right">
-                         <a data-toggle="modal" data-id=' . $value['id'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] . '</a>
-                         </div>
-                         <div class = "clearfix"></div>
+                         <div class = "clearfix"> </div>
+                         
                          </div>
                          </div>
                          </div>';
+			
+
 		}
 		return $content;
 	}
@@ -730,9 +734,16 @@ Class functions extends TagLibrary {
 			case 'name' :
 				$content .= $data[0]['name'];
 				break;
+			case 'itemid' :
+				$content .= $data[0]['id'];
+				break;
 			case 'image' :
 				$res_images = getResult("SELECT * FROM items_images WHERE items_images.item={$data[0]['id']}");
 				$content .= $res_images[0]['path'];
+				break;
+			case 'imageid' :
+				$image_id = getResult("SELECT * FROM items_images WHERE items_images.item={$data[0]['id']}");
+				$content = $image_id[0]['id'];
 				break;
 			case 'color' :
 				$first = 1;
@@ -747,8 +758,11 @@ Class functions extends TagLibrary {
 				}
 				break;
 			case 'size' :
-				$res_sizes = getResult("SELECT * FROM availability WHERE item={$data[0]['id']}");
-				foreach ($res_sizes as $key => $value) {
+				$first_colour = getSingleResult("SELECT * FROM items_images WHERE items_images.item={$data[0]['id']} limit 1", "colour");
+				$item = $data[0]['id'];
+				$size_of_first_item = getResult("select size from availability where item={$item} and colour='{$first_colour}'");
+				/*take the size available of the first item*/
+				foreach ($size_of_first_item as $key => $value) {
 					$content .= "<option>{$value['size']}</option>";
 				}
 				break;
@@ -758,25 +772,33 @@ Class functions extends TagLibrary {
 					for ($i = 1; $i < min(4, count($res_images)); $i++) {
 						$content .= '<div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                     <div class="left-side-thumb item-thumb" style="padding:10px ">
-                                    <a href=""><img src="' . $res_images[$i]['path'] . '" alt="" class="img-responsive"/></a>
-                                    <div style="height:5px;background-color:' . $res_images[$i]['colour'] . '"></div>
+                                    <button value=' . $res_images[$i]['id'] . ' class="item_image_button"><img  src="' . $res_images[$i]['path'] . '" alt="" class="img-responsive item_page_image"/></button>
+                                    <div class="selected_image_colour"  style="height:5px;background-color:' . $res_images[$i]['colour'] . '"></div>
                                     </div>
                                     </div>';
 					}
 				break;
+			case 'discount' :
+				if ($data[0]['discount'] > 0) {
+					$content .= " (-" . $data[0]['discount'] . "%)";
+				} else {
+					$content .= "";
+				}
+				break;
 			case 'price' :
-				$content .= $data[0]['price'];
+				$content .= floor($data[0]['price'] - $data[0]['price'] * $data[0]['discount'] / 100) . ",00 $";
 				break;
 			case 'brand' :
 				$res_brand = getResult("SELECT brand_name FROM brands WHERE id={$data[0]['brand']}");
 				$content .= $res_brand[0]['brand_name'];
 				break;
 			case 'availability' :
-				$res_quantity = getResult("SELECT * FROM availability WHERE item={$data[0]['id']}");
+				$first_colour = getSingleResult("SELECT * FROM items_images WHERE items_images.item={$data[0]['id']} limit 1", "colour");
+				$res_quantity = getResult("SELECT * FROM availability WHERE item={$data[0]['id']} and colour='{$first_colour}'");
 				if (!$res_quantity) {
-					$content .= "Out of Stok";
+					$content .= "<p style='color:red'>Out of Stock</p>";
 				} else {
-					$content .= "In Stock";
+					$content .= "<p style='color:green'>In Stock</p>";
 				}
 				break;
 			case 'description' :
@@ -793,10 +815,138 @@ Class functions extends TagLibrary {
 				$content .= '<li><a href="items.php?sex=' . $data[0]['sex'] . '&cat=' . $data[0][category] . '">' . $res_category[0]['cat_name'] . '</a><span class="divider"></span></li>';
 				$content .= '<li><a href="single-item.php?id=' . $data[0]['id'] . '">' . $data[0]['name'] . '</a><span class="divider"></span></li>';
 				break;
+			case 'review_count' :
+				$count = getSingleResult("SELECT COUNT(*) as count FROM reviews WHERE item={$data[0]['id']}", "count");
+				return $count;
+				break;
 			default :
 				break;
 		}
 		return $content;
+	}
+
+	function ItemReviews($name, $data, $pars) {
+
+		foreach ($data as $key => $value) {
+			$content .= '<div class="item-review cwell review_cwell">';
+			if ((check_permission("edit_review") && check_permission("delete_review")) || $value['username'] == $_SESSION['user']['username']) {
+				$content .= '	<div style="float:right;">
+				  				 <form action="updateReview.php" method="post">
+				   				<button name="edit" value="' . $value['id'] . '" class="btn btn-xs btn-warning edit_review_button"><i class="icon-pencil" ></i></button>
+				   				<button name="remove" value="' . $value['id'] . '" class="btn btn-xs btn-danger"><i class="icon-remove" ></i></button>
+				   				</form>
+				  				 </div>';
+			} else if (check_permission("edit_review")) {
+				$content .= '	<div style="float:right;">
+				  				 <form action="updateReview.php" method="post">
+				   				<button name="edit" value="' . $value['id'] . '" class="btn btn-xs btn-warning edit_review_button"><i class="icon-pencil" ></i></button>
+				   				</form>
+				  				 </div>';
+
+			} else if (check_permission("delete_review")) {
+				$content .= '	<div style="float:right;">
+				  				 <form action="updateReview.php" method="post">
+				   				<button name="remove" value="' . $value['id'] . '" class="btn btn-xs btn-danger"><i class="icon-remove" ></i></button>
+				   				</form>
+				  				 </div>';
+
+			}
+			$content .= '<h5> ' . $value["username"] . ' - <span class="color">' . $value["rating"] . '/5</span></h5>
+						<p class="rmeta">' . $value["date"] . '</p>
+						<p class="text_review" >' . $value["text"] . '</p>
+						<form action="updateReview.php"  method="post" class="editReview">
+									<textarea maxlength="200" name="text" class="form-control text_review_edit" style="width:560px; resize: none;" rows="6"></textarea>
+									<button  name="edit" value="' . $value['id'] . '" style="float: right;" class="btn btn-success">Confirm</button>
+									<div class="clearfix"></div>
+								</form>
+						</div>';
+		}
+		return $content;
+	}
+
+	/* Left Sidebar Navigation */
+	function LeftSideBar($name, $data, $pars) {
+
+		/* Man, Women & Accessories Categories */
+		$leftSideBar = '<div class="cwell sidebar">
+							<div  class="widget">
+								<h3 >Main Categories</h3>
+								<ul style="list-style: none; padding-left: 5px;">
+									<li><a id="leftSidebarMen" href="">Men</a></li>
+									<li><a id="leftSidebarWomen">Women</a></li>
+									<li><a id="leftSidebarAccessories">Accessories</a></li>
+								</ul>
+								<div class="sep-bor"></div>
+								<h3>Our Suggestions</h3>
+								<ul style="list-style: none; padding-left: 5px;">
+									<li><a id="leftSidebarSale">On Sale</a></li>
+									<li><a id="leftSidebarNewArrivals">New Arrivals</a></li>
+									<li><a id="leftSidebarBestSeller">Best Sellers</a></li>
+								</ul>
+								<div class="sep-bor"></div>
+								<h3>Brands</h3>
+							<div class="row">
+								<div class="col-sm-12">
+									<input id="brandSearch" class="form-control searchText" placeholder="Search Brand" type="text">
+								</div>
+							</div>
+							<div class="row">
+								<div class="cwell col-sm-12">
+									<ul id="brandList" style="list-style: none; padding-left: 5px;">
+									<div class="cwell"><h3 style="text-align: center;">"Brands Search"<br> Type a brand name above<span class="color"> !!!</span></h3></div>
+								</ul>
+									
+								</div>
+							</div>
+							<div class="sep-bor"></div>
+							<h3>Colors</h3>
+							<div class="row">
+								<div class="color-container cwell col-sm-12">
+									
+									<div class="clearfix"></div>								
+								</div>
+							</div>
+							<div class="sep-bor"></div>
+							<h3 >Price Range</h3>
+							<div style="text-align: center;"class="row">
+								<div class="col-sm-12">
+									<label>Min Price</label>
+									<input style="border-radius: 5px;text-align: center;" id="showMin" value="0">
+								</div>
+								<div class="col-sm-12">
+									<label>Max Price</label>
+									<input style="border-radius: 5px;text-align: center;" id="showMax" value="99">
+								</div>
+							</div>
+							<div class="row">
+								<div class="cwell col-sm-12">
+									<div class="noUiSlider"></div>
+								</div>
+							</div>
+						</div>
+						</div>';
+
+		return $leftSideBar;
+
+	}
+
+	function TagsContainer($name, $data, $pars) {
+		$tagsContainer = '<div class="cwell row" style="margin-bottom: 17px; margin-top: -15px;">
+			<div id="searchTagsContainer" class="col-md-12 col-sm-12 col-lg-12">';
+		if (isset($data['sex'])) {
+			if ($data['sex'] == 'M' || $data['sex'] == 'm') {
+				$tagsContainer .= '<a id="MenTag" href="" class="main_Tag btn btn-success btn-xs"><i class="icon-remove"></i> Men</a>';
+			} elseif ($data['sex'] == 'F' || $data['sex'] == 'f') {
+				$tagsContainer .= '<a id="WomenTag" href="" class="main_Tag btn btn-success btn-xs"><i class="icon-remove"></i> Women</a>';
+			}
+		}
+		$tagsContainer .= '</div>
+							<hr/>
+							<div class="pull-right" >
+								<a id="removeAllTags" href="" class="btn btn-info btn-sm"><i class="icon-remove"> </i> Remove All Filters</a>
+							</div>
+						</div>';
+		return $tagsContainer;
 	}
 
 }

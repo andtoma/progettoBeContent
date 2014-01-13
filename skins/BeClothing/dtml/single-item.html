@@ -1,180 +1,230 @@
 <!-- Page title -->
 <div class="page-title">
-    <div class="container">
-        <h2><i class="<[Item::ItemDetails value="sex" library=functions]> color"></i> <[Item::ItemDetails value="name" library=functions]></h2>
-        <hr />
-    </div>
+	<div class="container">
+		<h2><i class="<[Item::ItemDetails value="sex" library=functions]> color"></i> <[Item::ItemDetails value="name" library=functions]></h2>
+		<hr />
+	</div>
 </div>
 <!-- Page title -->
-
+<div id="test"></div>
 <!-- Page content -->
 <div class="shop-items">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 ">
-                <!-- Breadcrumb -->
-                <ul class="breadcrumb">
-                    <[Item::ItemDetails value="crumb" library=functions]>
-                    <!--
-                    <li>
-                        <a href="index.php">Home</a><span class="divider"></span>
-                    </li>
-                    <li>
-                        <a href="items.php">Smartphone</a><span class="divider"></span>
-                    </li>
-                    <li class="active">
-                        Apple
-                    </li>
-                    -->
-                </ul>
-                <!-- End Breadcrumb -->
-                <!-- Single Item -->
-                <div class="single-item">
-                    <div class="row cwell">
-                        <!-- Left Side Photos -->
-                        <div class="left-side-container col-lg-3 col-md-3 col-sm-4 col-xs-3">
-                            <[Item::ItemDetails value="thumbs" library=functions]>
-                            <!--
-                            <div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                <div class="left-side-thumb item-thumb">
-                                    <img src="skins/BeClothing/img/photos/prova.jpg" alt="" class="img-responsive"/>
-                                </div>
-                            </div>
-                            <div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                <div class="left-side-thumb item-thumb">
-                                    <img src="skins/BeClothing/img/photos/prova.jpg" alt="" class="img-responsive"/>
-                                </div>
-                            </div>
-                            <div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                <div class="left-side-thumb item-thumb">
-                                    <img src="skins/BeClothing/img/photos/prova.jpg" alt="" class="img-responsive"/>
-                                </div>
-                            </div>
-                            <div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                <div class="left-side-thumb item-thumb">
-                                    <img src="skins/BeClothing/img/photos/prova.jpg" alt="" class="img-responsive"/>
-                                </div>
-                            </div>
-                            -->
-                        </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 ">
+				<!-- Breadcrumb -->
+				<ul class="breadcrumb">
+					<[Item::ItemDetails value="crumb" library=functions]>
+					<!--
+					<li>
+					<a href="index.php">Home</a><span class="divider"></span>
+					</li>
+					<li>
+					<a href="items.php">Smartphone</a><span class="divider"></span>
+					</li>
+					<li class="active">
+					Apple
+					</li>
+					-->
+				</ul>
+				<!-- End Breadcrumb -->
+				<!-- Single Item -->
+				<div class="single-item">
+					<div class="row cwell">
+						<!-- Left Side Photos -->
+						<div class="left-side-container col-lg-3 col-md-3 col-sm-4 col-xs-3">
+							<[Item::ItemDetails value="thumbs" library=functions]>
+							<!--
+							<div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
+							<div class="left-side-thumb item-thumb">
+							<img src="skins/BeClothing/img/photos/prova.jpg" alt="" class="img-responsive"/>
+							</div>
+							</div>
+							<div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
+							<div class="left-side-thumb item-thumb">
+							<img src="skins/BeClothing/img/photos/prova.jpg" alt="" class="img-responsive"/>
+							</div>
+							</div>
+							<div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
+							<div class="left-side-thumb item-thumb">
+							<img src="skins/BeClothing/img/photos/prova.jpg" alt="" class="img-responsive"/>
+							</div>
+							</div>
+							<div class="left-side-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
+							<div class="left-side-thumb item-thumb">
+							<img src="skins/BeClothing/img/photos/prova.jpg" alt="" class="img-responsive"/>
+							</div>
+							</div>
+							-->
+						</div>
+						<input type="hidden" class="image_id" value='<[Item::ItemDetails value="imageid" library=functions]>' >
+						<img  class="col-lg-5 col-md-5 col-sm-8 col-xs-12 img-responsive center_image" src="<[Item::ItemDetails value="image" library=functions]>" alt=""/>
 
-                        <img class="col-lg-5 col-md-5 col-sm-8 col-xs-12 img-responsive" src="<[Item::ItemDetails value="image" library=functions]>" alt=""/>
-                        
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <!-- Title -->
-                            <h4><[Item::ItemDetails value="name" library=functions]></h4>
-                            <h5><strong>Price :</strong> \$<[Item::ItemDetails value="price" library=functions]></h5>
-                            <h5><strong>Brand :</strong> <[Item::ItemDetails value="brand" library=functions]></h5>
-                            <br>
-                            <!-- Dropdown menu -->
-                            <div class="form-group">
-                                <select id="colour" class="form-control">
-                                    <option disabled selected>Color</option>
-                                    <[Item::ItemDetails value="color" library=functions]>
-                                    <!--
-                                    <option>Red</option>
-                                    <option>Blue</option>
-                                    <option>Green</option>
-                                    <option>Orange</option>
-                                    -->
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select id="size" class="form-control">
-                                    <option disabled selected>Size</option>
-                                    <[Item::ItemDetails value="size" library=functions]>
-                                    <!--
-                                    <option>Red</option>
-                                    <option>Blue</option>
-                                    <option>Green</option>
-                                    <option>Orange</option>
-                                    -->
-                                </select>
-                            </div>
-                            <h5><strong>Availability :</strong> <[Item::ItemDetails value="availability" library=functions]></h5>
-                            <br>
-                            <!-- Quantity and add to cart button -->
-                            <div class="input-group">
-                                <input type="text" value=1 pattern="[0-9]" name="quantity" title="Only positive integers allowed, from 0 to 99" class="form-control" placeholder="" type="text">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-info" type="button">Buy!</button>
-                                </span>
-                            </div><!-- /input-group -->
-                            <!-- Add to wish list -->
-                            <br>
-                            <a href="wishlist.php">+ Add to Wish List</a>
-                        </div>
-                    </div>
+						<div  class=" col-lg-4 col-md-4 col-sm-12 col-xs-12">
+							<!-- Title -->
 
-                    <!-- End Single Item-->
-                    <br />
-                    <!-- Description, specs and review -->
-                    <ul id="myTab" class="nav nav-tabs">
-                        <!-- Use uniqe name for "href" in below anchor tags -->
-                        <li class="active">
-                            <a href="#tab1" data-toggle="tab">Description</a>
-                        </li>
-                        <li>
-                            <a href="#tab3" data-toggle="tab">Review (5)</a>
-                        </li>
-                    </ul>
-                    <!-- Tab Content -->
-                    <div id="myTabContent" class="tab-content">
-                        <!-- Description -->
-                        <div class="tab-pane fade in active" id="tab1">
-                            <h5><strong><[Item::ItemDetails value="name" library=functions]></strong></h5>
-                            <p>
-                                <[Item::ItemDetails value="description" library=functions]>
-                            </p>
-                        </div>
-                        <!-- Review -->
-                        <div class="tab-pane fade" id="tab3">
-                            <h5><strong>Product Reviews :</strong></h5>
-                            <hr />
-                            <div class="item-review">
-                                <h5>Ravi Kumar - <span class="color">4/5</span></h5>
-                                <p class="rmeta">
-                                    27/1/2012
-                                </p>
-                                <p>
-                                    Suspendisse potenti. Morbi ac felis nec mauris imperdiet fermentum. Aenean sodales augue ac lacus hendrerit sed rhoncus erat hendrerit. Vivamus vel ultricies elit. Curabitur lacinia nulla vel tellus elementum non mollis justo aliquam.
-                                </p>
-                            </div>
-                            <hr />
-                            <h5><strong>Write a Review</strong></h5>
-                            <hr />
-                            <form role="form">
-                                <div class="form-group col-lg-9 col-sm-9 col-xs-9">
-                                    <label for="name">Title</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Insert Title">
-                                </div>
-                                <div class="form-group col-lg-2 col-sm-2 col-xs-2" data-name="selectbox1">
-                                    <label for="rating">Rating</label>
-                                    <!-- Dropdown menu -->
-                                    <div class="bfh-selectbox">
-                                        <div data-value="1"><i class="icon-star"></i></div>
-                                        <div data-value="2"><i class="icon-star"></i><i class="icon-star"></i></div>
-                                        <div data-value="3"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-                                        <div data-value="4"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-                                        <div data-value="5"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9 col-sm-9 col-xs-9 form-group">
-                                    <label for="exampleInputEmail1">Review</label>
-                                    <textarea class="form-control" rows="3"></textarea>								
-                                    <button type="submit" class="btn btn-info">
-                                        Send
-                                    </button>
-                                    <button type="reset" class="btn btn-default">
-                                        Reset
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <br>
-            </div>
-        </div>
-    </div>
+							<h2 class="item_name_style"><[Item::ItemDetails value="name" library=functions]> </h2>
+							<p  class="sh line_dot">
+								<[Item::ItemDetails value="brand" library=functions]>
+							</p>
+							<!--<a href="" class="social">	<img class="social" src="skins/BeClothing/img/facebook-share.png " width="50"></a>
+							<a href="" class="social">	<img class="social" src="skins/BeClothing/img/twitter-share.png " width="50"></a>
+							<a href="" class="social">	<img class="social" src="skins/BeClothing/img/g+_share.png " width="50"></a>	-->
+
+							<script src="https://apis.google.com/js/plusone.js"></script>
+							<g:plusone  size="medium" annotation="none"></g:plusone>
+							&nbsp; <a  href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+
+							<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
+							&nbsp;
+							<a href="//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Flocalhost%2Fclient%2Fitems.php&media=skins%2FBeClothing%2Fimg%2Fphotos%2F1-blue.jpg&description=BeClothing" data-pin-do="buttonPin" data-pin-config="none"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"></a>
+
+							<div id="container" style="position:relative; left:156px;top:-33px;">
+
+								<div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-type="button"></div>
+							</div>
+
+							<p  class="lh price_style">
+								<[Item::ItemDetails value="price" library=functions]><small class="discount_style"> <[Item::ItemDetails value="discount" library=functions]></small>
+							</p>
+
+							<!-- Dropdown menu -->
+							<form id="item_form" action="index.php" method="post">
+
+								<div class="form-group">
+									<p>
+										<div class="select_item" >
+											SELECT A COLOUR
+										</div>
+									</p>
+									<select id="item_colour" class="form-control" required>
+										<option value="" disabled>Color</option>
+										<[Item::ItemDetails value="color" library=functions]>
+										<!--
+										COLOURS
+										-->
+									</select>
+								</div>
+								<div class="form-group">
+									<p>
+										<div  id="sizetext" class="select_item sizetext" >
+											SELECT A SIZE <small class="size_guide"> <a id="size_guide" href="">Size Guide</a> </small>
+										</div>
+
+									</p>
+									<select id="item_size"  class="form-control " required>
+										<option value="" disabled selected>Size</option>
+										<[Item::ItemDetails value="size" library=functions]>
+										<!--
+										SIZES
+										-->
+									</select>
+								</div>
+								<h2 style="padding-bottom:15px" class="item_availability"><[Item::ItemDetails value="availability" library=functions]></h2>
+								<!-- Quantity and add to cart button -->
+								<div id="quantity_buy" class="input-group">
+
+									<input type="number" required style="width:60px;" value="1" min="1" max="100"  id="item_quantity" class="form-control" placeholder="">
+									<span class="input-group-btn">
+										<button id="add_cart_item" class="btn btn-info" type="submit">
+											Buy!
+										</button> </span>
+
+								</div><!-- /input-group -->
+								<a class="add_wishlist" href="">+ Add to Wish List</a>
+
+								<!-- Add to wish list -->
+							</form>
+							<br>
+						</div>
+					</div>
+
+					<!-- End Single Item-->
+					<br />
+					<!-- Description, specs and review -->
+					<div id="myTabContent" class="cwell" style="width:250px">
+						<ul id="myTab" class="nav nav-tabs">
+							<!-- Use uniqe name for "href" in below anchor tags -->
+							<li class="active">
+								<a href="#tab1" data-toggle="tab">Description</a>
+							</li>
+							<li>
+								<a href="#tab2" data-toggle="tab" id="review_tab">Reviews (<[Item::ItemDetails value="review_count" library=functions]>)</a>
+							</li>
+						</ul>
+					</div>
+
+					<!--here!opdpasojpdjopasdjopsajopjopsadjopsa-->
+
+					<!-- Tab Content -->
+					<div  class="tab-content">
+						<!-- Description -->
+						<div class="tab-pane fade in active" id="tab1">
+							<div class="cwell review_cwell">
+								<h5><strong><[Item::ItemDetails value="name" library=functions]></strong></h5>
+								<p>
+									<[Item::ItemDetails value="description" library=functions]>
+								</p>
+							</div>
+						</div>
+						<!-- Review -->
+						<div class="tab-pane fade " id="tab2">
+							<[Reviews::ItemReviews library=functions]>
+
+							<!--<div class="item-review cwell review_cwell">
+							<h5>Giuseppino - <span class="color">4/5</span></h5>
+							<p class="rmeta">
+							27/1/2012
+							</p>
+							<p>
+							Suspendisse potenti. Morbi ac felis nec mauris imperdiet fermentum. Aenean sodales augue ac lacus hendrerit sed rhoncus erat hendrerit. Vivamus vel ultricies elit. Curabitur lacinia nulla vel tellus elementum non mollis justo aliquam.
+							</p>
+
+							</div>-->
+							<div id="review">
+								<h3><strong>Review this item</strong></h3>
+								<hr class="short_div" />
+
+								<div class="item-review cwell review_cwell" style="background-color: #E0E0E0">
+									<form id="review_form" action="add_review.php" method="post">
+										<input type="hidden" class="itemid" name="itemid" value="<[Item::ItemDetails value="itemid" library=functions]>">
+										<div  class="form-group" id="star_rating" data-name="selectbox1">
+											<label for="rating">Rating</label>
+											<div data-name="review_stars" data-value=1 class="bfh-selectbox">
+												<div  data-value="1">
+													<i class="icon-star"></i>
+												</div>
+												<div data-value="2">
+													<i class="icon-star"></i><i class="icon-star"></i>
+												</div>
+												<div data-value="3">
+													<i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i>
+												</div>
+												<div data-value="4">
+													<i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i>
+												</div>
+												<div data-value="5">
+													<i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i>
+												</div>
+											</div>
+										</div>
+										<label for="exampleInputEmail1">Review</label>&nbsp;<em>(200 characters max)</em>					
+										<textarea maxlength="200" id="review_text" name="review_text" class="form-control" style="width:310px;  resize: none;" rows="6" required></textarea>
+										<button type="submit" name="review_button" value="ok"  class="btn btn-info">
+											Send
+										</button>
+										<button type="reset" class="btn btn-default">
+											Reset
+										</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
 </div>
+
