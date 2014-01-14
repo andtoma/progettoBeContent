@@ -935,15 +935,15 @@ Class functions extends TagLibrary {
 			<div id="searchTagsContainer" class="col-md-12 col-sm-12 col-lg-12">';
 		if (isset($data['sex'])) {
 			if ($data['sex'] == 'M' || $data['sex'] == 'm') {
-				$tagsContainer .= '<a id="MenTag" href="" class="main_Tag btn btn-success btn-xs"><i class="icon-remove"></i> Men</a>';
+				$tagsContainer .= '<a id="MenTag" href="" class="main_Tag btn btn-primary btn-xs"><i class="icon-remove"></i> Men</a>';
 			} elseif ($data['sex'] == 'F' || $data['sex'] == 'f') {
-				$tagsContainer .= '<a id="WomenTag" href="" class="main_Tag btn btn-success btn-xs"><i class="icon-remove"></i> Women</a>';
+				$tagsContainer .= '<a id="WomenTag" href="" class="main_Tag btn btn-women btn-xs"><i class="icon-remove"></i> Women</a>';
 			}
 		}
 		$tagsContainer .= '</div>
 							<hr/>
 							<div class="pull-right" >
-								<a id="removeAllTags" href="" class="btn btn-info btn-sm"><i class="icon-remove"> </i> Remove All Filters</a>
+								<a id="removeAllTags" href="" class="btn btn-inverse btn-sm"><i class="icon-remove"> </i> Remove All Filters</a>
 							</div>
 						</div>';
 		return $tagsContainer;

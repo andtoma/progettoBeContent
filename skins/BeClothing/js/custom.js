@@ -19,6 +19,7 @@ $().ready(function() {
 			},
 			type : 'post'
 		}).done(function(response) {
+
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
@@ -41,7 +42,7 @@ $().ready(function() {
 	$('#leftSidebarMen').on('click', function() {
 		if (!men) {
 		$('#searchTagsContainer').parent().show();
-		$('#searchTagsContainer').append(' <a id="MenTag" href="" class="main_Tag btn btn-success btn-xs"><i class="icon-remove"></i> Men</a>');
+		$('#searchTagsContainer').append(' <a id="MenTag" href="" class="main_Tag btn btn-primary btn-xs"><i class="icon-remove"></i> Men</a>');
 		var tags = "";
 		var brands = '';
 		var colors = "";
@@ -49,8 +50,6 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
 			if ($(this).hasClass('brand_Tag')) {
@@ -95,9 +94,6 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
-		
 		
 		
 		$('#searchTagsContainer a').each(function() {
@@ -149,9 +145,7 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
-		
+
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
 			if ($(this).hasClass('brand_Tag')) {
@@ -193,7 +187,7 @@ $().ready(function() {
 		if (!women) {
 
 			$('#searchTagsContainer').parent().show();
-			$('#searchTagsContainer').append(' <a id="WomenTag" href="" class="main_Tag btn btn-success btn-xs"><i class="icon-remove"></i> Women</a>');
+			$('#searchTagsContainer').append(' <a id="WomenTag" href="" class="main_Tag btn btn-women btn-xs"><i class="icon-remove"></i> Women</a>');
 			var tags = "";
 		var brands = '';
 		var colors = "";
@@ -201,9 +195,7 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
-		
+
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
 			if ($(this).hasClass('brand_Tag')) {
@@ -248,8 +240,7 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -264,9 +255,6 @@ $().ready(function() {
 			}
 		});
 
-		alert(tags);
-		alert('(' + brands.substring(0, brands.length - 1) + ')');
-		alert('(' + colors.substring(0, colors.length - 1) + ')');
 		
 		$.ajax({
 			url : 'itemsFilter.php',
@@ -279,9 +267,7 @@ $().ready(function() {
 			},
 			type : 'post'
 		}).done(function(response) {
-			alert(response);
 			if (response != '') {
-				alert(response);
 				$('.item_list_start').html(response);
 			} else {
 				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
@@ -306,8 +292,6 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -350,7 +334,7 @@ $().ready(function() {
 		if (!accessories) {
 
 			$('#searchTagsContainer').parent().show();
-			$('#searchTagsContainer').append(' <a id="AccessoriesTag" href="" class="main_Tag btn btn-success btn-xs"><i class="icon-remove"></i> Accessories</a>');
+			$('#searchTagsContainer').append(' <a id="AccessoriesTag" href="" class="main_Tag btn btn-inverse btn-xs"><i class="icon-remove"></i> Accessories</a>');
 			var tags = "";
 		var brands = '';
 		var colors = "";
@@ -358,8 +342,6 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -405,8 +387,7 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -456,8 +437,7 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+	
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -508,8 +488,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -555,8 +535,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -607,8 +587,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -651,7 +631,7 @@ $().ready(function() {
 		if (!newArrivals) {
 
 			$('#searchTagsContainer').parent().show();
-			$('#searchTagsContainer').append(' <a id="NewArrivalsTag" href="" class="special_Tag btn btn-warning btn-xs"><i class="icon-remove"></i> New Arrivals</a>');
+			$('#searchTagsContainer').append(' <a id="NewArrivalsTag" href="" class="special_Tag btn btn-success btn-xs"><i class="icon-remove"></i> New Arrivals</a>');
 			var tags = "";
 		var brands = '';
 		var colors = "";
@@ -659,8 +639,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -696,7 +676,6 @@ $().ready(function() {
 
 		$('#NewArrivalsTag').click(function() {
 			$(this).remove();
-			alert($('#searchTagsContainer').children().length);
 			if ($('#searchTagsContainer').children().length == 0) {
 				$('#searchTagsContainer').parent().hide('slow');
 			}
@@ -707,8 +686,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -759,8 +738,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -803,7 +782,7 @@ $().ready(function() {
 		if (!bestSellers) {
 			$('#searchTagsContainer').parent().show();
 			/* Special New Arrivals Category not in Filter Tags*/
-			$('#searchTagsContainer').append(' <a id="BestSellersTag" href="" class="special_Tag btn btn-warning btn-xs"><i class="icon-remove"></i> Best Sellers</a>');
+			$('#searchTagsContainer').append(' <a id="BestSellersTag" href="" class="special_Tag btn btn-danger btn-xs"><i class="icon-remove"></i> Best Sellers</a>');
 			var tags = "";
 		var brands = '';
 		var colors = "";
@@ -811,8 +790,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -858,8 +837,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -897,6 +876,7 @@ $().ready(function() {
 		return false;
 
 	});
+
 	$('#BestSellersTag').click(function() {
 
 		$(this).remove();
@@ -907,8 +887,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -959,7 +939,6 @@ $().ready(function() {
 
 			/* Tag above on list item click */
 			$('li a.brand_list_item').on('click', function() {
-				alert($(this).text());
 
 				/* If not, make Tags Container visible */
 				$('#searchTagsContainer').parent().show();
@@ -967,13 +946,12 @@ $().ready(function() {
 				var not = 0;
 				$('#searchTagsContainer a').each(function() {
 					if ($(this).text() == what) {
-						alert();
 						not = 1;
 					}
 				});
 				/* Add Brand Tag */
 				if (!not) {
-					$('#searchTagsContainer').append(' <a href="" class="brand_Tag btn btn-info btn-xs"><i class="icon-remove"></i>' + $(this).text() + '</a>');
+					$('#searchTagsContainer').append(' <a href="" class="brand_Tag btn btn-brand btn-xs"><i class="icon-remove"></i>' + $(this).text() + '</a>');
 				}
 
 				var tags = "";
@@ -983,8 +961,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1020,7 +998,6 @@ $().ready(function() {
 				$(this).hide();
 
 				$('.brand_Tag').on('click', function() {
-					alert($(this).text());
 					$(this).remove();
 					var tags = "";
 		var brands = '';
@@ -1029,8 +1006,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1073,14 +1050,12 @@ $().ready(function() {
 
 	/* Color Picker Items Filter */
 	$('p.color_filter').on('click', function() {
-		alert();
 		/* If not, make Tags Container visible */
 		$('#searchTagsContainer').parent().show();
 		var what = $(this).attr('background-color');
 		var not = 0;
 		$('#searchTagsContainer a').each(function() {
 			if ($(this).attr('color') == what) {
-				alert();
 				not = 1;
 			}
 		});
@@ -1123,8 +1098,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1165,8 +1140,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1227,7 +1202,6 @@ $().ready(function() {
 	$('.noUi-handle-upper').html('<h6 style="margin-top: 25px;text-align: center;">Max<i class="icon-arrow-left"></i><i class="icon-arrow-right"></i></h6>').css('text-align', 'center');
 
 	$('.noUi-handle-upper').on('click', function() {
-		alert($('#showMax').val());
 		var tags = "";
 		var brands = '';
 		var colors = "";
@@ -1235,8 +1209,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1277,8 +1251,8 @@ $().ready(function() {
 		var sliderPriceMax = $('#showMax').val();
 		var slidePriceMin = sliderPriceMin.toString().split('.');
 		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+		
+		
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1859,7 +1833,8 @@ $(function() {
 
 /* Ecommerce sidebar */
 
-$(document).ready(function() {
+$(document).ready(function() {	
+	
 	$('.sidey .nav').navgoco({
 		accordion : true
 	});
