@@ -1,0 +1,15 @@
+
+#menuMega > ul > li a,#menuMega > ul > li span{
+	line-height: 29px;
+}
+#menuMega .wp-non-dropdown{
+	 padding: 7px 15px;
+}
+
+#menuMega .container{
+	margin: 0 auto;
+}
+
+#config table td{
+	padding: 5px;
+}

@@ -9,77 +9,44 @@ require "include/mainhtml.php";
 $main = load_main_html("Items");
 
 $container = new Skinlet("items");
+$quickshop = new Skinlet("quickshop");
 
-$crumb = '<li><a href="index.php">Home</a> <span class="divider"></span></li>';
+$x_pag = 9; #numero di elementi da mostrare per pagina
+$pag = $_GET['pag'];
+if (!$pag)
+    $pag = 1;
+$first = ($pag - 1) * $x_pag;
 
 switch ($_GET['sex']) {
     case 'M':
     case 'm':
-        #titolo e sottotitolo
-        $container->setContent("Titolo", "Man");
-        $container->setContent("Sottotitolo", "Sottotitolo da uomo...");
-        #Breadcrumb
-        $crumb.= '<li><a href="items.php&sex=M">Man</a> <span class="divider"></span></li>';
-        
         if (!isset($_GET['cat'])) {
-            $query_items_m = "SELECT * FROM Items WHERE sex='M'";
+            $query_items = "SELECT * FROM items WHERE sex='M' LIMIT {$first}, {$x_pag}";
         } else {
-            $query_items_m = "SELECT * FROM Items WHERE sex='M' AND category=" . $_GET['cat'];
-            $query_category = "SELECT cat_name FROM categories WHERE id=" . $_GET['cat'];
-            $res_category = getResult($query_category);
-            $crumb .= '<li><a href="items.php&sex=M&cat=' . $_GET['cat'] . '">' . $res_category[0]['cat_name'] . '</a> <span class="divider"></span></li>';
+            $query_items = "SELECT * FROM items WHERE sex='M' AND category={$_GET['cat']} LIMIT {$first}, {$x_pag}";
         }
-        $container->setContent("Breadcrumb", $crumb);
-        
-        $res_items_m = getResult($query_items_m);
-        $container->setContent("ItemsList", $res_items_m);
         break;
     case 'F':
     case 'f':
-        #titolo e sottotitolo
-        $container->setContent("Titolo", "Woman");
-        $container->setContent("Sottotitolo", "Sottotitolo da uomo...");
-        #Breadcrumb
-        $crumb.= '<li><a href="items.php&sex=F">Woman</a> <span class="divider"></span></li>';
-        
         if (!isset($_GET['cat'])) {
-            $query_items_f = "SELECT * FROM Items WHERE sex='F'";
+            $query_items = "SELECT * FROM items WHERE sex='F' LIMIT {$first}, {$x_pag}";
         } else {
-            $query_items_f = "SELECT * FROM Items WHERE sex='F' AND category=" . $_GET['cat'];
-            $query_category = "SELECT cat_name FROM categories WHERE id=" . $_GET['cat'];
-            $res_category = getResult($query_category);
-            $crumb .= '<li><a href="items.php&sex=F&cat=' . $_GET['cat'] . '">' . $res_category[0]['cat_name'] . '</a> <span class="divider"></span></li>';
+            $query_items = "SELECT * FROM items WHERE sex='F' AND category={$_GET['cat']} LIMIT {$first}, {$x_pag}";
         }
-        $container->setContent("Breadcrumb", $crumb);
-        
-        $res_items_f = getResult($query_items_f);
-        $container->setContent("ItemsList", $res_items_f);
         break;
     default:
-        #titolo e sottotitolo
-        $container->setContent("Titolo", "Our products");
-        $container->setContent("Sottotitolo", "Sottotitolo di default...");
-        #Breadcrumb
-        $crumb.= '<li><a href="items.php">Products</a> <span class="divider"></span></li>';
-        
         if (!isset($_GET['cat'])) {
-            $query_items = "SELECT * FROM Items";
+            $query_items = "SELECT * FROM items LIMIT {$first}, {$x_pag}";
         } else {
-            $query_items = "SELECT * FROM Items WHERE category=" . $_GET['cat'];
-            $query_category = "SELECT cat_name FROM categories WHERE id=" . $_GET['cat'];
-            $res_category = getResult($query_category);
-            $crumb .= '<li><a href="items.php&cat=' . $_GET['cat'] . '">' . $res_category[0]['cat_name'] . '</a> <span class="divider"></span></li>';
+            $query_items = "SELECT * FROM items WHERE category={$_GET['cat']} LIMIT {$first}, {$x_pag}";
         }
-        $container->setContent("Breadcrumb", $crumb);
-        
-        $res_items = getResult($query_items);
-        $container->setContent("ItemsList", $res_items);
         break;
 }
 
-/* Search Container Preload */
-$container -> setContent('searchTagsContainer', $_GET);
-
+$res_items = getResult($query_items);
+$container->setContent("ItemsList", $res_items);
+$container->setContent("searchTagsContainer", $_GET);
+$main->setContent("quickshop", $quickshop->get());
 $main->setContent("container", $container->get());
 $main->close();
 ?>

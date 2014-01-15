@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
 	$(".open-AddBookDialog").click(function() {
-
 		/*I get the name with an ajax call*/
 		var itemid = $(this).data('id');
 		$("#id").val($(this).data('id'));
+	
 
 		$.ajax({
 			url : "quickshop_ajax.php",

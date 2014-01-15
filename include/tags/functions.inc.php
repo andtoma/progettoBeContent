@@ -11,45 +11,99 @@ Class functions extends TagLibrary {
 		return;
 	}
 
-	function HeaderMenu($name, $data, $pars) {
-		### QUERY PER PRENDERE LE ID DEI MENU CON SOTTOMENU
-		$query_1 = "SELECT DISTINCT parent_id FROM menu WHERE parent_id!=0";
-		$res_1 = getResult($query_1);
-		$content = '<div class="navi"><div id="ddtopmenubar" class="mattblackmenu"><ul>';
-		foreach ($data as $key => $value) {
-			$hassub = 0;
-			foreach ($res_1 as $k1 => $v1) {
-				if ($value['id'] == $v1['parent_id']) {
-					$hassub = 1;
-					break;
-				}
-			}
-			if ($hassub == 1) {
-				/*
-				 * CASO IN CUI IL MENU HA DEI SOTTOMENU
-				 */
-				$content .= '<li>
-                                <a href="' . $value['link'] . '" rel="ddsubmenu1">' . $value['name'] . '</a>
-                            <ul id="ddsubmenu1" class="ddsubmenustyle">';
-				### QUERY PER PRENDERE I CAMPI DEL SOTTOMENU ASSOCIATO AL MENU CORRENTE
-				$query_2 = "SELECT * FROM menu WHERE parent_id=" . $value['id'];
-				$res_2 = getResult($query_2);
-				foreach ($res_2 as $k2 => $v2) {
-					$content .= '<li>
-                                    <a href="' . $v2['link'] . '">' . $v2['name'] . '</a>
-                                 </li>';
-				}
-				$content .= '</ul></li>';
+
+/*THIS is a 3 level menu:
+ -a father is a main menu item(home, men, contacts,...)
+ -a son is a category, for example accessories
+ -a grandson is a subcategory, for example jewels
+ * 
+ in the function for every item menu I check if there is some son is the table(menu it's a hierarchical table), if it exist 
+ * I make the same thing of the father.
+ * */
+		function HeaderMenu($name, $data, $pars) {
+		$menu = "<li><img src='skins/BeClothing/img/logogagagogo.png'></li>";
+		$main_menu = getResult("SELECT * FROM menu WHERE parent_id=0 ORDER BY position");
+
+		foreach ($main_menu as $key => $value) {
+			$has_sons = hasResult("SELECT * FROM menu WHERE parent_id='{$value['id']}'");
+
+			/*ha dei sottomenu*/
+			if (!$has_sons) {
+				/*it is a single menu with href*/
+				$menu .= "<li class='menu-non-dropdown'><a href='" . $value['link'] . "'>" . $value['name'] . "</a></li>";
 			} else {
-				/*
-				 * CASO IN CUI IL MENU NON HA SOTTOMENU
-				 */
-				$content .= '<li><a href="' . $value['link'] . '">' . $value['name'] . '</a></li>';
+				$menu .= '<li class="fly-out"><a href=' . $value["link"] . '>' . $value["name"] . '</a>
+				 <div animate-in="slideDown" animate-out="bounceOut" class="dropdown-menu row col-lg-6" >
+                                <div class="content">';
+				/*it has sons*/
+				$sons = getResult("SELECT * FROM menu WHERE parent_id='{$value["id"]}' ORDER BY position");
+
+				foreach ($sons as $key => $value) {
+					$has_grandsons = hasResult("SELECT * FROM menu WHERE parent_id='{$value['id']}'");
+
+					if (!$has_grandsons) {
+						$menu .= ' <div class="col-lg-4">
+                                      '. $value["name"].'</div>';
+
+					} else {
+						$menu .= '  <div style="padding-right:10px;color:black;" class="col-lg-4"><strong>
+                                        '. $value["name"].' </strong><ul>';
+
+						$grand_sons = getResult("SELECT * FROM menu WHERE parent_id='{$value["id"]}' ORDER BY position");
+
+						foreach ($grand_sons as $key => $value) {
+
+							$menu .= '<li><a href=' . $value["link"] . '>' . $value["name"] . '</a></li>';
+						}
+						$menu .= '</ul></div>';
+					}
+				}
+				$menu .= " </div></div>";
 			}
 		}
-		$content .= '</ul></div></div>';
-		return $content;
+		return $menu;
 	}
+	
+
+	#	function HeaderMenu($name, $data, $pars) {
+	#		### QUERY PER PRENDERE LE ID DEI MENU CON SOTTOMENU
+	#		$query_1 = "SELECT DISTINCT parent_id FROM menu WHERE parent_id!=0";
+	#		$res_1 = getResult($query_1);
+	#		$content = '<div class="navi"><div id="ddtopmenubar" class="mattblackmenu"><ul>';
+	#		foreach ($data as $key => $value) {
+	#			$hassub = 0;
+	#			foreach ($res_1 as $k1 => $v1) {
+	#				if ($value['id'] == $v1['parent_id']) {
+	#					$hassub = 1;
+	#					break;
+	#				}
+	#			}
+	#			if ($hassub == 1) {
+	#				/*
+	#				 * CASO IN CUI IL MENU HA DEI SOTTOMENU
+	#				 */
+	#				$content .= '<li>
+	#                               <a href="' . $value['link'] . '" rel="ddsubmenu1">' . $value['name'] . '</a>
+	#                          <ul id="ddsubmenu1" class="ddsubmenustyle">';
+	#			### QUERY PER PRENDERE I CAMPI DEL SOTTOMENU ASSOCIATO AL MENU CORRENTE
+	#			$query_2 = "SELECT * FROM menu WHERE parent_id=" . $value['id'];
+	#			$res_2 = getResult($query_2);
+	#			foreach ($res_2 as $k2 => $v2) {
+	#				$content .= '<li>
+	#                               <a href="' . $v2['link'] . '">' . $v2['name'] . '</a>
+	#                           </li>';
+	#		}
+	#		$content .= '</ul></li>';
+	#			} else {
+	#				/*
+	#				 * CASO IN CUI IL MENU NON HA SOTTOMENU
+	#				 */
+	#				$content .= '<li><a href="' . $value['link'] . '">' . $value['name'] . '</a></li>';
+	#			}
+	#		}
+	#		$content .= '</ul></div></div>';
+	#		return $content;
+	#	}
 
 	function FooterMenu($name, $data, $pars) {
 		$content = '<ul>';
@@ -350,40 +404,38 @@ Class functions extends TagLibrary {
 		return $content;
 	}
 
-	function ItemsList($name, $data, $pars) {
+    function ItemsList($name, $data, $pars) {
+        $content = '';
+        switch ($pars['value']) {
+            case 'list':
+                foreach ($data as $key => $value) {
+                    #check disponibilità
+                    $query_availability = "SELECT DISTINCT item FROM availability WHERE item=" . $value['id'];
+                    $res_availability = getResult($query_availability);
+                    #check prodotto hot
+                    $query_discount = "SELECT discount FROM items WHERE id=" . $value['id'];
+                    $res_discount = getResult($query_discount);
 
-		$content = '';
+                    $link = "single-item.php?id=" . $value['id'];
+                    $short_desc = substr($value['description'], 0, 60) . '...';
 
-		foreach ($data as $key => $value) {
-			#check disponibilità
-	$query_availability = "SELECT DISTINCT item FROM availability WHERE item=" . $value['id'];
-	$res_availability = getResult($query_availability);
-	#check prodotto hot
-	$query_discount = "SELECT discount FROM items WHERE id=" . $value['id'];
-	$res_discount = getResult($query_discount);
-
-	$link = "single-item.php?id=" . $value['id'];
-	$short_desc = substr($value['description'], 0, 60) . '...';
-
-	$content .= '<div class="col-xs-12 col-sm-6 col-md-4">
+                    $content .= '<div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="item">';
 
-	# HOT or OUT OF STOCK icon
-	if (!$res_availability) {
-		$content .= '<div class="item-icon">
+                    # HOT or OUT OF STOCK icon
+                    if (!$res_availability) {
+                        $content .= '<div class="item-icon">
                              <span class="out-of-stock">OUT OF STOCK</span>
                              </div>';
-	} else {
-		if ($res_discount[0]['discount']) {
-			$content .= '<div class="item-icon">
+                    } elseif ($res_discount[0]['discount']) {
+                        $content .= '<div class="item-icon">
                                  <span class="hot">HOT</span>
                                  </div>';
-		}
-	}
-	# Item image
-	$query_image = "SELECT path FROM items_images WHERE item=" . $value['id'];
-	$res_image = getResult($query_image);
-	$content .= '<div class = "item-image" style="margin-top: -20px;margin-bottom: -20px;">
+                    }
+                    # Item image
+                    $query_image = "SELECT path FROM items_images WHERE item={$value['id']}";
+                    $res_image = getResult($query_image);
+                    $content .= '<div class = "item-image">
                          <a href = "' . $link . '"><img src = "' . $res_image[0]['path'] . '" alt = "" class = "img-responsive"/></a>
                          </div>
                          <div class = "item-details">
@@ -393,18 +445,151 @@ Class functions extends TagLibrary {
                          <hr />
                          <div class="pagination-centered">
                          	<a href = "' . $link . '" class = "btn btn-info btn-sm"><i class = "icon-search"></i>View Details</a>
-                       	    <a data-toggle="modal" data-id=' . $value['id'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . floor($value['price'] - $value['price'] * $value['discount'] / 100) . '</a>
+                       	    <a data-toggle="modal" data-id=' . $value['id'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] . '</a>
                          </div>
-                         <div class = "clearfix"> </div>
-                         
+                         <div class = "clearfix"></div>
                          </div>
                          </div>
                          </div>';
-			
+                }
+                break;
 
-		}
-		return $content;
-	}
+            case 'crumb':
+                $content .= '<li><a href="index.php">Home</a> <span class="divider"></span></li>';
+                $link = "items.php";
+                $query_category = "SELECT cat_name FROM categories WHERE id={$_GET['cat']}";
+                switch ($_GET['sex']) {
+                    case 'M':
+                    case 'm':
+                        $link .= "?sex=M";
+                        $content.= "<li><a href=\"{$link}\">Man</a> <span class=\"divider\"></span></li>";
+                        if (isset($_GET['cat'])) {
+                            $link .= "&cat={$_GET['cat']}";
+                            $res_category = getResult($query_category);
+                            $content .= "<li><a href=\"{$link}\">{$res_category[0]['cat_name']}</a><span class=\"divider\"></span></li>";
+                        }
+                        break;
+                    case 'F':
+                    case 'f':
+                        $link .= "?sex=F";
+                        $content.= "<li><a href=\"{$link}\">Woman</a> <span class=\"divider\"></span></li>";
+                        if (isset($_GET['cat'])) {
+                            $link .= "&cat={$_GET['cat']}";
+                            $res_category = getResult($query_category);
+                            $content .= "<li><a href=\"{$link}\">{$res_category[0]['cat_name']}</a><span class=\"divider\"></span></li>";
+                        }
+                        break;
+                    default:
+                        $content.= "<li><a href=\"{$link}\">Products</a> <span class=\"divider\"></span></li>";
+                        if (isset($_GET['cat'])) {
+                            $link .= "?cat={$_GET['cat']}&";
+                            $res_category = getResult($query_category);
+                            $content .= "<li><a href=\"{$link}\">{$res_category[0]['cat_name']}</a><span class=\"divider\"></span></li>";
+                        }
+                        break;
+                }
+                break;
+
+            case 'pag':
+                $link = "items.php";
+                $x_pag = 9; #numero di elementi da mostrare per pagina
+                $pag = $_GET['pag'];
+                if (!$pag)
+                    $pag = 1;
+                $first = ($pag - 1) * $x_pag;
+
+                switch ($_GET['sex']) {
+                    case 'M':
+                    case 'm':
+                        $link .= "?sex=M&";
+                        if (!isset($_GET['cat'])) {
+                            $all_rows = count(getResult("SELECT id FROM items WHERE sex='M'"));
+                        } else {
+                            $link .= "cat={$_GET['cat']}&";
+                            $all_rows = count(getResult("SELECT id FROM items WHERE sex='M' AND category={$_GET['cat']}"));
+                        }
+                        break;
+                    case 'F':
+                    case 'f':
+                        $link .= "?sex=F&";
+                        if (!isset($_GET['cat'])) {
+                            $all_rows = count(getResult("SELECT id FROM items WHERE sex='F'"));
+                        } else {
+                            $link .= "cat={$_GET['cat']}&";
+                            $all_rows = count(getResult("SELECT id FROM items WHERE sex='F' AND category={$_GET['cat']}"));
+                        }
+                        break;
+
+                    default:
+                        $link .= "?";
+                        if (!isset($_GET['cat'])) {
+                            $all_rows = count(getResult("SELECT id FROM items"));
+                        } else {
+                            $link .= "?cat={$_GET['cat']}&";
+                            $all_rows = count(getResult("SELECT id FROM items WHERE category={$_GET['cat']}"));
+                        }
+                        break;
+                }
+                $all_pages = ceil($all_rows / $x_pag);
+                if ($all_pages > 1) {
+                    if ($pag > 1) {
+                        $content .= "<li><a href=\"{$link}pag=" . ($pag - 1) . "\">&laquo; Previous Page</a></li>";
+                    }
+                    if ($all_pages > $pag) {
+                        $content .= "<li><a href=\"{$link}pag=" . ($pag + 1) . "\">Next Page &raquo;</a></li>";
+                    }
+                }
+                break;
+            case 'title':
+                switch ($_GET['sex']) {
+                    case 'M':
+                    case 'm':
+                        $content .= 'Man';
+                        break;
+                    case 'F':
+                    case 'f':
+                        $content .= 'Woman';
+                        break;
+                    default:
+                        $content .= 'Our products';
+                        break;
+                }
+                break;
+            case 'subtitle':
+                switch ($_GET['sex']) {
+                    case 'M':
+                    case 'm':
+                        $content .= 'Sottotitolo da uomo...';
+                        break;
+                    case 'F':
+                    case 'f':
+                        $content .= 'Sottotitolo da donna...';
+                        break;
+                    default:
+                        $content .= 'Sottotitolo di default...';
+                        break;
+                }
+                break;
+            case 'icon':
+                switch ($_GET['sex']) {
+                    case 'M':
+                    case 'm':
+                        $content .= 'icon-male';
+                        break;
+                    case 'F':
+                    case 'f':
+                        $content .= 'icon-female';
+                        break;
+                    default:
+                        $content .= 'icon-group';
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+        return $content;
+    }
 
 	/* Blog Post List */
 	function BlogPosts($name, $data, $pars) {

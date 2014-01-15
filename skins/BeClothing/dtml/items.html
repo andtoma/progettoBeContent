@@ -1,33 +1,48 @@
+<[ModalQuickshop]>
 <!-- Page title -->
 <div class="page-title">
-	<div class="container">
-		<h2><i class="icon-desktop color"></i><[Titolo]><small><[Sottotitolo]></small></h2>
-		<hr />
-	</div>
+    <div class="container">
+        <h2><i class="<[ItemsList::ItemsList value='icon' library=functions]> color"></i><[ItemsList::ItemsList value="title" library=functions]><small><[ItemsList::ItemsList value="subtitle" library=functions]></small></h2>
+        <hr />
+    </div>
 </div>
 <!-- Page title -->
 
 <!-- Page content -->
 <div class="shop-items">
-	<div class="container">
-		<[searchTagsContainer::TagsContainer library=functions]>
-		<div class="col-md-12">
-			<!-- Breadcrumb -->
-			<ul class="breadcrumb">
-				<[Breadcrumb]>
-			</ul>
-		</div>
-		<div class="row">
+    <div class="container">
+    	<[searchTagsContainer::TagsContainer library=functions]>
+        <div class="col-md-12">
+            <!-- Breadcrumb -->
+            <ul class="breadcrumb">
+                <[ItemsList::ItemsList value="crumb" library=functions]>
+            </ul>
+        </div>	
+       
+                <div class="row">
 			<div class="col-md-3">
 				<[Items_SideBar::LeftSideBar library=functions]>
 			</div>
 			<div class="col-md-9">
 				<!-- Items List starts -->
 				<div class="item_list_start row">
-					<[ItemsList::ItemsList library=functions]>
+					<[ItemsList::ItemsList value="list" library=functions]>
 				</div>
+				<div class="pagination-centered">
+                            <!-- Pagination -->
+                            <ul class="pagination">
+                                <[ItemsList::ItemsList value="pag" library=functions]>
+                            </ul>
+                        </div>
 				<!-- Items List ends -->
 			</div>
 		</div>
-	</div>
-</div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    

@@ -13,7 +13,14 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600italic,600' rel='stylesheet' type='text/css'>
 
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600italic,600' rel='stylesheet' type='text/css'>
+
 		<!-- Styles -->
+		<link href="skins/BeClothing/css/menu3d.min.css" rel="stylesheet" media="screen, projection" />
+		<link href="skins/BeClothing/css/animate.css" rel="stylesheet" type="text/css" />
+		<link href="skins/BeClothing/css/skin.css" rel="stylesheet" type="text/css" />
+
 		<!-- Bootstrap CSS -->
 		<link href="skins/BeClothing/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Animate css -->
@@ -31,16 +38,36 @@
 		<link href="skins/BeClothing/css/bootstrap-formhelpers.css" rel="stylesheet">
 		<!-- Datepicker CSS -->
 		<link href="skins/BeClothing/css/datepicker.css" rel="stylesheet">
-		
 		<!-- noUI Slider CSS -->
-        <link href="skins/BeClothing/css/jquery.nouislider.css" rel="stylesheet">
-
+		<link href="skins/BeClothing/css/jquery.nouislider.css" rel="stylesheet">
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="#">
 
 	</head>
+		
+	</style>
 
 	<body>
+
+		<!-- Logo & Navigation starts -->
+
+		<div class="container">
+			<div id="menuMega" class="menu3dmega navbar navbar-fixed-top bs-docs-nav">
+				
+				
+				
+				<ul class="container">
+					
+					
+					<!-- CONTIENE MENU!!!!! -->
+					
+						<[HeaderMenu::HeaderMenu library=functions]>
+					
+				</ul>
+			</div>
+
+		</div>
+		<!-- Logo & Navigation ends -->
 		<[modal]>
 		<[quickshop]>
 		<!-- Shopping cart Modal -->
@@ -80,76 +107,6 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-
-		<!-- Logo & Navigation starts -->
-
-		<div class="header">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-2 col-sm-2">
-						<!-- Logo -->
-						<div class="logo">
-							<h1><a href="index.php">BeClothing</a></h1>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-5">
-						<!-- Navigation menu -->
-
-						<[HeaderMenu::HeaderMenu library=functions]>
-
-						<!--  DOVE C'ERA IL PLACEHOLDER
-						<div class="navi">
-						<div id="ddtopmenubar" class="mattblackmenu">
-						<ul>
-						<li>
-						<a href="index.php">Home</a>
-						</li>
-						<li>
-						<a href="items.php" rel="ddsubmenu1">Man</a>
-						<ul id="ddsubmenu1" class="ddsubmenustyle">
-						<li>
-						<a href="items.php">Trousers</a>
-						</li>
-						</ul>
-						</li>
-						<li>
-						<a href="items.php">Woman</a>
-						</li>
-						<li>
-						<a href="blog.php">Blog</a>
-						</li>
-						<li>
-						<a href="account.php">My Account</a>
-						</li>
-						<li>
-						<a href="contactus.php">Contact Us</a>
-						</li>
-						</ul>
-						</div>
-						</div>
-						-->
-
-						<!-- Dropdown NavBar -->
-						<div class="navis"></div>
-
-					</div>
-
-					<div class="col-md-4 col-sm-5">
-						<div class="kart-links">
-							<[LoginBox::LoginBox library=functions]>
-							<!--
-							<a href="login.php">Login</a>
-							<a href="register.php">Signup</a>
-							<a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> 3 Items - $ 300</a>
-							-->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Logo & Navigation ends -->
-
 		<[container]>
 
 		<!-- FOOTER.HTML STARTS HERE -->
@@ -172,7 +129,7 @@
 						<div class="fwidget">
 							<h4>Latest Blog Posts</h4>
 							<hr />
-	                    	<[Recent_Post_Footer::RecentPostsList library=functions]>
+							<[Recent_Post_Footer::RecentPostsList library=functions]>
 						</div>
 					</div>
 
@@ -246,12 +203,11 @@
 		<script src="skins/BeClothing/js/contact.js"></script>
 
 		<script src="skins/BeClothing/js/newsletter.js"></script>
-		
-		<script src="skins/BeClothing/js/item.js"></script>
-		
-		<!-- noUI Slider JS -->
-        <script src="skins/BeClothing/js/jquery.nouislider.js"></script>
 
+		<script src="skins/BeClothing/js/item.js"></script>
+
+		<!-- noUI Slider JS -->
+		<script src="skins/BeClothing/js/jquery.nouislider.js"></script>
 		<!-- Bootstrap JS -->
 		<script src="skins/BeClothing/js/bootstrap.min.js"></script>
 		<!-- Dropdown menu -->
@@ -274,6 +230,22 @@
 		<script src="skins/BeClothing/js/bootstrap-formhelpers.js"></script>
 		<!-- Datepicker JS -->
 		<script src="skins/BeClothing/js/bootstrap-datepicker.js"></script>
+
+		<script src="skins/BeClothing/js/menu3d.min.js" type="text/javascript"></script>
+		<!--Demo-->
+		<script src="skins/BeClothing/js/jquery.cookie.js" type="text/javascript"></script>
+		<script src="skins/BeClothing/js/jquery.ddslick.js" type="text/javascript"></script>
+		<script>
+			$().ready(function() {
+				$('#menuMega').menu3d({
+					"skin" : "skin-blue-light",
+					"speed" : 500,
+					"responsive" : true,
+					/*hoverIn --> animazione entrata*/
+					/*hoverOut --> animazione uscita*/
+				});
+			});
+		</script>
 
 	</body>
 </html>

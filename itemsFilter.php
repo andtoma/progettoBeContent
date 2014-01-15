@@ -49,7 +49,7 @@ foreach ($tags as $value) {
 	}
 }
 
-$query = "select * from items where price >= " . $_POST['priceMin'] . " and price <= " . $_POST['priceMax'] . " ";
+$query = "select * from items where FLOOR(price-(price*discount/100)) >= " . $_POST['priceMin'] . " and price <= " . $_POST['priceMax'] . " ";
 
 if ($men_tag == 1)
 	$query .= "and sex='M'";

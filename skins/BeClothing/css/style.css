@@ -1,4 +1,15 @@
 /* Basic CSS starts */
+
+
+div#menuMega{
+	position:absolute;
+	width:100%;
+}
+
+div#menuMega>ul>li>a{
+	padding:13px;
+}
+
 .item_image_button {
 	border: 0px;
 	opacity: 1px;

@@ -22,7 +22,7 @@ function load_main_html($section) {
     $main->setContent("ShoppingCart");
     # MENU
     $res_menu = getResult($query_menu);
-    $main->setContent("HeaderMenu", $res_menu);
+    $main->setContent("HeaderMenu", 0);
     $main->setContent("LoginBox");
 
     /*
