@@ -19,11 +19,19 @@ function load_main_html($section) {
 	$quickshop = new Skinlet("quickshop");
 	$main -> setContent("quickshop", $quickshop -> get());
 	
+	
+	$modal_cart = new Skinlet("modal_cart");
+	$main -> setContent("modal_cart", $modal_cart -> get());
+	
+	$login = new Skinlet("login_modal");
+	$main -> setContent("login_modal", $login -> get());
+	
     $main->setContent("ShoppingCart");
     # MENU
     $res_menu = getResult($query_menu);
+	
     $main->setContent("HeaderMenu", 0);
-    $main->setContent("LoginBox");
+	
 
     /*
      * PLACEHOLDER -> FOOTER

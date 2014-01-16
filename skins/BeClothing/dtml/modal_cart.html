@@ -1,0 +1,36 @@
+<div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header title-background">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title mymodal_title">Shopping Cart</h4>
+					</div>
+					<div class="modal-body">
+
+						<!-- Items table -->
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Colour</th>
+									<th>Size</th>
+									<th>Quantity</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<[ShoppingCart::ShoppingCart library=functions]>
+							</tbody>
+						</table>
+
+					</div>
+					<div class="modal-footer">
+						<a  class="btn btn-info" data-dismiss="modal">Continue Shopping</a>
+						<a href="checkout.php" class="btn btn-danger beforeCheckOut">CheckOut</a>
+
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->

@@ -112,13 +112,13 @@ $(document).ready(function() {
 		/*availability message*/
 		/*I consider the size options*/
 		if ($('#item_size option').length == 0) {
-			var availability = "<p style='color:red'>Out of Stock</p>";
+			var availability = "<p class='notAvailable'>Out of Stock</p>";
 			$(".sizetext").hide();
 			$("#item_size").hide();
 			$("#quantity_buy").hide();
 
 		} else {
-			var availability = "<p style='color:green'>In Stock</p>";
+			var availability = "<p class='available'>In Stock</p>";
 			$(".sizetext").show();
 			$("#item_size").show();
 			$("#quantity_buy").show();
@@ -152,13 +152,13 @@ $(document).ready(function() {
 		/*availability message*/
 
 		if ($('#item_size option').length == 0) {
-			var availability = "<p style='color:red'>Out of Stock</p>";
+			var availability = "<p class='notAvailable'>Out of Stock</p>";
 			$(".sizetext").hide();
 			$("#item_size").hide();
 			$("#quantity_buy").hide();
 
 		} else {
-			var availability = "<p style='color:green'>In Stock</p>";
+			var availability = "<p class='available'>In Stock</p>";
 			$(".sizetext").show();
 			$("#item_size").show();
 			$("#quantity_buy").show();
@@ -317,7 +317,7 @@ $(document).ready(function() {
 	$("#size_guide").click(function(e) {
 		e.stopPropagation();
 		$(".title").html("Size Charts");
-		$(".text-modal").html("<img style='text-align:center' src='skins/BeClothing/img/sizeChart.jpg'width='550' >");
+		$(".text-modal").html("<img class='sizeGuideModal' src='skins/BeClothing/img/sizeChart.jpg'width='550' >");
 		$("#mymodal").modal("show");
 		return false;
 

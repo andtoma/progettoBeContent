@@ -81,12 +81,19 @@ if ($_POST['brand']) {
 	$query .= " and brand in (select id from brands where brand_name in ( " . str_replace("\'", "'", $_POST['brand']) . " ) )";
 }
 
+if($_POST['subcategories'] != ""){
+	$query .= " and category in ( select id from categories where cat_name in ( " . str_replace("\'", "'", $_POST['subcategories'])." ) )";
+}
+
 $query .= " order by id ";
 
+
+echo $query; exit;
 $result = getResult($query);
 $first = 1;
 
 foreach ($result as $key => $value) {
+	
 	if ($first == 1) {
 		$content = '<script src="skins/BeClothing/js/modal_quickshop.js"></script>';
 		$first = 0;

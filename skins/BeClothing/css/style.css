@@ -1,64 +1,5 @@
 /* Basic CSS starts */
 
-div#menuMega > ul > li > a {
-font-size: 15px;
-padding : 15px 20px;
-} 
-
-div#menuMega{
-	position:absolute;
-	width:100%;
-}
-
-div#menuMega>ul>li>a{
-	padding:13px;
-}
-
-.item_image_button {
-	border: 0px;
-	opacity: 1px;
-	background: none;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-}
-
-.item_page_image {
-	opacity: 0.4;
-	filter: alpha(opacity=40); /* For IE8 and earlier */
-}
-.item_page_image:hover {
-	opacity: 1.0;
-	filter: alpha(opacity=100); /* For IE8 and earlier */
-}
-
-.modal-resume {
-	border: 1px solid red;
-	background-color: #16cbe6;
-	margin-bottom: 5px;
-	display: inline-block;
-	padding: 15px;
-	width: auto;
-	border-radius: 5px;
-}
-.text-modal {
-	font-size: 14px;
-	color: red;
-	text-align: center;
-	margin: 25px;
-	font-weight: bold;
-}
-
-.subtext-modal {
-	font-size: 13px;
-	font-weight: bold;
-	color: white;
-	text-align: center;
-	margin: 25px;
-	margin-top: 0px;
-	padding-top: 0px;
-}
-
 body {
 	font-family: 'Open Sans', sans-serif;
 	color: #444;
@@ -67,6 +8,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	background: #fafafa url('../img/main-back.png') repeat;
 	height: auto;
+	padding-top: 54px;
 }
 
 h1, h2, h3, h4 {
@@ -87,7 +29,7 @@ ul, ol {
 }
 
 a {
-	color: #16cbe6;
+	color: #2888D2;
 	text-decoration: none;
 }
 
@@ -124,8 +66,8 @@ strong {
 
 #myTab li.active a {
 	color: #fff !important;
-	background: #16cbe6 !important;
-	border-color: #16cbe6 !important;
+	background: #2888D2 !important;
+	border-color: #2888D2 !important;
 }
 
 /* Basic CSS ends */
@@ -135,7 +77,7 @@ strong {
 }
 
 .color {
-	color: #16cbe6;
+	color: #2888D2;
 }
 
 .wishlist-button {
@@ -144,7 +86,7 @@ strong {
 }
 
 .title-background {
-	background-color: #16cbe6;
+	background-color: #2888D2;
 }
 
 .sep-bor {
@@ -195,7 +137,7 @@ strong {
 
 .btn-blue {
 	color: #fff !important;
-	background: #16cbe6;
+	background: #2888D2;
 	border: 1px solid #0fa6bc;
 	border-bottom: 2px solid #0fa6bc;
 	font-size: 13px;
@@ -386,20 +328,22 @@ strong {
 }
 
 .carousel-indicators .active {
-	background: #16cbe6;
+	background: #2888D2;
 	border: 1px solid #0fa6bc;
 }
 
 .carousel-indicators li:hover {
-	background: #16cbe6;
+	background: #2888D2;
 	border: 1px solid #0fa6bc;
 }
+
+
 
 /* Logo & Navigation */
 
 .header {
 	height: 70px;
-	background: #16cbe6;
+	background: #2888D2;
 	border-top: 4px solid #0fa6bc;
 	border-bottom: 1px solid #0fa6bc;
 }
@@ -680,7 +624,7 @@ strong {
 	text-align: center;
 	line-height: 35px;
 	border-radius: 100px;
-	background: #16cbe6;
+	background: #2888D2;
 	font-size: 25px;
 	margin-right: 5px;
 }
@@ -883,7 +827,7 @@ strong {
 .recent-posts .recent-post-block .rp-right {
 	width: 50px;
 	float: right;
-	background: #16cbe6;
+	background: #2888D2;
 	height: 65px;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
@@ -916,7 +860,7 @@ strong {
 .recent-posts .my_carousel .carousel_nav a {
 	width: 20px;
 	height: 20px;
-	background: #16cbe6;
+	background: #2888D2;
 	display: inline-block;
 	padding: 0px;
 	text-align: center;
@@ -1028,10 +972,10 @@ strong {
 	line-height: 20px;
 	padding: 12px 15px;
 	color: #fff;
-	background: #16cbe6;
+	background: #2888D2;
 	display: block;
 	text-decoration: none;
-	border: 1px solid #0fa6bc;
+	border: 1px solid  #2a6496;
 	border-top: 0px;
 	font-weight: bold;
 }
@@ -1049,9 +993,9 @@ strong {
 }
 
 .sidey .nav a:hover, .sidey .nav li.active > a {
-	background: #0fa6bc;
+	background: #2a6496;
 	color: #fff;
-	border-bottom: 1px solid #0fa6bc;
+	border-bottom: 1px solid #2a6496;
 }
 
 .sidey .nav > li.active > a {
@@ -1212,7 +1156,7 @@ strong {
 	padding-left: 5px;
 	padding-right: 5px;
 	height: 20px;
-	background: #16cbe6;
+	background: #2888D2;
 	display: inline-block;
 	color: #fff;
 	text-align: center;
@@ -1284,7 +1228,7 @@ strong {
 	border-radius: 5px;
 	font-size: 13px;
 	font-weight: bold;
-	background: #16cbe6;
+	background: #2888D2;
 	color: #fff;
 	width: 40px;
 	text-align: center;
@@ -1411,7 +1355,7 @@ strong {
 	width: 25px;
 	height: 25px;
 	line-height: 25px;
-	background: #16cbe6;
+	background: #2888D2;
 	display: inline-block;
 }
 
@@ -1948,7 +1892,7 @@ strong {
 	bottom: 0px;
 	right: 0px;
 	z-index: 104400;
-	background: #16cbe6;
+	background: #2888D2;
 }
 
 .totop a, .totop a:visited {
@@ -2030,7 +1974,7 @@ footer .fwidget ul li {
 }
 
 footer  i.contact-icon {
-	background: #0fa6bc;
+	background: #2888D2;
 	width: 30px;
 	height: 30px;
 	line-height: 30px;
@@ -2101,6 +2045,11 @@ h4.mymodal_title {
 	.carousel-indicators {
 		display: none;
 	}
+	
+	#carousel_container_mp li, #carousel_container_na li{
+	min-width: 280px;
+	max-height: 
+}
 }
 
 /* Tablets */
@@ -2113,6 +2062,7 @@ h4.mymodal_title {
 	}
 	.carousel .carousel-caption {
 		bottom: 30px !important;
+		margin-top: -30px;
 	}
 	.carousel .carousel-caption h2 {
 		font-size: 25px !important;
@@ -2196,6 +2146,7 @@ h4.mymodal_title {
 		margin-top: 50px;
 	}
 }
+
 .sh {
 
 	font-family: Gill Sans, Verdana;
@@ -2265,14 +2216,14 @@ h4.mymodal_title {
 .price_style {
 	font-size: 35px;
 	padding-bottom: 12px;
-	margin-top: -10px;
+	margin-top: -65px;
 }
 .item_name_style {
 	font-size: 35px;
 	margin-bottom: 0;
 	/*font-weight:bold;*/
 	padding-bottom: 0;
-	color: #16cbe6;
+	color: #2888D2;
 }
 
 .review_cwell {
@@ -2282,6 +2233,137 @@ h4.mymodal_title {
 	width: 110px;
 }
 .short_div {
-	border-bottom: 1px solid #16cbe6;
+	border-bottom: 1px solid #2888D2;
 	width: 600px;
+}
+
+
+li#logo{
+	background-color: #2888D2;
+}
+
+
+
+div#menuMega > ul > li > a {
+	font-size: 15px;
+	padding : 15px 20px;
+} 
+
+div#menuMega{
+	position:absolute;
+	width:100%;
+}
+
+div#menuMega>ul>li>a{
+	padding:16px;
+}
+
+.item_image_button {
+	border: 0px;
+	opacity: 1px;
+	background: none;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+
+.item_page_image {
+	opacity: 0.4;
+	filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+.item_page_image:hover {
+	opacity: 1.0;
+	filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+.modal-resume {
+	border: 1px solid red;
+	background-color: #2888D2;
+	margin-bottom: 5px;
+	display: inline-block;
+	padding: 15px;
+	width: auto;
+	border-radius: 5px;
+}
+.text-modal {
+	font-size: 14px;
+	color: red;
+	text-align: center;
+	margin: 25px;
+	font-weight: bold;
+}
+
+.subtext-modal {
+	font-size: 13px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	margin: 25px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+p.available {
+	color: green;
+}
+
+p.notAvailable {
+	color: red;
+}
+
+img.sizeGuideModal {
+	text-align: center;
+}
+
+h1.itemsNotFoundHeader1{
+	text-align: center;
+}
+
+h2.itemsNotFoundHeader2{
+	text-align: center;
+}
+
+h6.noUiHandlerLabel{
+	margin-top: 25px;
+	text-align: center;
+}
+
+#menu_logout, #menu_cart,#menu_account,#menu_login,#menu_signin{
+	margin-top: 10px;
+	 margin-right: 3px;
+	 height: 35px; 
+	 border-radius: 5px;
+	 float: right;
+
+} 
+#menu_logout_a, #menu_cart_a,#menu_account_a,#menu_signin_a, #menu_login_a{
+	height: 40px; 
+	padding-top: 7px;
+	padding-left: 1px;
+	 padding-right: 3px;
+	 color:#fff;
+}
+#menu_logout_a:hover,#menu_cart_a:hover,#menu_account_a:hover,#menu_signin_a:hover,#menu_login_a:hover,.menu_list:hover{
+border-bottom: 0px;
+}
+
+.nohvr:hover{
+	background-color: #2888D2;
+}
+.btn-info{
+	background-color:#2888D2;
+	border-color: #2888D2;
+}
+.btn-info:hover{
+	background-color:#2a6496;
+	border-color: #2a6496;
+}
+
+.social-well{
+	height:138px;
+}
+
+.login_mod{
+	padding-bottom: 0px;
+margin-bottom: -15px;
 }

@@ -15,7 +15,8 @@ $().ready(function() {
 				brand : '',
 				color : '',
 				priceMin : '0',
-				priceMax : '99'
+				priceMax : '99',
+				subcategories: ''
 			},
 			type : 'post'
 		}).done(function(response) {
@@ -23,7 +24,7 @@ $().ready(function() {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 		return false;
@@ -44,14 +45,15 @@ $().ready(function() {
 		$('#searchTagsContainer').parent().show();
 		$('#searchTagsContainer').append(' <a id="MenTag" href="" class="main_Tag btn btn-primary btn-xs"><i class="icon-remove"></i> Men</a>');
 		var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
+		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
 			if ($(this).hasClass('brand_Tag')) {
@@ -60,7 +62,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -71,14 +77,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			men = 1;
@@ -90,16 +97,14 @@ $().ready(function() {
 				$('#searchTagsContainer').parent().hide('slow');
 			}
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
-		
-		
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -109,7 +114,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -120,14 +129,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			men = 0;
@@ -179,7 +189,7 @@ $().ready(function() {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 		men = 0;
@@ -196,14 +206,14 @@ $().ready(function() {
 			$('#searchTagsContainer').parent().show();
 			$('#searchTagsContainer').append(' <a id="WomenTag" href="" class="main_Tag btn btn-women btn-xs"><i class="icon-remove"></i> Women</a>');
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -213,7 +223,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -224,14 +238,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			women = 1;
@@ -243,14 +258,14 @@ $().ready(function() {
 				$('#searchTagsContainer').parent().hide('slow');
 			}
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -260,15 +275,14 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
-
-		alert(tags);
-		alert('(' + brands.substring(0, brands.length - 1) + ')');
-		alert('(' + colors.substring(0, colors.length - 1) + ')');
-		
 		$.ajax({
 			url : 'itemsFilter.php',
 			data : {
@@ -276,16 +290,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
-			alert(response);
 			if (response != '') {
-				alert(response);
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			women = 0;
@@ -336,7 +349,7 @@ $().ready(function() {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 		women = 0;
@@ -353,14 +366,14 @@ $().ready(function() {
 			$('#searchTagsContainer').parent().show();
 			$('#searchTagsContainer').append(' <a id="AccessoriesTag" href="" class="main_Tag btn btn-inverse btn-xs"><i class="icon-remove"></i> Accessories</a>');
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -370,7 +383,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -381,14 +398,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			accessories = 1;
@@ -400,14 +418,14 @@ $().ready(function() {
 				$('#searchTagsContainer').parent().hide('slow');
 			}
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -417,7 +435,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -428,14 +450,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
-				$('.item_list_start').html(response);				
+				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			accessories = 0;
@@ -451,14 +474,14 @@ $().ready(function() {
 			$('#searchTagsContainer').parent().hide('slow');
 		}
 		var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -468,7 +491,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -479,14 +506,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 		accessories = 0;
@@ -503,14 +531,14 @@ $().ready(function() {
 			$('#searchTagsContainer').parent().show();
 			$('#searchTagsContainer').append(' <a id="SaleTag" href="" class="special_Tag btn btn-warning btn-xs"><i class="icon-remove"></i> On Sale</a>');
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -520,7 +548,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -531,14 +563,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			sale = 1;
@@ -550,14 +583,14 @@ $().ready(function() {
 				$('#searchTagsContainer').parent().hide('slow');
 			}
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -567,7 +600,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -578,14 +615,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			sale = 0;
@@ -602,14 +640,14 @@ $().ready(function() {
 			$('#searchTagsContainer').parent().hide('slow');
 		}
 		var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -619,7 +657,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -630,14 +672,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 		sale = 0;
@@ -654,14 +697,14 @@ $().ready(function() {
 			$('#searchTagsContainer').parent().show();
 			$('#searchTagsContainer').append(' <a id="NewArrivalsTag" href="" class="special_Tag btn btn-success btn-xs"><i class="icon-remove"></i> New Arrivals</a>');
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -671,7 +714,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -682,14 +729,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			newArrivals = 1;
@@ -702,14 +750,14 @@ $().ready(function() {
 				$('#searchTagsContainer').parent().hide('slow');
 			}
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -719,7 +767,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -730,14 +782,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			newArrivals = 0;
@@ -754,14 +807,14 @@ $().ready(function() {
 			$('#searchTagsContainer').parent().hide('slow');
 		}
 		var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -771,7 +824,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -782,14 +839,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 		newArrivals = 0;
@@ -806,14 +864,14 @@ $().ready(function() {
 			/* Special New Arrivals Category not in Filter Tags*/
 			$('#searchTagsContainer').append(' <a id="BestSellersTag" href="" class="special_Tag btn btn-danger btn-xs"><i class="icon-remove"></i> Best Sellers</a>');
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -823,7 +881,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -834,14 +896,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			bestSellers = 1;
@@ -853,14 +916,14 @@ $().ready(function() {
 				$('#searchTagsContainer').parent().hide('slow');
 			}
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -870,7 +933,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -881,14 +948,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 			bestSellers = 0;
@@ -903,14 +971,14 @@ $().ready(function() {
 
 		$(this).remove();
 		var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -920,7 +988,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -931,14 +1003,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 		bestSellers = 0;
@@ -979,14 +1052,14 @@ $().ready(function() {
 				}
 
 				var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -996,7 +1069,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -1007,14 +1084,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 
@@ -1022,17 +1100,18 @@ $().ready(function() {
 				$(this).hide();
 
 				$('.brand_Tag').on('click', function() {
+					
 					alert($(this).text());
 					$(this).remove();
 					var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1042,7 +1121,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -1053,26 +1136,84 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
-					return false;
+		
+		
+		
+		
+		
+		return false;
 				});
-
+				
 				return false;
 			});
-
+			
 		});
-
+	
 	});
-
+	$('.brand_Tag').on('click', function() {
+					
+					alert($(this).text());
+					$(this).remove();
+					var tags = "";
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
+		
+		$('#searchTagsContainer a').each(function() {
+			text = $(this).text();
+			if ($(this).hasClass('brand_Tag')) {
+				brands += "'" + text + "',";
+			} else {
+				if ($(this).hasClass('color_Tag')) {
+					colors += "'" + text + "',";
+				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
+					tags = tags + ' ' + $(this).text();
+					}
+				}
+			}
+		});
+		$.ajax({
+			url : 'itemsFilter.php',
+			data : {
+				tag : tags,
+				brand : brands.substring(0, brands.length - 1),
+				color : colors.substring(0, colors.length - 1),
+				priceMin : sliderPriceMin,
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
+			},
+			type : 'post'
+		}).done(function(response) {
+			if (response != '') {
+				$('.item_list_start').html(response);
+			} else {
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
+			}
+		});
+		
+		return false;
+	});
+				
+				
 	/* Color Picker Items Filter */
 	$('p.color_filter').on('click', function() {
 		alert();
@@ -1113,20 +1254,20 @@ $().ready(function() {
 					not = 1;
 				}
 			});
-			/* Add Brand Tag */
+			/* Add Color Tag */
 			if (!not) {
 				$('#searchTagsContainer').append(' <a href="" class="color_Tag btn btn-info btn-xs"><i class="icon-remove"></i>' + $(this).attr('id') + '</a>');
 			}
 
 			var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1136,7 +1277,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -1147,28 +1292,29 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 
 			$('.color_Tag').on('click', function() {
 				$(this).remove();
 				var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1178,7 +1324,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -1189,14 +1339,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 				return false;
@@ -1206,6 +1357,124 @@ $().ready(function() {
 	});
 
 });
+
+/* SubCategories */
+$().ready(function(){
+	$('li a.leftSideBarSubcategories').on('click', function(){
+	
+			$('#searchTagsContainer').parent().show();
+			var what = $(this).text();
+			alert(what);
+			var not = 0;
+			$('#searchTagsContainer a').each(function() {
+				if ($(this).text() == what) {
+					not = 1;
+				}
+			});
+			/* Add Sub Tag */
+			if (!not) {
+				$('#searchTagsContainer').append(' <a href="" class="Subcategories_Tag btn btn-subcategories btn-xs"><i class="icon-remove"></i>' +what+'</a>');
+			}
+
+			var tags = "";
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
+		
+		$('#searchTagsContainer a').each(function() {
+			text = $(this).text();
+			if ($(this).hasClass('brand_Tag')) {
+				brands += "'" + text + "',";
+			} else {
+				if ($(this).hasClass('color_Tag')) {
+					colors += "'" + text + "',";
+				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
+					tags = tags + ' ' + $(this).text();
+					}
+				}
+			}
+		});
+		$.ajax({
+			url : 'itemsFilter.php',
+			data : {
+				tag : tags,
+				brand : brands.substring(0, brands.length - 1),
+				color : colors.substring(0, colors.length - 1),
+				priceMin : sliderPriceMin,
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
+			},
+			type : 'post'
+		}).done(function(response) {
+			if (response != '') {
+				$('.item_list_start').html(response);
+			} else {
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
+			}
+		});
+		/*End Done*/
+
+			$('.Subcategories_Tag').on('click', function() {
+				$(this).remove();
+				var tags = "";
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
+		
+		$('#searchTagsContainer a').each(function() {
+			text = $(this).text();
+			if ($(this).hasClass('brand_Tag')) {
+				brands += "'" + text + "',";
+			} else {
+				if ($(this).hasClass('color_Tag')) {
+					colors += "'" + text + "',";
+				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
+					tags = tags + ' ' + $(this).text();
+					}
+				}
+			}
+		});
+		$.ajax({
+			url : 'itemsFilter.php',
+			data : {
+				tag : tags,
+				brand : brands.substring(0, brands.length - 1),
+				color : colors.substring(0, colors.length - 1),
+				priceMin : sliderPriceMin,
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
+			},
+			type : 'post'
+		}).done(function(response) {
+			if (response != '') {
+				$('.item_list_start').html(response);
+			} else {
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
+			}
+		});
+		/* End Done */
+		return false;
+			});
+			return false;
+	});
+});
+
 
 /* Price Slider */
 $().ready(function() {
@@ -1225,20 +1494,20 @@ $().ready(function() {
 
 	/* Custom min-max handlers */
 	$('.noUiSlider').closest('.cwell').css('padding-bottom', '40px');
-	$('.noUi-handle-lower').html('<h6 style="margin-top: 25px;text-align: center;">Min<i class="icon-arrow-left"></i><i class="icon-arrow-right"></i></h6>').css('text-align', 'center');
-	$('.noUi-handle-upper').html('<h6 style="margin-top: 25px;text-align: center;">Max<i class="icon-arrow-left"></i><i class="icon-arrow-right"></i></h6>').css('text-align', 'center');
+	$('.noUi-handle-lower').html('<h6 class="noUiHandlerLabel">Min<i class="icon-arrow-left"></i><i class="icon-arrow-right"></i></h6>').css('text-align', 'center');
+	$('.noUi-handle-upper').html('<h6 class="noUiHandlerLabel">Max<i class="icon-arrow-left"></i><i class="icon-arrow-right"></i></h6>').css('text-align', 'center');
 
 	$('.noUi-handle-upper').on('click', function() {
 		alert($('#showMax').val());
 		var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1248,7 +1517,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -1259,28 +1532,29 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');				
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 	});
 
 	$('.noUi-handle-lower').on('click', function() {
 		var tags = "";
-		var brands = '';
-		var colors = "";
-		var sliderPriceMin = $('#showMin').val();
-		var sliderPriceMax = $('#showMax').val();
-		var slidePriceMin = sliderPriceMin.toString().split('.');
-		var slidePriceMax = sliderPriceMax.toString().split('.');
-		alert(slidePriceMin);
-		alert(slidePriceMax);
+			var brands = '';
+			var colors = "";
+			var sliderPriceMin = $('#showMin').val();
+			var sliderPriceMax = $('#showMax').val();
+			var slidePriceMin = sliderPriceMin.toString().split('.');
+			var slidePriceMax = sliderPriceMax.toString().split('.');
+			var subcategories = "";
+			
 		
 		$('#searchTagsContainer a').each(function() {
 			text = $(this).text();
@@ -1290,7 +1564,11 @@ $().ready(function() {
 				if ($(this).hasClass('color_Tag')) {
 					colors += "'" + text + "',";
 				} else {
+					if($(this).hasClass('Subcategories_Tag')){
+						subcategories += "'" + text + "',";
+					} else {
 					tags = tags + ' ' + $(this).text();
+					}
 				}
 			}
 		});
@@ -1301,14 +1579,15 @@ $().ready(function() {
 				brand : brands.substring(0, brands.length - 1),
 				color : colors.substring(0, colors.length - 1),
 				priceMin : sliderPriceMin,
-				priceMax : sliderPriceMax
+				priceMax : sliderPriceMax,
+				subcategories : subcategories.substring(0, subcategories.length - 1)
 			},
 			type : 'post'
 		}).done(function(response) {
 			if (response != '') {
 				$('.item_list_start').html(response);
 			} else {
-				$('.item_list_start').html('<div class="cwell"><h1 style="text-align: center;">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para" style="text-align: center;">Try to change your search tags above!</h2></div>');
+				$('.item_list_start').html('<div class="cwell"><h1 class="itemsNotFoundHeader1">Sorry<span class="color">!!!</span> No Results Found<span class="color">!!!</span></h1><h2 class="error-para itemsNotFoundHeader2">Try to change your search tags above!</h2></div>');
 			}
 		});
 	});
@@ -1762,7 +2041,7 @@ $('#carousel_container_mp').carouFredSel({
 	width : '100%',
 	direction : 'left',
 	scroll : {
-		items : 2,
+		items : 1,
 		delay : 2000,
 		duration : 500,
 		pauseOnHover : "true"
@@ -1792,7 +2071,7 @@ $('#carousel_container_na').carouFredSel({
 	width : '100%',
 	direction : 'left',
 	scroll : {
-		items : 2,
+		items : 1,
 		delay : 2000,
 		duration : 500,
 		pauseOnHover : "true"

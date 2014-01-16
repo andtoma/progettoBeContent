@@ -20,40 +20,70 @@ Class functions extends TagLibrary {
  in the function for every item menu I check if there is some son is the table(menu it's a hierarchical table), if it exist 
  * I make the same thing of the father.
  * */
-		function HeaderMenu($name, $data, $pars) {
-		$menu = "<li><img src='skins/BeClothing/img/logogagagogo.png'></li>";
+	function HeaderMenu($name, $data, $pars) {
 		$main_menu = getResult("SELECT * FROM menu WHERE parent_id=0 ORDER BY position");
 
 		foreach ($main_menu as $key => $value) {
 			$has_sons = hasResult("SELECT * FROM menu WHERE parent_id='{$value['id']}'");
+			$icon = getSingleResult("select I.ref as ref from icons I join menu M where  M.icon=I.id and M.id ='{$value['id']}'", "ref");
 
-			/*ha dei sottomenu*/
 			if (!$has_sons) {
-				/*it is a single menu with href*/
-				$menu .= "<li class='menu-non-dropdown'><a href='" . $value['link'] . "'>" . $value['name'] . "</a></li>";
+				/*********************************
+				 * it is a single menu with href
+				 * *******************************/
+				$menu .= "<li class='menu-non-dropdown'><a href='" . $value['link'] . "'>";
+				/**check for icons**/
+				if ($icon != "NULL") {
+					$menu .= $icon . ' ';
+				}
+				$menu .= $value['name'] . "</a></li>";
+
 			} else {
-				$menu .= '<li class="fly-out"><a href=' . $value["link"] . '>' . $value["name"] . '</a>
-				 <div animate-in="slideDown" animate-out="bounceOut" class="dropdown-menu row col-lg-6" >
-                                <div class="content">';
-				/*it has sons*/
+				/*********************************
+				 * it has sons
+				 * *******************************/
+				$menu .= '<li class="fly-out"><a  href=' . $value["link"] . '>';
+				/**check for icon**/
+
+				if ($icon != "NULL") {
+					$menu .= $icon . " ";
+				}
+				$menu .= $value["name"] . '</a><div animate-in="slideDown" animate-out="bounceOut" class="dropdown-menu row col-lg-6" > <div class="content">';
+
+				/*I get the sons of each menu item*/
+
 				$sons = getResult("SELECT * FROM menu WHERE parent_id='{$value["id"]}' ORDER BY position");
 
 				foreach ($sons as $key => $value) {
-					$has_grandsons = hasResult("SELECT * FROM menu WHERE parent_id='{$value['id']}'");
 
-					if (!$has_grandsons) {
-						$menu .= ' <div class="col-lg-4">
-                                      '. $value["name"].'</div>';
+					$menu .= '  <div style="padding-right:10px;color:black;" class="col-lg-4">';
 
-					} else {
-						$menu .= '  <div style="padding-right:10px;color:black;" class="col-lg-4"><strong>
-                                        '. $value["name"].' </strong><ul>';
+					/*check if son has an icon*/
+					$icon = getSingleResult("select I.ref as ref from icons I join menu M where  M.icon=I.id and M.id ='{$value['id']}'", "ref");
+					if ($icon != "NULL") {
+						$menu .= $icon . ' ';
+					}
+					$menu .= '<strong> ' . $value["name"] . ' </strong>';
+
+					if (hasResult("SELECT * FROM menu WHERE parent_id='{$value['id']}'")) {
+
+						/*if the son has sons (es Brands--->Nike)*/
 
 						$grand_sons = getResult("SELECT * FROM menu WHERE parent_id='{$value["id"]}' ORDER BY position");
+						$menu .= '<ul>';
 
 						foreach ($grand_sons as $key => $value) {
 
-							$menu .= '<li><a href=' . $value["link"] . '>' . $value["name"] . '</a></li>';
+							$menu .= '<li>';
+							
+							/*check if the grandson has an icon*/
+
+							$icon = getSingleResult("select I.ref as ref from icons I join menu M where  M.icon=I.id and M.id ='{$value['id']}'", "ref");
+							if ($icon != "NULL") {
+								$menu .= $icon . ' ';
+							}
+
+							$menu .= '<a class="menu_list" href=' . $value["link"] . '>' . $value["name"] . '</a></li>';
 						}
 						$menu .= '</ul></div>';
 					}
@@ -61,6 +91,37 @@ Class functions extends TagLibrary {
 				$menu .= " </div></div>";
 			}
 		}
+		if (!isset($_SESSION['user'])) {
+			$menu .= "<li id='menu_login'> <button class='btn btn-success'><a  id='menu_signin_a'><i class='icon-key icon-large' style='margin-right: 3px;'></i> Login</a></button></li>
+					  <li id='menu_signin'><button onclick=location.href='register.php' class='btn btn-warning'><a href='register.php' id='menu_login_a'><i class='icon-check icon-large' style='margin-right: 3px;'></i> Sign In</a></button></li>";
+		} else {
+			# SE L'UTENTE è IN SESSIONE CARICA IL CARRELLO E IL LOGOUT
+			$num_items = 0;
+			$tot_price = 0;
+
+			# QUERY: SHOPPINGCART
+			$query_shoppingcart = "SELECT name, quantity,FLOOR( price - price * discount/100) as price 
+                                   FROM items INNER JOIN cart ON items.id=cart.item 
+                                   WHERE cart.user=" . $_SESSION['user']['id'];
+			$res_shoppingcart = getResult($query_shoppingcart);
+			foreach ($res_shoppingcart as $key => $value) {
+				$num_items += $value['quantity'];
+				$tot_price += ($value['price'] * $value['quantity']);
+			}
+			$menu .= " <li  id='menu_logout'><button  onclick=location.href='logout.php' class='btn btn-danger'><a href='logout.php' id='menu_logout_a'><i class='icon-lock icon-large' style='margin-right: 3px;'></i> Logout</a></button></li>
+			           <li  id='menu_account'><button onclick=location.href='account.php' class='btn btn-success'><a href='account.php' id='menu_account_a'><i class='icon-user icon-large' style='margin-right: 3px;'></i> Account</a></button></li>
+			           <li  id='menu_cart'>
+			              <button data-toggle='modal' href='#shoppingcart' class='btn btn-warning'> 
+			              	<a data-toggle='modal' href='#shoppingcart' id='menu_cart_a'>
+			              		<i class='icon-shopping-cart icon-large' style='margin-right: 3px;'></i> " . $num_items . " Items - &#36;" . $tot_price ."
+			              	</a>
+			              </button>
+			           </li>";
+                        
+		}
+		/*logged: logout, cart & account
+		  not logged: sign in & login
+		*/
 		return $menu;
 	}
 	
@@ -166,7 +227,7 @@ Class functions extends TagLibrary {
                              <div class="carousel_caption">
                                  <h5><a href="' . $link . '">' . $value['name'] . '</a></h5>
                                  <p>' . $short_desc . '</p>
-                                 <a href="' . $link . '" class="btn btn-info btn-sm"><i class="icon-search"></i>View Details</a>
+                                 <a href="' . $link . '" class="btn btn-info btn-sm"><i  class="icon-search"></i>View Details</a>
                                  <a data-toggle="modal" data-id=' . $value['item'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] . '</a>
                              </div>
                          </li>';
@@ -445,7 +506,8 @@ Class functions extends TagLibrary {
                          <hr />
                          <div class="pagination-centered">
                          	<a href = "' . $link . '" class = "btn btn-info btn-sm"><i class = "icon-search"></i>View Details</a>
-                       	    <a data-toggle="modal" data-id=' . $value['id'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;' . $value['price'] . '</a>
+                       	    <a data-toggle="modal" data-id=' . $value['id'] . ' href="#quickshop" class="btn btn-danger btn-sm open-AddBookDialog modal-title">Buy for &#36;'  . floor($value['price'] - $value['price'] * $value['discount'] / 100) . '</a>
+
                          </div>
                          <div class = "clearfix"></div>
                          </div>
@@ -1050,11 +1112,14 @@ Class functions extends TagLibrary {
 	}
 
 	/* Left Sidebar Navigation */
+		/* Left Sidebar Navigation */
 	function LeftSideBar($name, $data, $pars) {
 
 		/* Man, Women & Accessories Categories */
 		$leftSideBar = '<div class="cwell sidebar">
 							<div  class="widget">
+							
+							
 								<h3 >Main Categories</h3>
 								<ul style="list-style: none; padding-left: 5px;">
 									<li><a id="leftSidebarMen" href="">Men</a></li>
@@ -1062,14 +1127,28 @@ Class functions extends TagLibrary {
 									<li><a id="leftSidebarAccessories">Accessories</a></li>
 								</ul>
 								<div class="sep-bor"></div>
-								<h3>Our Suggestions</h3>
-								<ul style="list-style: none; padding-left: 5px;">
-									<li><a id="leftSidebarSale">On Sale</a></li>
-									<li><a id="leftSidebarNewArrivals">New Arrivals</a></li>
-									<li><a id="leftSidebarBestSeller">Best Sellers</a></li>
-								</ul>
-								<div class="sep-bor"></div>
-								<h3>Brands</h3>
+								<h3>Subcategories</h3>';
+		$query = getResult("select * from categories");
+		$firstTime = 1;
+		foreach($query as $key => $value){
+			if($firstTime){
+				$leftSideBar .= '<ul style="list-style: none; padding-left: 5px;">';
+				$firstTime = 0;
+			}
+			$leftSideBar .= '<li><a href="" class="leftSideBarSubcategories">'.$value["cat_name"].'</a></li>';
+		}
+		if(!$firstTime){
+			$leftSideBar .= '</ul>';				
+		}
+		$leftSideBar .= '<div class="sep-bor"></div>
+							<h3>Our Suggestions</h3>
+							<ul style="list-style: none; padding-left: 5px;">
+								<li><a id="leftSidebarSale">On Sale</a></li>
+								<li><a id="leftSidebarNewArrivals">New Arrivals</a></li>
+								<li><a id="leftSidebarBestSeller">Best Sellers</a></li>
+							</ul>
+						<div class="sep-bor"></div>
+							<h3>Brands</h3>
 							<div class="row">
 								<div class="col-sm-12">
 									<input id="brandSearch" class="form-control searchText" placeholder="Search Brand" type="text">
@@ -1086,10 +1165,12 @@ Class functions extends TagLibrary {
 							<div class="sep-bor"></div>
 							<h3>Colors</h3>
 							<div class="row">
+								
 								<div class="color-container cwell col-sm-12">
 									
-									<div class="clearfix"></div>								
+																	
 								</div>
+								
 							</div>
 							<div class="sep-bor"></div>
 							<h3 >Price Range</h3>
@@ -1124,6 +1205,11 @@ Class functions extends TagLibrary {
 			} elseif ($data['sex'] == 'F' || $data['sex'] == 'f') {
 				$tagsContainer .= '<a id="WomenTag" href="" class="main_Tag btn btn-women btn-xs"><i class="icon-remove"></i> Women</a>';
 			}
+		}
+		if(isset($data['brand'])){
+			/* ho chiamato items.php?brand=brand_id */
+			$tagsContainer .= '<a href="" class="brand_Tag btn btn-brand btn-xs"><i class="icon-remove"></i>'.$data['brand'].'</a>';
+			/* inserisco un tag con il nome della marca */					
 		}
 		$tagsContainer .= '</div>
 							<hr/>

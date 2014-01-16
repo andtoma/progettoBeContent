@@ -33,7 +33,6 @@
 		<!-- Font awesome CSS -->
 		<link href="skins/BeClothing/css/font-awesome.min.css" rel="stylesheet">
 		<!-- Custom CSS -->
-		<link href="skins/BeClothing/css/style.css" rel="stylesheet">
 		<!-- Bootstrap Form Helpers CSS -->
 		<link href="skins/BeClothing/css/bootstrap-formhelpers.css" rel="stylesheet">
 		<!-- Datepicker CSS -->
@@ -42,22 +41,19 @@
 		<link href="skins/BeClothing/css/jquery.nouislider.css" rel="stylesheet">
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="#">
+		<!-- Font Awesome -->
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<link href="skins/BeClothing/css/style.css" rel="stylesheet">
 
 	</head>
-		
-	</style>
-	
 	<body>
 
 		<!-- Logo & Navigation starts -->
 
 		<div class="container">
 			<div id="menuMega" class="menu3dmega navbar navbar-fixed-top bs-docs-nav">
-				
-				
-				
-				<ul class="container">
-					
+				<ul>
+					<li><img class='nohvr' src='skins/BeClothing/img/logogagagogo.png'></li>
 					
 					<!-- CONTIENE MENU!!!!! -->
 					
@@ -69,45 +65,12 @@
 		</div>
 		<!-- Logo & Navigation ends -->
 		<[modal]>
+		<[login_modal]>
 		<[quickshop]>
+		<[modal_cart]>
 		<!-- Shopping cart Modal -->
-		<div class="modal fade" id="shoppingcart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header title-background">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-							&times;
-						</button>
-						<h4 class="modal-title mymodal_title">Shopping Cart</h4>
-					</div>
-					<div class="modal-body">
-
-						<!-- Items table -->
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Colour</th>
-									<th>Size</th>
-									<th>Quantity</th>
-									<th>Price</th>
-								</tr>
-							</thead>
-							<tbody>
-								<[ShoppingCart::ShoppingCart library=functions]>
-							</tbody>
-						</table>
-
-					</div>
-					<div class="modal-footer">
-						<a href="index.php" class="btn btn-info">Continue Shopping</a>
-						<a href="checkout.php" class="btn btn-danger beforeCheckOut">CheckOut</a>
-
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
 		<[container]>
+	
 
 		<!-- FOOTER.HTML STARTS HERE -->
 
@@ -241,10 +204,17 @@
 				"skin" : "skin-blue-dark",
 				"speed" : 500,
 				"responsive" : true,
-				/*hoverIn -->
-				 animazione entrata*/
-				/*hoverOut --> animazione uscita*/
+				"hoverIn": "slideDown", /* animazione in apertura */
+                "hoverOut": "fadeOut"/* animazione in chiusura */
 			});
+			$("#menu_login").click(function(){
+				$("#login_modal").modal("show");
+				
+				
+			});
+			
+			
+
 		});
 	</script>
 
