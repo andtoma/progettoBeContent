@@ -11,6 +11,7 @@ FROM wishlist
 INNER JOIN items ON wishlist.item=items.id 
 WHERE wishlist.user=".$_SESSION['user']['id'];
 
+
 $main = load_main_html("Wishlist");
 
 if (!isset($_SESSION['user'])) {

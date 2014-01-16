@@ -4,8 +4,13 @@ session_start();
 
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
-require "include/query_collection.php";
 require "include/mainhtml.php";
+
+$query_siteaddress = "SELECT info_text FROM site_infos WHERE info_type='address'";
+$query_sitephone = "SELECT info_text FROM site_infos WHERE info_type='phone'";
+$query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
+
+
 $main = load_main_html("Contact Us");
 
 $container = new Skinlet("contactus");

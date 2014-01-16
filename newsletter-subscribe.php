@@ -1,7 +1,6 @@
-<?
+<?php
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
-require "include/query_collection.php";
 require "include/mainhtml.php";
 
 if (!isset($_POST['ok'])) {

@@ -1,4 +1,4 @@
-<?
+<?php
 require_once "include/dbms.inc.php";
 session_start();
 /*if someone type this script url will be redirected*/

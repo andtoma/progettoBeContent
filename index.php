@@ -4,10 +4,23 @@ session_start();
 
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
-require "include/query_collection.php";
 require "include/mainhtml.php";
 
 
+/*
+ * QUERY HOMEPAGE
+ */
+$query_slideshow = "SELECT * FROM slideshow";
+$query_itemsmp = "SELECT purchase.item, path, name, description, FLOOR( price - price * discount/100) as price, quantity, COUNT(*) 
+FROM purchase 
+INNER JOIN items ON purchase.item=items.id 
+INNER JOIN items_images ON items.id=items_images.item 
+GROUP BY purchase.item 
+ORDER BY COUNT(*) DESC";
+$query_itemsna = "SELECT DISTINCT items.id AS item , path, name, description, FLOOR( price - price * discount/100) as price 
+FROM items 
+INNER JOIN items_images ON items.id=items_images.item 
+ORDER BY items.id DESC";
 
 
 

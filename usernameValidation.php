@@ -1,4 +1,4 @@
-<?
+<?php
 require "include/dbms.inc.php";
 
 $result = mysql_query("select * from users where username='{$_REQUEST['username']}'");

@@ -1,4 +1,4 @@
-<?
+<?php
 require_once "include/dbms.inc.php";
 /*if someone type this script url will be redirected*/
 if (!isset($_POST['flag'])) {
