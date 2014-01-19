@@ -2092,6 +2092,36 @@ $('#carousel_container_na').carouFredSel({
 	}
 });
 
+/* Brands carousel (CarouFredSel) */
+
+/* Carousel */
+
+$('#carousel_container_br').carouFredSel({
+	responsive : true,
+	width : '100%',
+	direction : 'left',
+	scroll : {
+		items : 4,
+		delay : 2000,
+		duration : 500,
+		pauseOnHover : "true"
+	},
+	prev : {
+		button : "#car_prev_br",
+		key : "left"
+	},
+	next : {
+		button : "#car_next_br",
+		key : "right"
+	},
+	items : {
+		visible : {
+			min : 1,
+			max : 4
+		}
+	}
+});
+
 /* Scroll to Top */
 
 $(".totop").hide();

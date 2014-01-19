@@ -554,7 +554,7 @@ Class functions extends TagLibrary {
 
             case 'pag':
                 $link = "items.php";
-                $x_pag = 9; #numero di elementi da mostrare per pagina
+                $x_pag = 12; #numero di elementi da mostrare per pagina
                 $pag = $_GET['pag'];
                 if (!$pag)
                     $pag = 1;
@@ -1220,5 +1220,19 @@ Class functions extends TagLibrary {
 		return $tagsContainer;
 	}
 
+        
+        function Brands($name, $data, $pars) {
+		$content = '';
+		foreach ($data as $key => $value) {
+
+			$content .= '<li><a href="items.php?brand=' . $value['id'] . '"><div class="carousel_caption">
+                                        <img src="' . $value['brand_pic'] . '" alt="' . $value['brand_name'] . '" class="img-imgresponsive"/>
+                                    </div></a></li>';
+		}
+		return $content;
+	}
+        
 }
+
+
 ?>

@@ -21,6 +21,7 @@ $query_itemsna = "SELECT DISTINCT items.id AS item , path, name, description, FL
 FROM items 
 INNER JOIN items_images ON items.id=items_images.item 
 ORDER BY items.id DESC";
+$query_brands = "SELECT * FROM brands";
 
 
 
@@ -42,6 +43,9 @@ $container->setContent("ItemsMP", $res_itemsmp);
 # ITEMS NEW ARRIVALS
 $res_itemsna = getResult($query_itemsna);
 $container->setContent("ItemsNA", $res_itemsna);
+# BRANDS
+$res_brands = getResult($query_brands);
+$container->setContent("Brands", $res_brands);
 
 $main->setContent("container", $container->get());
 $main->close();

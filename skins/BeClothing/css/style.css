@@ -2047,9 +2047,8 @@ h4.mymodal_title {
 	}
 	
 	#carousel_container_mp li, #carousel_container_na li{
-	min-width: 280px;
-	max-height: 
-}
+                min-width: 280px;
+        }
 }
 
 /* Tablets */
@@ -2366,4 +2365,28 @@ border-bottom: 0px;
 .login_mod{
 	padding-bottom: 0px;
 margin-bottom: -15px;
+}
+
+#carousel_container_br li {
+	display: block;
+	float: left;
+	width: 25%;
+        height: 125px;
+	margin: 5px;
+	text-align: center;
+	background: #fff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 2px #aaa;
+}
+
+#carousel_container_br li img {
+	padding: 5px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+        height: 100px;
+        min-height: 100px;
+	max-height: 100px;
+	margin: 0 auto 0 auto;
 }

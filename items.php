@@ -10,7 +10,7 @@ $main = load_main_html("Items");
 $container = new Skinlet("items");
 $quickshop = new Skinlet("quickshop");
 
-$x_pag = 9; #numero di elementi da mostrare per pagina
+$x_pag = 12; #numero di elementi da mostrare per pagina
 $pag = $_GET['pag'];
 if (!$pag)
     $pag = 1;
