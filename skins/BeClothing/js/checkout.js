@@ -89,12 +89,13 @@ $(document).ready(function() {
 			//string error
 			/*check if the quantity in the cart is available in the store*/
 			/*for each item in the cart I check if the quantity request is available*/
-			$("#partial").each(function() {
+			$(".partial").each(function() {
 				var id = $(this).closest('tr').find('.id').val();
 				var name = $(this).closest('tr').find('.name').text();
 				var colour = $(this).closest('tr').find('.colour').text();
 				var size = $(this).closest('tr').find('.size').text();
 				var quantity = $(this).closest('tr').find('.quantity').text();
+				
 				$.ajax({
 					async : false,
 					url : "get_item_quantity.php",
@@ -117,6 +118,7 @@ $(document).ready(function() {
 				});
 
 			});
+		
 			if (all_is_ok == 1) {
 				return true;
 			} else {

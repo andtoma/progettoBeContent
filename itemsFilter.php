@@ -48,8 +48,7 @@ foreach ($tags as $value) {
 			break;
 	}
 }
-
-$query = "select * from items where FLOOR(price-(price*discount/100)) >= " . $_POST['priceMin'] . " and price <= " . $_POST['priceMax'] . " ";
+$query = "select * from items where FLOOR(price-(price*discount/100))  >= " . $_POST['priceMin'] . " and  FLOOR(price-(price*discount/100))   <= " . $_POST['priceMax'] . " ";
 
 if ($men_tag == 1 && $women_tag == 1)
 
@@ -89,7 +88,7 @@ if ($_POST['subcategories'] != "") {
 }
 
 $query .= " order by id ";
-
+echo $query;
 $result = getResult($query);
 $first = 1;
 

@@ -274,7 +274,7 @@ Class functions extends TagLibrary {
                                 <td class="colour">' . $value['colour'] . '</td>
                       	        <td class="size">' . $value['size'] . '</td>
                                 <td class="quantity">' . $value['quantity'] . '</td>
-                                <td id="partial">&#36;' . ($value['price'] * $value['quantity']) . '</td>
+                                <td class="partial">&#36;' . ($value['price'] * $value['quantity']) . '</td>
                             </tr>';
 				$tot_price += ($value['price'] * $value['quantity']);
 			}
