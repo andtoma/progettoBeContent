@@ -2,14 +2,13 @@
 
 session_start();
 
-require "include/template2.inc.php";
-require "include/dbms.inc.php";
-require "include/mainhtml.php";
+require_once "include/template2.inc.php";
+require_once "include/dbms.inc.php";
+require_once "include/query_collection.php";
+require_once "include/mainhtml.php";
+require_once "include/auth.inc.php";
 
-$query_siteaddress = "SELECT info_text FROM site_infos WHERE info_type='address'";
-$query_sitephone = "SELECT info_text FROM site_infos WHERE info_type='phone'";
-$query_siteemail = "SELECT info_text FROM site_infos WHERE info_type='email'";
-
+updateSessionCookie();
 
 $main = load_main_html("Contact Us");
 

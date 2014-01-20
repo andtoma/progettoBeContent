@@ -239,7 +239,27 @@ $(document).ready(function() {
 	 ************************************/
 
 	$(".add_wishlist").click(function(e) {
+		var islogged;
+
 		e.preventDefault();
+		/*check if user is logged in*/
+		var islogged;
+		$.ajax({
+			async : false,
+			url : "isLoggedUser.php",
+			success : function(responce) {
+				islogged = responce;
+			}
+		});
+
+		if (islogged == 0) {
+			$(".title").html("Error!");
+			$(".text-modal").html("<i class='icon-exclamation-sign'></i>&nbsp;Please <a href='login.php'>Login</a> or <a href='register.php'>Sign In</a>.");
+			$("#mymodal").modal("show");
+
+			return false;
+		}
+
 		$.ajax({
 			url : "add-wishlist.php",
 			type : "post",
@@ -269,7 +289,22 @@ $(document).ready(function() {
 	 ************************************/
 
 	$("#item_form").submit(function(e) {
-		e.preventDefault();
+		var islogged;
+		$.ajax({
+			async : false,
+			url : "isLoggedUser.php",
+			success : function(responce) {
+				islogged = responce;
+			}
+		});
+		if (islogged == 0) {
+			$(".title").html("Error!");
+			$(".text-modal").html("<i class='icon-exclamation-sign'></i>&nbsp;Please <a href='login.php'>Login</a> or <a href='register.php'>Sign In</a>.");
+			$("#mymodal").modal("show");
+
+			return false;
+		}
+		/*check for quantities*/
 		$.ajax({
 			async : false,
 			url : "get_item_quantity.php",
@@ -317,7 +352,7 @@ $(document).ready(function() {
 	$("#size_guide").click(function(e) {
 		e.stopPropagation();
 		$(".title").html("Size Charts");
-		$(".text-modal").html("<img class='sizeGuideModal' src='skins/BeClothing/img/sizeChart.jpg'width='550' >");
+		$(".text-modal").html("<img class='sizeGuideModal' src='skins/BeClothing/img/sizeChart.gif'  >");
 		$("#mymodal").modal("show");
 		return false;
 
@@ -403,7 +438,7 @@ $(document).ready(function() {
 		}
 	});
 
-/*user click on "edit review"*/
+	/*user click on "edit review"*/
 	$(".editReview").hide();
 	$(".edit_review_button").click(function(e) {
 		e.preventDefault();

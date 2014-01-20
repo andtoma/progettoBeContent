@@ -1,4 +1,4 @@
-<?php
+<?
 session_start();
 require_once "include/dbms.inc.php";
 require_once "include/template2.inc.php";

@@ -51,14 +51,17 @@ foreach ($tags as $value) {
 
 $query = "select * from items where FLOOR(price-(price*discount/100)) >= " . $_POST['priceMin'] . " and price <= " . $_POST['priceMax'] . " ";
 
-if ($men_tag == 1)
-	$query .= "and sex='M'";
+if ($men_tag == 1 && $women_tag == 1)
 
-if ($women_tag == 1 && $men_tag == 0) {
+	$query .= "and (sex='M' or sex='F')";
 
-	$query .= " and sex='F'";
-} else if ($women_tag == 1) {
-	$query .= " or sex='F'";
+else if ($women_tag == 1 && $men_tag == 0) {
+
+	$query .= " and sex='M'";
+
+} else if ($men_tag == 1) {
+	
+	$query .= " and sex='M'";
 }
 
 if ($accessories_tag == 1)
@@ -81,19 +84,17 @@ if ($_POST['brand']) {
 	$query .= " and brand in (select id from brands where brand_name in ( " . str_replace("\'", "'", $_POST['brand']) . " ) )";
 }
 
-if($_POST['subcategories'] != ""){
-	$query .= " and category in ( select id from categories where cat_name in ( " . str_replace("\'", "'", $_POST['subcategories'])." ) )";
+if ($_POST['subcategories'] != "") {
+	$query .= " and category in ( select id from categories where cat_name in ( " . str_replace("\'", "'", $_POST['subcategories']) . " ) )";
 }
 
 $query .= " order by id ";
 
-
-echo $query; exit;
 $result = getResult($query);
 $first = 1;
 
 foreach ($result as $key => $value) {
-	
+
 	if ($first == 1) {
 		$content = '<script src="skins/BeClothing/js/modal_quickshop.js"></script>';
 		$first = 0;

@@ -1,10 +1,34 @@
 $(document).ready(function() {
 
+	$("#quickshop-form").submit(function(e) {
+		var islogged ;
+
+		/*check if user is logged in*/
+		var islogged;
+		$.ajax({
+			async : false,
+			url : "isLoggedUser.php",
+			success : function(responce) {
+				islogged = responce;
+			}
+		});
+
+		if (islogged == 0) {
+			$("#quickshop").modal("hide");
+			$(".title").html("Error!");
+			$(".text-modal").html("<i class='icon-exclamation-sign'></i>&nbsp;Please <a href='login.php'>Login</a> or <a href='register.php'>Sign In</a>.");
+			$("#mymodal").modal("show");
+
+			return false;
+		}
+	});
+	
+
 	$(".open-AddBookDialog").click(function() {
+
 		/*I get the name with an ajax call*/
 		var itemid = $(this).data('id');
 		$("#id").val($(this).data('id'));
-	
 
 		$.ajax({
 			url : "quickshop_ajax.php",

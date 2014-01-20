@@ -2,14 +2,13 @@
 
 session_start();
 
-require "include/template2.inc.php";
-require "include/dbms.inc.php";
-require "include/auth.inc.php";
-require "include/mainhtml.php";
+require_once "include/template2.inc.php";
+require_once "include/dbms.inc.php";
+require_once "include/auth.inc.php";
+require_once "include/query_collection.php";
+require_once "include/mainhtml.php";
 
 $main = load_main_html("Login");
-
-$container = new Skinlet("login");
 
 if (!isset($_SESSION['user'])) {
     login($main);

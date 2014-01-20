@@ -1,4 +1,4 @@
-<?php
+<?
 session_start();
 require "include/dbms.inc.php";
 

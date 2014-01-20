@@ -64,12 +64,15 @@ $(document).ready(function() {
 		}
 	});
 
-	/*when user press checkout */
-	$('.beforeCheckOut').on('click', function() {
+	/*when user press checkout*/
 
+	$('.beforeCheckOut').on('click', function() {
 		var total = $('#total').text();
 		
-		/*if cart is empty*/
+		/*
+		 * if cart is empty!!
+		 * */
+		
 		if (total == "$0") {
 			$("#shoppingcart").modal("hide");
 			$(".title").html("Warning!");
@@ -79,20 +82,19 @@ $(document).ready(function() {
 			return false;
 		} else {
 			var availability;
-			//will be get with ajax
+			//will be take with ajax
 			var all_is_ok = 1;
 			//say if all is gone good
 			var string = "";
 			//string error
 			/*check if the quantity in the cart is available in the store*/
 			/*for each item in the cart I check if the quantity request is available*/
-			$(".partial").each(function() {
+			$("#partial").each(function() {
 				var id = $(this).closest('tr').find('.id').val();
 				var name = $(this).closest('tr').find('.name').text();
 				var colour = $(this).closest('tr').find('.colour').text();
 				var size = $(this).closest('tr').find('.size').text();
-				var quantity = $(this).closest('tr').find('.quantity').val();
-			//	alert(id + " " + " " + colour + " " + size + " " + name + " " + quantity);
+				var quantity = $(this).closest('tr').find('.quantity').text();
 				$.ajax({
 					async : false,
 					url : "get_item_quantity.php",
@@ -109,7 +111,7 @@ $(document).ready(function() {
 							 * it means that responce contains the availability
 							 *  */
 							all_is_ok = 0;
-							string = string + "<br/>" + "<fieldset class='modal-resume'>NAME: " + name + "<br/> COLOUR: " + colour + " <br/>SIZE: " + size + " <br/>MAX QUANTITY AVAILABLE:" + responce + " </fieldset>";
+							string = string + "<br/>" + "<fieldset class='modal-resume'>" + name.toUpperCase() + "<br/> COLOUR: " + colour + " <br/>SIZE: " + size + " <br/>AVAILABLE: " + responce + " </fieldset>";
 						}
 					}
 				});
@@ -118,11 +120,13 @@ $(document).ready(function() {
 			if (all_is_ok == 1) {
 				return true;
 			} else {
+				/*with a modal I give an error  and I propose to automatically update his/her cart*/
 				$("#shoppingcart").modal("hide");
 				$(".title").html("Warning!");
 				$(".text-modal").css("color", "red");
 				$(".text-modal").html("<i class='icon-exclamation-sign'></i>&nbsp;Some quantities are not longer available:<div class='subtext-modal'></div>");
 				$(".subtext-modal").html(string);
+				$(".text-modal").append("<a href='update_quantities.php'>Click here</a> to automatically update your <a href='cart.php'>Cart</a>.");
 				$("#mymodal").modal("show");
 				return false;
 			}

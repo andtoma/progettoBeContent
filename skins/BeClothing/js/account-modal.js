@@ -24,7 +24,7 @@ $(document).ready(function() {
 			return true;
 		} else {
 			$(".title").html("Warning");
-			$(".text-modal").html("<i class='icon-exclamation-sign'></i>&nbsp;The quantity you request is not available");
+			$(".text-modal").html("<i class='icon-exclamation-sign'></i>&nbsp;The quantity requested is not available");
 			$("#mymodal").modal("show");
 			$('#cart_form').trigger('reset');
 			return false;

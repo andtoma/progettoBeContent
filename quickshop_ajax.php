@@ -1,4 +1,4 @@
-<?php
+<?
 
 require_once "include/dbms.inc.php";
 

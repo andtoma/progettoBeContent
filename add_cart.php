@@ -1,4 +1,4 @@
-<?php
+<?
 session_start();
 
 require_once "include/dbms.inc.php";
@@ -12,7 +12,7 @@ if (isset($_POST['add-cart'])) {
 			/*item is not available, user request an email when the item will be available again*/
 
 			$oid = mysql_query("insert into availability_requests(item,email) values('{$_POST['id']}','{$_POST['email']}')") or die(mysql_error());
-			header('Location:account.php?id=3');
+			header('Location:index.php');
 			break;
 		case 2 :
 			/*user would add the item into cart*/
