@@ -1107,21 +1107,20 @@ Class functions extends TagLibrary {
 							<div class="row">
 								
 								<div class="color-container cwell col-sm-12">
-									
-																	
 								</div>
 								
 							</div>
+							
 							<div class="sep-bor"></div>
 							<h3 >Price Range</h3>
 							<div style="text-align: center;"class="row">
 								<div class="col-sm-12">
 									<label>Min Price</label>
-									<input style="border-radius: 5px;text-align: center;" id="showMin" value="0">
+									<input class="form-control" style="text-align: center;" id="showMin" value="0">
 								</div>
 								<div class="col-sm-12">
 									<label>Max Price</label>
-									<input style="border-radius: 5px;text-align: center;" id="showMax" value="99">
+									<input class="form-control" style="text-align: center;" id="showMax" value="99">
 								</div>
 							</div>
 							<div class="row">

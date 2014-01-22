@@ -17,8 +17,9 @@ if (!$query) {
 	/* Matches list */
 	$colorList = '';
 	foreach($query as $key => $value){
-		$colorList .= '<p id="' . $value['name'] . '"class="color_filter" style="border: 1px solid black; float: left;color: rgba(0,0,0,0); border-radius: 5px; background-color: '.$value['name'].'; width: 17%; margin-right: 5px; margin-bottom: 5px;">.</p>';
+		$colorList .= '<p id="' . $value['name'] . '"class="color_filter" style="border: 1px solid black; float: left;color: rgba(0,0,0,0); background-color: '.$value['name'].'; width: 17%; margin-right: 5px; margin-bottom: 5px;">.</p>';
 	}
+	$colorList .= '<div class="clearfix"></div>';
 	}
 	echo $colorList;
 
