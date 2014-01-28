@@ -5,7 +5,6 @@ $(document).ready(function() {
 	
 	$('.validate_quantity').on('click', function() {
 		var result;
-		
 		$.ajax({
 			async : false,
 			url : "get_item_quantity.php",

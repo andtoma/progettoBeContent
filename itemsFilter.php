@@ -88,7 +88,6 @@ if ($_POST['subcategories'] != "") {
 }
 
 $query .= " order by id ";
-echo $query;
 $result = getResult($query);
 $first = 1;
 
