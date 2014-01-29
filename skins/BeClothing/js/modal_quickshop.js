@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    
+            $('.sidebar a').click(function(){
+                $('.pagination').hide();
+        });
+
 
 	$("#quickshop-form").submit(function(e) {
 		var islogged ;

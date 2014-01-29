@@ -337,8 +337,6 @@ strong {
 	border: 1px solid #0fa6bc;
 }
 
-
-
 /* Logo & Navigation */
 
 .header {
@@ -975,7 +973,7 @@ strong {
 	background: #2888D2;
 	display: block;
 	text-decoration: none;
-	border: 1px solid  #2a6496;
+	border: 1px solid #2a6496;
 	border-top: 0px;
 	font-weight: bold;
 }
@@ -2045,10 +2043,10 @@ h4.mymodal_title, h4.login_title {
 	.carousel-indicators {
 		display: none;
 	}
-	
-	#carousel_container_mp li, #carousel_container_na li{
-	min-width: 280px;
-}
+
+	#carousel_container_mp li, #carousel_container_na li {
+		min-width: 280px;
+	}
 }
 
 /* Tablets */
@@ -2236,24 +2234,21 @@ h4.mymodal_title, h4.login_title {
 	width: 600px;
 }
 
-
-li#logo{
+li#logo {
 	background-color: #2888D2;
 }
 
-
-
 div#menuMega > ul > li > a {
 	font-size: 15px;
-	padding : 15px 20px;
-} 
-
-div#menuMega{
-	position:absolute;
+	padding: 15px 20px;
 }
 
-div#menuMega>ul>li>a{
-	padding:16px;
+div#menuMega {
+	position: absolute;
+}
+
+div#menuMega > ul > li > a {
+	padding: 16px;
 }
 
 .item_image_button {
@@ -2268,20 +2263,20 @@ div#menuMega>ul>li>a{
 img.item_page_image {
 	opacity: 0.4;
 	filter: alpha(opacity=40); /* For IE8 and earlier */
-	 -moz-opacity:0.4;
-  -khtml-opacity: 0.4;
+	-moz-opacity: 0.4;
+	-khtml-opacity: 0.4;
 }
 img.item_page_image:hover {
 	opacity: 1.0;
 	filter: alpha(opacity=100); /* For IE8 and earlier */
-	 -moz-opacity:1.0;
-  -khtml-opacity: 1.0;
+	-moz-opacity: 1.0;
+	-khtml-opacity: 1.0;
 }
 
 .modal-resume {
 	border: 2px solid silver;
-	background-color:#E0E0E0;
-	color:#2888D2;
+	background-color: #E0E0E0;
+	color: #2888D2;
 	margin-bottom: 5px;
 	display: inline-block;
 	padding: 15px;
@@ -2318,84 +2313,79 @@ img.sizeGuideModal {
 	text-align: center;
 }
 
-h1.itemsNotFoundHeader1{
+h1.itemsNotFoundHeader1 {
 	text-align: center;
 }
 
-h2.itemsNotFoundHeader2{
+h2.itemsNotFoundHeader2 {
 	text-align: center;
 }
 
-h6.noUiHandlerLabel{
+h6.noUiHandlerLabel {
 	margin-top: 25px;
 	text-align: center;
 }
 
-#menu_logout, #menu_cart,#menu_account,#menu_login,#menu_signin{
+#menu_logout, #menu_cart, #menu_account, #menu_login, #menu_signin {
 	margin-top: 10px;
-	 margin-right: 3px;
-	 height: 35px; 
-	 border-radius: 5px;
-	 float: right;
-
-} 
-#menu_logout_a, #menu_cart_a,#menu_account_a,#menu_signin_a, #menu_login_a{
-	height: 40px; 
+	margin-right: 3px;
+	height: 35px;
+	border-radius: 5px;
+	float: right;
+}
+#menu_logout_a, #menu_cart_a, #menu_account_a, #menu_signin_a, #menu_login_a {
+	height: 40px;
 	padding-top: 7px;
 	padding-left: 1px;
-	 padding-right: 3px;
-	 color:#fff;
+	padding-right: 3px;
+	color: #fff;
 }
-#menu_logout_a:hover,#menu_cart_a:hover,#menu_account_a:hover,#menu_signin_a:hover,#menu_login_a:hover,.menu_list:hover{
-border-bottom: 0px;
+#menu_logout_a:hover, #menu_cart_a:hover, #menu_account_a:hover, #menu_signin_a:hover, #menu_login_a:hover, .menu_list:hover {
+	border-bottom: 0px;
 }
 
- .nohvr:hover{
-	background-color:#2888D2;
+.nohvr:hover {
+	background-color: #2888D2;
 	border-bottom: 9px;
 	margin: 0px;
 }
 
-
-
-.btn-info{
-	background-color:#2888D2;
+.btn-info {
+	background-color: #2888D2;
 	border-color: #2888D2;
 }
-.btn-info:hover{
-	background-color:#2a6496;
+.btn-info:hover {
+	background-color: #2a6496;
 	border-color: #2a6496;
 }
 
-.social-well{
-	height:138px;
+.social-well {
+	height: 138px;
 }
 
-.login_mod{
+.login_mod {
 	padding-bottom: 0px;
-margin-bottom: -15px;
-padding-top: 35px;
+	margin-bottom: -15px;
+	padding-top: 35px;
 }
 
-.quickshop-form{
+.quickshop-form {
 	margin-bottom: 11px;
-
 }
-.quickshop_footer{
+.quickshop_footer {
 	margin-top: 25px;
-margin-bottom: -35px;
-
+	margin-bottom: -35px;
 }
 
-.test{
+.test {
 	padding-bottom: 15px;
 }
 
 body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
-margin-right: 0px;
+	margin-right: 0px;
 }
 
-.logo_site{
+.logo_site {
 	margin-bottom: -26px;
 	margin-top: -30px;
 	margin-left: -17px;
@@ -2404,7 +2394,7 @@ margin-right: 0px;
 	width: 258px;
 }
 
-.logo_site:hover{
+.logo_site:hover {
 	margin-bottom: -26px;
 	margin-top: -30px;
 	margin-left: -17px;
@@ -2413,69 +2403,64 @@ margin-right: 0px;
 	width: 258px;
 }
 
-
-.options_menu:hover{
+.options_menu:hover {
 	border-bottom: 0px;
 }
 .menu3dmega.skin-blue-dark .dropdown-menu {
-margin-top: -1px;
-
-
+	margin-top: -1px;
 }
 
 .menu3dmega.skin-blue-dark > ul > li.first:hover {
-border-left: 1px solid #3C9CE6;
-border-right: 1px solid #1474BE;
-background-color:#2888D2;
-
+	border-left: 1px solid #3C9CE6;
+	border-right: 1px solid #1474BE;
+	background-color: #2888D2;
 }
 
 body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
-margin-right: 15px;
+	margin-right: 15px;
 }
 
-#confirm_msg1,#confirm_msg2 {
-border-bottom: none;
+#confirm_msg1, #confirm_msg2 {
+	border-bottom: none;
 }
 
-.confirm_msg2{
+.confirm_msg2 {
 	font-size: 24px;
 }
 
-.cwell_confirm{
-	width:800px;
+.cwell_confirm {
+	width: 800px;
 }
 
-.quickshop_item_name{
-	border:none;
-	background-color:white !important;
-	color:#2888D2;
-	box-shadow:none !important;
-	font-size:20px;
+.quickshop_item_name {
+	border: none;
+	background-color: white !important;
+	color: #2888D2;
+	box-shadow: none !important;
+	font-size: 20px;
 	text-transform: uppercase;
 }
 
-.remember_class{
-	margin-top:-15px;
+.remember_class {
+	margin-top: -15px;
 }
-.bigTitle{
+.bigTitle {
 	font-size: 50px;
 }
 div.posts div.entry p {
 	margin-bottom: 35px;
 	margin-top: 35px;
 }
-li.comment div.comment-author, li.comment div.cmeta, li.comment p{
+li.comment div.comment-author, li.comment div.cmeta, li.comment p {
 	padding-left: 10px;
 	padding-right: 10px;
 }
-
 
 #carousel_container_br li {
 	display: block;
 	float: left;
 	width: 25%;
-        height: 125px;
+	height: 125px;
 	margin: 5px;
 	text-align: center;
 	background: #fff;
@@ -2489,8 +2474,17 @@ li.comment div.comment-author, li.comment div.cmeta, li.comment p{
 	padding: 5px;
 	padding-top: 0px;
 	padding-bottom: 0px;
-        height: 100px;
-        min-height: 100px;
+	height: 100px;
+	min-height: 100px;
 	max-height: 100px;
-	margin: 0 auto ;
+	margin: 0 auto;
 }
+
+.main_item_image {
+	margin-left: -45px;
+}
+
+.buy_panel_item {
+	margin-left: 40px;
+}
+

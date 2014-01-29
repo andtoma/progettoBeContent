@@ -605,6 +605,8 @@ Class functions extends TagLibrary {
 				$query = getResult("select id, username, title, text, datetime from posts order by id desc limit " . $blog_page_start . "," . $blog_page_end . "");
 				$post_list = '<div class="posts">';
 				foreach ($query as $key => $value) {
+				$value['text']=stripslashes($value['text']);
+					
 					$comments_number = getSingleResult('select count(*) from comments where post=' . $value['id'] . '', 'count(*)');
 					$post_list .= '<div class="cwell entry">
 				   <h2>
@@ -760,6 +762,7 @@ Class functions extends TagLibrary {
 				$post_data = getResult('select * from posts where id=' . $data['id'] . '');
 				$comments_number = getSingleResult('select count(*) from comments where post=' . $data['id'] . '', 'count(*)');
 				foreach ($post_data as $key => $value) {
+					$value['text']=stripslashes($value['text']);
 					$result .= '<div class="cwell entry">
 								<h2>
 								<a href="#">' . $value['title'] . '</a>';

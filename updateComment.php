@@ -7,7 +7,8 @@ require "include/dbms.inc.php";
 require "include/query_collection.php";
 require "include/mainhtml.php";
 
-$oid = mysql_query('update comments set text="'.$_POST['text'].'" where id="'.$_POST['id'].'"');
+$text=mysql_escape_string($_POST['text']);
+$oid = mysql_query('update comments set text="'.$text.'" where id="'.$_POST['id'].'"');
 if(!$oid){
 	echo "ko";
 } else {

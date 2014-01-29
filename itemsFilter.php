@@ -56,7 +56,7 @@ if ($men_tag == 1 && $women_tag == 1)
 
 else if ($women_tag == 1 && $men_tag == 0) {
 
-	$query .= " and sex='M'";
+	$query .= " and sex='F'";
 
 } else if ($men_tag == 1) {
 	
