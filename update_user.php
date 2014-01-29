@@ -10,14 +10,19 @@ require_once "include/mainhtml.php";
 
 switch($_POST['act']) {
 	case "1" :
+		$name=mysql_escape_string($_POST['name']);
+		$surname=mysql_escape_string($_POST['surname']);
+		$email=mysql_escape_string($_POST['email']);
+		$phone=mysql_escape_string($_POST['phone']);
+		
 		/* user info edit case*/
 		$oid = mysql_query("update users set 
-		name=	'{$_POST['name']}',
-		surname= '{$_POST['surname']}'	,
-		email='{$_POST['email']}',
+		name=	'{$name}',
+		surname= '{$surname}'	,
+		email='{$email}',
 		birth_date='{$_POST['birth_date']}',
 		sex='{$_POST['sex']}',
-		phone='{$_POST['phone']}'
+		phone='{$phone}'
 		where id='{$_SESSION['user']['id']}'") or die(mysql_error);
 
 		break;
@@ -28,13 +33,17 @@ switch($_POST['act']) {
 		break;
 
 	case "3":		
+		$state=mysql_escape_string($_POST['state']);
+		$city=mysql_escape_string($_POST['city']);
+		$zip_code=mysql_escape_string($_POST['zip_code']);
+		$address=mysql_escape_string($_POST['address']);
 		/* address edit case*/
 		$oid = mysql_query("update users set 
 		country='{$_POST['inputCountry']}',
-		state='{$_POST['state']}',
-		city='{$_POST['city']}',
-		zip_code='{$_POST['zip_code']}',
-		address='{$_POST['address']}'
+		state='{$state}',
+		city='{$city}',
+		zip_code='{$zip_code}',
+		address='{$address}'
 		where id='{$_SESSION['user']['id']}'") or die(mysql_error);
 		break;
 

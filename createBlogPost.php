@@ -8,8 +8,12 @@ require "include/query_collection.php";
 require "include/mainhtml.php";
 
 $date = date('d F Y, g:i a');
-$title=mysql_escape_string($_POST['title']);
-$text=mysql_escape_string($_POST['text']);
-$oid = mysql_query("insert into posts(username, title, text, datetime) values('{$_SESSION['user']['username']}','{$title}','{$text}','{$date}') ") or die(mysql_error()); 
+
+$text = mysql_escape_string($_POST['text']);
+
+$title = mysql_escape_string($_POST['title']);
+
+$oid = mysql_query("insert into posts(username, title, text, datetime) values('{$_SESSION['user']['username']}','{$title}','{$text}','{$date}') ") or die(mysql_error());
+
 header('Location:blog.php');
 ?>
