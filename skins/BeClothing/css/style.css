@@ -2417,7 +2417,7 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
 }
 
 body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
-	margin-right: 15px;
+	margin-right: 0px;
 }
 
 #confirm_msg1, #confirm_msg2 {
@@ -2487,4 +2487,3 @@ li.comment div.comment-author, li.comment div.cmeta, li.comment p {
 .buy_panel_item {
 	margin-left: 40px;
 }
-

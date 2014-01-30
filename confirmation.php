@@ -3,13 +3,13 @@
 session_start();
 
 require_once "include/auth.inc.php";
-require "include/template2.inc.php";
-require "include/dbms.inc.php";
-require "include/query_collection.php";
-require "include/mainhtml.php";
+require_once "include/template2.inc.php";
+require_once "include/dbms.inc.php";
+require_once "include/query_collection.php";
+require_once "include/mainhtml.php";
 
 $main = load_main_html("Confirmation");
-if (!isset($_SESSION['from_order'])) {
+if (isset($_SESSION['from_order'])) {
 	updateSessionCookie();
 
 	/*in this way user is not allowed to refresh this page and type directly this page address*/
